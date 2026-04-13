@@ -1,0 +1,28 @@
+# Lightweight migration-only container
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    postgresql-client \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+
+# Copy dependency files
+COPY pyproject.toml uv.lock* ./
+
+# Install ONLY migration dependencies
+RUN uv sync --frozen --only-group migrations --no-install-project
+
+# Copy Alembic files
+COPY alembic.ini ./
+COPY alembic/ ./alembic/
+
+# Copy database models and config (required by alembic/env.py)
+COPY shared/ ./shared/
+
+# Default command: run migrations
+CMD ["/app/.venv/bin/alembic", "upgrade", "head"]

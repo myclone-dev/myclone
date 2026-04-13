@@ -1,0 +1,256 @@
+{
+  "common": {
+    "loading": "Načítání...",
+    "error": "Chyba",
+    "retry": "Zkusit znovu",
+    "close": "Zavřít",
+    "cancel": "Zrušit",
+    "continue": "Pokračovat",
+    "submit": "Odeslat",
+    "skip": "Přeskočit",
+    "seconds": "sekund",
+    "minutes": "minut",
+    "you": "Vy",
+    "goBack": "Zpět",
+    "optional": "volitelné",
+    "save": "Uložit",
+    "saving": "Ukládání...",
+    "messages": "zprávy",
+    "message": "zpráva",
+    "at": "v"
+  },
+  "chat": {
+    "modeToggle": {
+      "voice": "Hlas",
+      "text": "Text"
+    },
+    "connection": {
+      "connecting": "Připojování...",
+      "settingUp": "Nastavování chatu...",
+      "takeMoment": "Toto bude trvat jen chvíli"
+    },
+    "input": {
+      "placeholder": "Napište zprávu...",
+      "send": "Odeslat zprávu",
+      "uploading": "Nahrávání...",
+      "provideInfo": "Pro pokračování prosím zadejte své údaje..."
+    },
+    "emptyState": {
+      "title": "Začněte se mnou konverzaci.",
+      "subtitle": "Zeptejte se mě na cokoliv! Jsem tu, abych poskytl odborné poznatky a pomoc.",
+      "connectionError": "Chyba připojení",
+      "retryConnection": "Zkusit připojení znovu"
+    },
+    "fileTypes": {
+      "pdf": "PDF",
+      "doc": "Word dokument",
+      "docx": "Word dokument",
+      "xls": "Excel tabulka",
+      "xlsx": "Excel tabulka",
+      "ppt": "PowerPoint",
+      "pptx": "PowerPoint",
+      "png": "Obrázek",
+      "jpg": "Obrázek",
+      "jpeg": "Obrázek",
+      "file": "Soubor"
+    },
+    "errors": {
+      "sessionNotInitialized": "Relace nebyla inicializována",
+      "failedToUpload": "Nahrání souboru selhalo",
+      "unknownError": "Neznámá chyba"
+    }
+  },
+  "voice": {
+    "status": {
+      "connected": "Připojeno",
+      "readyToTalk": "Připraven mluvit",
+      "readyToStart": "Připraven začít",
+      "readyToHelp": "Připraven pomoci",
+      "initializing": "Inicializace...",
+      "connecting": "Připojování...",
+      "speaking": "Mluví...",
+      "listening": "Poslouchá..."
+    },
+    "buttons": {
+      "startConversation": "Zahájit konverzaci",
+      "startVoiceChat": "Zahájit hlasový chat",
+      "enableAudio": "Klikněte pro povolení zvuku",
+      "endSession": "Ukončit relaci",
+      "endCall": "Ukončit hovor",
+      "mute": "Ztlumit",
+      "unmute": "Zrušit ztlumení",
+      "backToTextChat": "Zpět na textový chat"
+    },
+    "transcript": {
+      "title": "Živý přepis",
+      "download": "Stáhnout přepis",
+      "minimize": "Minimalizovat",
+      "maximize": "Maximalizovat",
+      "emptyState": "Vaše konverzace se zde zobrazí",
+      "saving": "Ukládání...",
+      "show": "Zobrazit přepis",
+      "viewPrevious": "Zobrazit předchozí přepis"
+    },
+    "upload": {
+      "title": "Nahrajte dokument k analýze asistentem"
+    },
+    "limitExceeded": {
+      "sessionEnded": "Hlasová relace ukončena",
+      "unavailable": "Hlasový chat není k dispozici",
+      "conversationEnded": "Vaše konverzace s {{name}} skončila.",
+      "unavailableMessage": "Hlasový chat s {{name}} není momentálně k dispozici.",
+      "continueWithText": "Můžete pokračovat v konverzaci přes textový chat.",
+      "useTextInstead": "Stále můžete vést konverzaci přes textový chat.",
+      "continueWithTextButton": "Pokračovat textovým chatem"
+    }
+  },
+  "session": {
+    "inactivity": {
+      "title": "Jste tu ještě?",
+      "description": "Vaše relace bude odpojena za",
+      "dismiss": "Jsem tu",
+      "hint": "Klikněte kamkoliv nebo stiskněte klávesu pro pokračování"
+    },
+    "timeLimit": {
+      "title": "Relace brzy skončí",
+      "description": "Vaše relace skončí za",
+      "dismiss": "Rozumím",
+      "info": "Po skončení této relace můžete zahájit novou. Vaše konverzace bude uložena."
+    },
+    "disconnected": {
+      "title": "Relace odpojena",
+      "ended": "Relace ukončena",
+      "connectionLost": "Spojení ztraceno",
+      "reconnect": "Znovu připojit",
+      "reconnecting": "Připojování...",
+      "messagesSaved": "Vaše zprávy jsou uloženy",
+      "reasons": {
+        "inactivity": {
+          "title": "Relace odpojena",
+          "description": "Vaše chatová relace byla odpojena kvůli nečinnosti. Vaše konverzace byla uložena."
+        },
+        "manual": {
+          "title": "Relace ukončena",
+          "description": "Ukončili jste tuto chatovou relaci. Vaše konverzace byla uložena."
+        },
+        "error": {
+          "title": "Spojení ztraceno",
+          "description": "Spojení bylo neočekávaně ztraceno. Pro pokračování v chatu se znovu připojte."
+        }
+      }
+    },
+    "timer": {
+      "remaining": "Zbývá {{time}}"
+    },
+    "endConfirm": {
+      "title": "Ukončit chat relaci?",
+      "description": "Vaše konverzace bude uložena."
+    },
+    "timeLimitExceeded": {
+      "title": "Dosažen časový limit relace",
+      "sessionEnded": "Vaše relace s {{name}} skončila.",
+      "duration": "Trvání",
+      "messagesCount": "Zprávy",
+      "conversationSaved": "Vaše konverzace byla uložena. Můžete si prohlédnout přepis nebo zahájit novou relaci.",
+      "viewTranscript": "Zobrazit přepis",
+      "startNewSession": "Nová relace",
+      "downloadTranscript": "Stáhnout přepis"
+    }
+  },
+  "email": {
+    "prompt": {
+      "title": "Zůstaňte ve spojení!",
+      "description": "Získejte kopii této konverzace a pokračujte e-mailem",
+      "placeholder": "Zadejte svůj e-mail",
+      "submit": "Pokračovat",
+      "submitting": "Odesílání...",
+      "skip": "Přeskočit",
+      "errors": {
+        "required": "Zadejte prosím svůj e-mail",
+        "invalid": "Zadejte prosím platný e-mail"
+      }
+    },
+    "banner": {
+      "title": "Uložit tuto konverzaci",
+      "description": "Zadejte své údaje pro uložení tohoto chatu a pozdější pokračování",
+      "emailLabel": "E-mailová adresa",
+      "emailPlaceholder": "vas@email.cz",
+      "fullnameLabel": "Celé jméno",
+      "phoneLabel": "Telefonní číslo",
+      "phonePlaceholder": "+420 123 456 789",
+      "continueConversation": "Pokračovat v konverzaci"
+    },
+    "otp": {
+      "continue": "Pokračovat v této konverzaci",
+      "verify": "Ověřte svůj e-mail",
+      "completeProfile": "Dokončete svůj profil",
+      "verifyDescription": "Ověřte svůj e-mail pro uložení postupu a pokračování kdykoliv",
+      "codeSentTo": "Odeslali jsme 6místný kód na {{email}}",
+      "detailsDescription": "Přidejte své údaje pro uložení této konverzace",
+      "sendCode": "Odeslat kód",
+      "verifyCode": "Ověřit kód",
+      "verificationCode": "Ověřovací kód",
+      "resendCode": "Znovu odeslat kód",
+      "resendIn": "Znovu odeslat za {{seconds}}s",
+      "changeEmail": "Změnit e-mail",
+      "complete": "Dokončit",
+      "fullNamePlaceholder": "Jan Novák",
+      "checkingProfile": "Kontrola profilu...",
+      "back": "Zpět",
+      "errors": {
+        "sendFailed": "Odeslání kódu selhalo",
+        "invalidCode": "Neplatný ověřovací kód",
+        "linkFailed": "Propojení relace selhalo",
+        "resendFailed": "Opětovné odeslání kódu selhalo"
+      }
+    }
+  },
+  "widget": {
+    "aiPowered": "Digitální klon poháněný AI",
+    "bubbleText": "Chatujte se mnou",
+    "noUsername": "Není nakonfigurováno uživatelské jméno",
+    "closeChat": "Zavřít chat",
+    "openChat": "Otevřít chat",
+    "tooltips": {
+      "talkToMe": "Promluvte si se mnou!",
+      "askAnything": "Zeptejte se mě na cokoliv",
+      "needHelp": "Potřebujete pomoc?",
+      "letsChat": "Pojďme si popovídat!"
+    }
+  },
+  "assistant": {
+    "error": {
+      "unableToLoad": "Nelze načíst asistenta. Zkuste to prosím později."
+    }
+  },
+  "textLimit": {
+    "title": "Dosažen limit zpráv",
+    "quotaReached": "Měsíční kvóta zpráv {{name}} byla dosažena.",
+    "usageInfo": "{{used}} / {{limit}} zpráv použito tento měsíc",
+    "continueWithVoice": "Stále můžete vést konverzaci přes hlasový chat.",
+    "tryAgainLater": "Zkuste to prosím později, až se kvóta resetuje.",
+    "continueWithVoiceButton": "Pokračovat hlasovým chatem"
+  },
+  "avatar": {
+    "aiClone": "AI Klon"
+  },
+  "source": "Zdroj",
+  "sources": "Zdroje",
+  "settings": {
+    "language": {
+      "title": "Jazyk",
+      "description": "Vyberte preferovaný jazyk rozhraní",
+      "saved": "Jazyková preference uložena"
+    }
+  },
+  "calendar": {
+    "bookCall": "Rezervovat hovor",
+    "scheduleMeeting": "Naplánovat schůzku"
+  },
+  "contentOutput": {
+    "viewFull": "Zobrazit celý obsah",
+    "copyMarkdown": "Kopírovat markdown",
+    "copied": "Zkopírováno!",
+    "downloadMd": "Stáhnout .md"
+  }
+}

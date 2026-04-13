@@ -1,0 +1,256 @@
+{
+  "common": {
+    "loading": "جاري التحميل...",
+    "error": "خطأ",
+    "retry": "إعادة المحاولة",
+    "close": "إغلاق",
+    "cancel": "إلغاء",
+    "continue": "متابعة",
+    "submit": "إرسال",
+    "skip": "تخطي الآن",
+    "seconds": "ثواني",
+    "minutes": "دقائق",
+    "you": "أنت",
+    "goBack": "رجوع",
+    "optional": "اختياري",
+    "save": "حفظ",
+    "saving": "جاري الحفظ...",
+    "messages": "رسائل",
+    "message": "رسالة",
+    "at": "في"
+  },
+  "chat": {
+    "modeToggle": {
+      "voice": "صوت",
+      "text": "نص"
+    },
+    "connection": {
+      "connecting": "جاري الاتصال...",
+      "settingUp": "إعداد المحادثة...",
+      "takeMoment": "سيستغرق هذا لحظة فقط"
+    },
+    "input": {
+      "placeholder": "اكتب رسالتك...",
+      "send": "إرسال الرسالة",
+      "uploading": "جاري الرفع...",
+      "provideInfo": "يرجى تقديم معلوماتك للمتابعة..."
+    },
+    "emptyState": {
+      "title": "ابدأ محادثة معي.",
+      "subtitle": "اسألني أي شيء! أنا هنا لتقديم رؤى ومساعدة متخصصة.",
+      "connectionError": "خطأ في الاتصال",
+      "retryConnection": "إعادة محاولة الاتصال"
+    },
+    "fileTypes": {
+      "pdf": "PDF",
+      "doc": "مستند Word",
+      "docx": "مستند Word",
+      "xls": "جدول Excel",
+      "xlsx": "جدول Excel",
+      "ppt": "PowerPoint",
+      "pptx": "PowerPoint",
+      "png": "صورة",
+      "jpg": "صورة",
+      "jpeg": "صورة",
+      "file": "ملف"
+    },
+    "errors": {
+      "sessionNotInitialized": "الجلسة غير مُهيأة",
+      "failedToUpload": "فشل رفع الملف",
+      "unknownError": "خطأ غير معروف"
+    }
+  },
+  "voice": {
+    "status": {
+      "connected": "متصل",
+      "readyToTalk": "جاهز للتحدث",
+      "readyToStart": "جاهز للبدء",
+      "readyToHelp": "جاهز للمساعدة",
+      "initializing": "جاري التهيئة...",
+      "connecting": "جاري الاتصال...",
+      "speaking": "جاري التحدث...",
+      "listening": "جاري الاستماع..."
+    },
+    "buttons": {
+      "startConversation": "بدء المحادثة",
+      "startVoiceChat": "بدء المحادثة الصوتية",
+      "enableAudio": "انقر لتفعيل الصوت",
+      "endSession": "إنهاء الجلسة",
+      "endCall": "إنهاء المكالمة",
+      "mute": "كتم الصوت",
+      "unmute": "إلغاء كتم الصوت",
+      "backToTextChat": "العودة للدردشة النصية"
+    },
+    "transcript": {
+      "title": "النص المباشر",
+      "download": "تحميل النص",
+      "minimize": "تصغير",
+      "maximize": "تكبير",
+      "emptyState": "ستظهر محادثتك هنا",
+      "saving": "جاري الحفظ...",
+      "show": "عرض النص",
+      "viewPrevious": "عرض النص السابق"
+    },
+    "upload": {
+      "title": "ارفع مستنداً ليقوم المساعد بتحليله"
+    },
+    "limitExceeded": {
+      "sessionEnded": "انتهت الجلسة الصوتية",
+      "unavailable": "المحادثة الصوتية غير متاحة",
+      "conversationEnded": "انتهت محادثتك مع {{name}}.",
+      "unavailableMessage": "المحادثة الصوتية مع {{name}} غير متاحة حالياً.",
+      "continueWithText": "يمكنك متابعة محادثتك عبر الدردشة النصية.",
+      "useTextInstead": "لا يزال بإمكانك إجراء محادثة عبر الدردشة النصية.",
+      "continueWithTextButton": "متابعة بالدردشة النصية"
+    }
+  },
+  "session": {
+    "inactivity": {
+      "title": "هل ما زلت هنا؟",
+      "description": "سيتم قطع اتصال جلستك خلال",
+      "dismiss": "ما زلت هنا",
+      "hint": "انقر في أي مكان أو اضغط أي مفتاح للمتابعة"
+    },
+    "timeLimit": {
+      "title": "الجلسة على وشك الانتهاء",
+      "description": "ستنتهي جلستك خلال",
+      "dismiss": "فهمت",
+      "info": "يمكنك بدء جلسة جديدة بعد انتهاء هذه الجلسة. سيتم حفظ محادثتك."
+    },
+    "disconnected": {
+      "title": "تم قطع اتصال الجلسة",
+      "ended": "انتهت الجلسة",
+      "connectionLost": "فُقد الاتصال",
+      "reconnect": "إعادة الاتصال",
+      "reconnecting": "جاري إعادة الاتصال...",
+      "messagesSaved": "تم حفظ رسائلك",
+      "reasons": {
+        "inactivity": {
+          "title": "تم قطع اتصال الجلسة",
+          "description": "تم قطع اتصال جلسة الدردشة بسبب عدم النشاط. تم حفظ محادثتك."
+        },
+        "manual": {
+          "title": "انتهت الجلسة",
+          "description": "أنهيت جلسة الدردشة هذه. تم حفظ محادثتك."
+        },
+        "error": {
+          "title": "فُقد الاتصال",
+          "description": "فُقد الاتصال بشكل غير متوقع. يرجى إعادة الاتصال لمتابعة الدردشة."
+        }
+      }
+    },
+    "timer": {
+      "remaining": "{{time}} متبقي"
+    },
+    "endConfirm": {
+      "title": "إنهاء جلسة الدردشة؟",
+      "description": "سيتم حفظ محادثتك."
+    },
+    "timeLimitExceeded": {
+      "title": "تم الوصول إلى الحد الزمني للجلسة",
+      "sessionEnded": "انتهت جلستك مع {{name}}.",
+      "duration": "المدة",
+      "messagesCount": "الرسائل",
+      "conversationSaved": "تم حفظ محادثتك. يمكنك عرض النص أو بدء جلسة جديدة.",
+      "viewTranscript": "عرض النص",
+      "startNewSession": "جلسة جديدة",
+      "downloadTranscript": "تحميل النص"
+    }
+  },
+  "email": {
+    "prompt": {
+      "title": "ابقَ على تواصل!",
+      "description": "احصل على نسخة من هذه المحادثة وتابع عبر البريد الإلكتروني",
+      "placeholder": "أدخل بريدك الإلكتروني",
+      "submit": "متابعة",
+      "submitting": "جاري الإرسال...",
+      "skip": "تخطي الآن",
+      "errors": {
+        "required": "يرجى إدخال بريدك الإلكتروني",
+        "invalid": "يرجى إدخال بريد إلكتروني صالح"
+      }
+    },
+    "banner": {
+      "title": "حفظ هذه المحادثة",
+      "description": "أدخل معلوماتك لحفظ هذه الدردشة والمتابعة لاحقاً",
+      "emailLabel": "البريد الإلكتروني",
+      "emailPlaceholder": "your@email.com",
+      "fullnameLabel": "الاسم الكامل",
+      "phoneLabel": "رقم الهاتف",
+      "phonePlaceholder": "+966 5XX XXX XXXX",
+      "continueConversation": "متابعة المحادثة"
+    },
+    "otp": {
+      "continue": "متابعة هذه المحادثة",
+      "verify": "تحقق من بريدك الإلكتروني",
+      "completeProfile": "أكمل ملفك الشخصي",
+      "verifyDescription": "تحقق من بريدك الإلكتروني لحفظ تقدمك والاستئناف في أي وقت",
+      "codeSentTo": "أرسلنا رمزاً من 6 أرقام إلى {{email}}",
+      "detailsDescription": "أضف بياناتك لحفظ هذه المحادثة",
+      "sendCode": "إرسال الرمز",
+      "verifyCode": "التحقق من الرمز",
+      "verificationCode": "رمز التحقق",
+      "resendCode": "إعادة إرسال الرمز",
+      "resendIn": "إعادة الإرسال خلال {{seconds}} ث",
+      "changeEmail": "تغيير البريد",
+      "complete": "إكمال",
+      "fullNamePlaceholder": "محمد أحمد",
+      "checkingProfile": "جاري التحقق من ملفك الشخصي...",
+      "back": "رجوع",
+      "errors": {
+        "sendFailed": "فشل إرسال الرمز",
+        "invalidCode": "رمز التحقق غير صالح",
+        "linkFailed": "فشل ربط الجلسة",
+        "resendFailed": "فشل إعادة إرسال الرمز"
+      }
+    }
+  },
+  "widget": {
+    "aiPowered": "نسخة رقمية مدعومة بالذكاء الاصطناعي",
+    "bubbleText": "تحدث معي",
+    "noUsername": "لم يتم تكوين اسم المستخدم",
+    "closeChat": "إغلاق المحادثة",
+    "openChat": "فتح المحادثة",
+    "tooltips": {
+      "talkToMe": "تحدث معي!",
+      "askAnything": "اسألني أي شيء",
+      "needHelp": "هل تحتاج مساعدة؟",
+      "letsChat": "دعنا نتحدث!"
+    }
+  },
+  "assistant": {
+    "error": {
+      "unableToLoad": "تعذر تحميل المساعد. يرجى المحاولة مرة أخرى لاحقاً."
+    }
+  },
+  "textLimit": {
+    "title": "تم الوصول لحد الرسائل",
+    "quotaReached": "تم الوصول إلى الحصة الشهرية لرسائل {{name}}.",
+    "usageInfo": "{{used}} / {{limit}} رسالة مستخدمة هذا الشهر",
+    "continueWithVoice": "لا يزال بإمكانك إجراء محادثة عبر الدردشة الصوتية.",
+    "tryAgainLater": "يرجى المحاولة مرة أخرى لاحقاً عند إعادة تعيين الحصة.",
+    "continueWithVoiceButton": "متابعة بالدردشة الصوتية"
+  },
+  "avatar": {
+    "aiClone": "نسخة ذكاء اصطناعي"
+  },
+  "source": "المصدر",
+  "sources": "المصادر",
+  "settings": {
+    "language": {
+      "title": "اللغة",
+      "description": "اختر لغتك المفضلة للواجهة",
+      "saved": "تم حفظ تفضيل اللغة"
+    }
+  },
+  "calendar": {
+    "bookCall": "حجز مكالمة",
+    "scheduleMeeting": "جدولة اجتماع"
+  },
+  "contentOutput": {
+    "viewFull": "عرض المحتوى الكامل",
+    "copyMarkdown": "نسخ الماركداون",
+    "copied": "تم النسخ!",
+    "downloadMd": "تحميل .md"
+  }
+}

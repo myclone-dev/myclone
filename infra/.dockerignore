@@ -1,0 +1,65 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env
+pip-log.txt
+pip-delete-this-directory.txt
+.tox
+.coverage
+.coverage.*
+.pytest_cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.cache
+.mypy_cache
+
+# Documentation
+README.md
+docs/
+CLEANUP_DOCUMENTATION.md
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Logs and uploads (exclude from container, will be mounted)
+logs/
+uploads/
+
+# Voice processing artifacts (exclude from container, will be mounted)
+app/voice-processing/venv/
+app/voice-processing/output/
+app/voice-processing/logs/
+app/voice-processing/temp/
+app/voice-processing/__pycache__/
+app/voice-processing/**/__pycache__/
+
+# Development files
+.env.dev
+.env.example
+docker-compose.dev.yml
+docker-compose.local.yml
+
+# Node modules if any
+node_modules/

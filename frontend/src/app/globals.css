@@ -1,0 +1,459 @@
+@import "tailwindcss";
+
+/* Include streamdown styles for ElevenLabs Response component */
+@source "../node_modules/streamdown/dist/*.js";
+
+@theme {
+  --color-yellow-bright: #ffe065;
+  --color-yellow-light: #fff4cc;
+  --color-peach-cream: #fff8f2;
+  --color-peach-light: #fff4eb;
+  --color-peach-dark: #ffecd9;
+  --color-orange-light: #ffe4cc;
+  --color-ai-brown: #b06b30;
+
+  /* AI gradient colors for Summary chip - Brand Yellow/Gold theme */
+  --color-ai-gold: #ffc329;
+  --color-ai-gold-light: #ffd666;
+  --color-ai-gold-dark: #e6a800;
+  --color-ai-amber: #f59e0b;
+  --color-ai-gradient-start: #ffc329;
+  --color-ai-gradient-end: #f59e0b;
+
+  /* Sentiment colors for conversation summaries */
+  --color-sentiment-positive: #10b981;
+  --color-sentiment-positive-light: #d1fae5;
+  --color-sentiment-neutral: #6b7280;
+  --color-sentiment-neutral-light: #f3f4f6;
+  --color-sentiment-negative: #ef4444;
+  --color-sentiment-negative-light: #fee2e2;
+  --color-sentiment-mixed: #8b5cf6;
+  --color-sentiment-mixed-light: #ede9fe;
+
+  /* OAuth provider brand colors */
+  --color-linkedin-blue: #0a66c2;
+  --color-linkedin-blue-dark: #004182;
+  --color-google-bg: #ffffff;
+  --color-google-bg-hover: #f9fafb;
+  --color-google-text: #374151;
+  --color-google-border: #d1d5db;
+
+  /* Brand colors for knowledge sources */
+  --color-linkedin: #0a66c2;
+  --color-twitter: #1da1f2;
+  --color-website: #7c3aed;
+  --color-document: #ea580c;
+  --color-youtube: #ff0000;
+
+  /* Voice usage indicator colors */
+  --color-voice-duration-border: #c7d2fe; /* indigo-200 */
+  --color-voice-duration-bg: #eef2ff; /* indigo-50 */
+  --color-voice-duration-text: #4338ca; /* indigo-700 */
+
+  /* Usage bar colors */
+  --color-usage-bar-amber: #fbbf24; /* amber-400 */
+  --color-usage-bar-bg-amber: #fef3c7; /* amber-100 */
+
+  /* Tier badge colors */
+  --color-tier-free-bg: #f1f5f9; /* slate-100 */
+  --color-tier-free-text: #334155; /* slate-700 */
+  --color-tier-free-border: #e2e8f0; /* slate-200 */
+
+  /* Progress bar colors (usage indicators) */
+  --color-progress-default-bg: #e2e8f0; /* slate-200 */
+  --color-progress-default-bar: #475569; /* slate-600 */
+  --color-progress-warning-bg: #ffedd5; /* orange-100 */
+  --color-progress-warning-bar: #ea580c; /* orange-600 */
+  --color-progress-warning-glow: #fed7aa; /* orange-200 */
+  --color-progress-danger-bg: #fee2e2; /* red-100 */
+  --color-progress-danger-bar: #dc2626; /* red-600 */
+  --color-progress-danger-glow: #fecaca; /* red-200 */
+
+  /* Status text colors */
+  --color-status-warning: #ea580c; /* orange-600 */
+  --color-status-danger: #dc2626; /* red-600 */
+  --color-status-default: #475569; /* slate-600 */
+
+  /* Knowledge source icon backgrounds */
+  --color-source-blue-bg: #dbeafe; /* blue-100 */
+  --color-source-blue-text: #2563eb; /* blue-600 */
+  --color-source-green-bg: #dcfce7; /* green-100 */
+  --color-source-green-text: #16a34a; /* green-600 */
+  --color-source-purple-bg: #f3e8ff; /* purple-100 */
+  --color-source-purple-text: #9333ea; /* purple-600 */
+  --color-source-red-bg: #fee2e2; /* red-100 */
+  --color-source-red-text: #dc2626; /* red-600 */
+  --color-source-amber-bg: #fef3c7; /* amber-100 */
+  --color-source-amber-text: #d97706; /* amber-600 */
+
+  /* Alert/banner colors */
+  --color-alert-warning-bg: #fff7ed; /* orange-50 */
+  --color-alert-warning-border: #fed7aa; /* orange-200 */
+  --color-alert-warning-text: #9a3412; /* orange-800 */
+  --color-alert-info-bg: #f5f3ff; /* violet-50 */
+  --color-alert-info-border: #ddd6fe; /* violet-200 */
+  --color-alert-info-text: #5b21b6; /* violet-900 */
+  --color-alert-info-accent: #7c3aed; /* violet-600 */
+  --color-alert-info-accent-hover: #6d28d9; /* violet-700 */
+
+  /* Dashed border/empty state colors */
+  --color-empty-border: #e2e8f0; /* slate-200 */
+  --color-empty-bg: #f8fafc; /* slate-50 */
+  --color-empty-text: #64748b; /* slate-500 */
+
+  /* Banner colors (compact variant) */
+  --color-banner-yellow-bg: #fefce8; /* yellow-50 */
+  --color-banner-yellow-border: #fef08a; /* yellow-200 */
+  --color-banner-yellow-text: #854d0e; /* yellow-800 */
+  --color-banner-yellow-icon: #ca8a04; /* yellow-600 */
+  --color-banner-yellow-hover: #fef9c3; /* yellow-100 */
+
+  /* Tier-specific gradient colors */
+  --color-tier-pro-from: #fef3c7; /* yellow-100 */
+  --color-tier-pro-to: #fef3c7; /* amber-100 */
+  --color-tier-pro-text: #92400e; /* amber-800 */
+  --color-tier-pro-border: #fcd34d; /* amber-200 - fixed typo */
+
+  --color-tier-business-from: #dbeafe; /* blue-100 */
+  --color-tier-business-to: #e0e7ff; /* indigo-100 */
+  --color-tier-business-text: #3730a3; /* indigo-800 */
+  --color-tier-business-border: #a5b4fc; /* indigo-200 */
+
+  --color-tier-enterprise-from: #f3e8ff; /* purple-100 */
+  --color-tier-enterprise-to: #fce7f3; /* pink-100 */
+  --color-tier-enterprise-text: #6b21a8; /* purple-800 */
+  --color-tier-enterprise-border: #d8b4fe; /* purple-200 */
+
+  /* Session Timer colors */
+  --color-session-timer-ping: #fed7aa; /* orange-200 with opacity */
+  --color-session-timer-bg: #ffedd5; /* orange-100 */
+  --color-session-timer-icon: #ea580c; /* orange-600 */
+  --color-session-timer-text: #ea580c; /* orange-600 */
+  --color-session-timer-border: #fed7aa; /* orange-200 */
+  --color-session-timer-countdown-bg: #fff7ed; /* orange-50 */
+  --color-session-timer-btn: #f97316; /* orange-500 */
+  --color-session-timer-btn-hover: #ea580c; /* orange-600 */
+  --color-session-timer-stats-from: #fff7ed; /* orange-50 */
+  --color-session-timer-stats-to: #fffbeb; /* amber-50 */
+  --color-session-timer-gradient-from: #ffedd5; /* orange-100 */
+  --color-session-timer-gradient-to: #fef3c7; /* amber-100 */
+  --color-session-timer-accent: #f97316; /* orange-500 */
+  --color-session-timer-badge-bg: #ffedd5; /* orange-100 */
+  --color-session-timer-badge-text: #ea580c; /* orange-600 */
+  --color-session-timer-divider: #fed7aa; /* orange-200 */
+  --color-session-timer-btn-outline-border: #fed7aa; /* orange-200 */
+  --color-session-timer-btn-outline-text: #c2410c; /* orange-700 */
+  --color-session-timer-btn-outline-hover-border: #fdba74; /* orange-300 */
+  --color-session-timer-btn-outline-hover-bg: #fff7ed; /* orange-50 */
+
+  /* Session Timer state colors (warning/critical) */
+  --color-session-warning-text: #d97706; /* amber-600 */
+  --color-session-warning-bg: #fffbeb; /* amber-50 */
+  --color-session-warning-border: #fde68a; /* amber-200 */
+  --color-session-warning-icon: #f59e0b; /* amber-500 */
+  --color-session-critical-text: #dc2626; /* red-600 */
+  --color-session-critical-bg: #fef2f2; /* red-50 */
+  --color-session-critical-border: #fecaca; /* red-200 */
+  --color-session-critical-icon: #ef4444; /* red-500 */
+  --color-session-normal-text: #4b5563; /* gray-600 */
+  --color-session-normal-bg: #f9fafb; /* gray-50 */
+  --color-session-normal-border: #e5e7eb; /* gray-200 */
+  --color-session-normal-icon: #9ca3af; /* gray-400 */
+
+  /* Visual Workflow Builder colors */
+  --color-workflow-grid-dot: #d1d5db; /* gray-300 - grid dots */
+  --color-workflow-minimap-bg: #ffffff; /* white - minimap background */
+  --color-workflow-minimap-border: #e5e7eb; /* gray-200 - minimap border */
+  --color-workflow-minimap-mask: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* white 80% - minimap mask */
+  --color-workflow-node-start: #10b981; /* emerald-500 - start node */
+  --color-workflow-node-question: #3b82f6; /* blue-500 - question node */
+  --color-workflow-node-result: #8b5cf6; /* violet-500 - result node */
+  --color-workflow-node-default: #6b7280; /* gray-500 - default node */
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@layer base {
+  :root {
+    /* Brand colors: #FFC329 (primary gold), #121212 (black text), neutral grays */
+    --background: 0 0% 98%; /* light gray background */
+    --foreground: 0 0% 7.1%; /* #121212 - black */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 7.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 7.1%;
+    --primary: 43 100% 58%; /* #FFC329 - gold/yellow */
+    --primary-foreground: 0 0% 7.1%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 7.1%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 43 100% 58%;
+    --accent-foreground: 0 0% 7.1%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 90%;
+    --input: 0 0% 98%;
+    --ring: 43 100% 58%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Fix for Tailwind v4: Add cursor pointer to all interactive buttons */
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Typing indicator wave animation */
+@keyframes wave {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  30% {
+    transform: translateY(-6px);
+    opacity: 1;
+  }
+}
+
+/* Blinking cursor animation */
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.625rem;
+  /* Brand colors: #FFC329 (primary gold), #121212 (black text), neutral grays */
+  --background: oklch(0.98 0 0); /* light gray background */
+  --foreground: oklch(0.148 0 0); /* #121212 - black */
+  --card: oklch(1 0 0); /* white for cards */
+  --card-foreground: oklch(0.148 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.148 0 0);
+  --primary: oklch(0.82 0.15 85); /* #FFC329 - gold/yellow */
+  --primary-foreground: oklch(0.148 0 0); /* black text on gold */
+  --secondary: oklch(0.96 0 0); /* neutral light gray */
+  --secondary-foreground: oklch(0.148 0 0);
+  --muted: oklch(0.96 0 0); /* neutral muted gray */
+  --muted-foreground: oklch(0.45 0 0); /* gray text */
+  --accent: oklch(0.82 0.15 85); /* same as primary gold */
+  --accent-foreground: oklch(0.148 0 0);
+  --destructive: oklch(0.577 0.245 27.325); /* keep red for errors */
+  --border: oklch(0.9 0 0); /* neutral gray border */
+  --input: oklch(0.98 0 0); /* light gray for inputs */
+  --ring: oklch(0.82 0.15 85); /* gold ring/focus */
+  --chart-1: oklch(0.82 0.15 85); /* gold */
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(1 0 0); /* white sidebar */
+  --sidebar-foreground: oklch(0.148 0 0);
+  --sidebar-primary: oklch(0.82 0.15 85); /* gold for active items */
+  --sidebar-primary-foreground: oklch(0.148 0 0);
+  --sidebar-accent: oklch(0.96 0 0); /* neutral gray accent */
+  --sidebar-accent-foreground: oklch(0.148 0 0);
+  --sidebar-border: oklch(0.9 0 0);
+  --sidebar-ring: oklch(0.82 0.15 85);
+
+  /* Custom yellow shades for UI */
+  --yellow-bright: oklch(0.88 0.15 95); /* #FFE065 - bright yellow */
+  --yellow-light: oklch(0.96 0.08 95); /* #FFF4CC - pale cream yellow */
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* NextStep.js Tour Customization - Match Brand Colors */
+/* Using theme colors defined in @theme block: --color-ai-gold (#ffc329) */
+
+/* Overlay backdrop */
+[data-nextstep-overlay] {
+  background: oklch(
+    0.148 0 0 / 60%
+  ) !important; /* foreground color with 60% opacity */
+}
+
+/* Spotlight/highlight effect - Gold border matching brand */
+[data-nextstep-spotlight] {
+  border: 3px solid oklch(0.82 0.15 85) !important; /* primary gold color */
+  box-shadow: 0 0 0 4px oklch(0.82 0.15 85 / 25%) !important; /* primary with 25% opacity */
+  border-radius: var(--radius) !important;
+}
+
+/* Dark mode support */
+.dark [data-nextstep-overlay] {
+  background: oklch(0 0 0 / 75%) !important; /* pure black with 75% opacity */
+}
+
+.dark [data-nextstep-spotlight] {
+  border: 3px solid oklch(0.82 0.15 85) !important; /* primary gold color */
+  box-shadow: 0 0 0 4px oklch(0.82 0.15 85 / 35%) !important; /* primary with 35% opacity */
+}
+
+/* Transcript panel citation styles - smaller text for compact view */
+.transcript-citations button {
+  @apply text-xs py-1.5;
+}
+
+.transcript-citations button svg {
+  @apply w-3 h-3;
+}
+
+/* Reduce citation card size in transcript panel */
+.transcript-citations [class*="p-3"] {
+  @apply p-2;
+}
+
+.transcript-citations [class*="text-sm"] {
+  @apply text-xs;
+}
+
+.transcript-citations [class*="text-xs"] {
+  @apply text-[10px];
+}
+
+.transcript-citations [class*="gap-3"] {
+  @apply gap-2;
+}
+
+.transcript-citations [class*="w-4"] {
+  @apply w-3;
+}
+
+.transcript-citations [class*="h-4"] {
+  @apply h-3;
+}

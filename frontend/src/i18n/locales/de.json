@@ -1,0 +1,256 @@
+{
+  "common": {
+    "loading": "Wird geladen...",
+    "error": "Fehler",
+    "retry": "Erneut versuchen",
+    "close": "Schließen",
+    "cancel": "Abbrechen",
+    "continue": "Fortfahren",
+    "submit": "Absenden",
+    "skip": "Jetzt überspringen",
+    "seconds": "Sekunden",
+    "minutes": "Minuten",
+    "you": "Sie",
+    "goBack": "Zurück",
+    "optional": "optional",
+    "save": "Speichern",
+    "saving": "Wird gespeichert...",
+    "messages": "Nachrichten",
+    "message": "Nachricht",
+    "at": "bei"
+  },
+  "chat": {
+    "modeToggle": {
+      "voice": "Sprache",
+      "text": "Text"
+    },
+    "connection": {
+      "connecting": "Verbindung wird hergestellt...",
+      "settingUp": "Chat wird eingerichtet...",
+      "takeMoment": "Dies dauert nur einen Moment"
+    },
+    "input": {
+      "placeholder": "Nachricht eingeben...",
+      "send": "Nachricht senden",
+      "uploading": "Wird hochgeladen...",
+      "provideInfo": "Bitte geben Sie Ihre Daten ein, um fortzufahren..."
+    },
+    "emptyState": {
+      "title": "Starten Sie ein Gespräch mit mir.",
+      "subtitle": "Fragen Sie mich alles! Ich bin hier, um Experteneinblicke und Unterstützung zu bieten.",
+      "connectionError": "Verbindungsfehler",
+      "retryConnection": "Verbindung wiederholen"
+    },
+    "fileTypes": {
+      "pdf": "PDF",
+      "doc": "Word-Dokument",
+      "docx": "Word-Dokument",
+      "xls": "Excel-Tabelle",
+      "xlsx": "Excel-Tabelle",
+      "ppt": "PowerPoint",
+      "pptx": "PowerPoint",
+      "png": "Bild",
+      "jpg": "Bild",
+      "jpeg": "Bild",
+      "file": "Datei"
+    },
+    "errors": {
+      "sessionNotInitialized": "Sitzung nicht initialisiert",
+      "failedToUpload": "Datei-Upload fehlgeschlagen",
+      "unknownError": "Unbekannter Fehler"
+    }
+  },
+  "voice": {
+    "status": {
+      "connected": "Verbunden",
+      "readyToTalk": "Bereit zum Sprechen",
+      "readyToStart": "Bereit zum Starten",
+      "readyToHelp": "Bereit zu helfen",
+      "initializing": "Wird initialisiert...",
+      "connecting": "Verbindung wird hergestellt...",
+      "speaking": "Spricht...",
+      "listening": "Hört zu..."
+    },
+    "buttons": {
+      "startConversation": "Gespräch starten",
+      "startVoiceChat": "Sprachchat starten",
+      "enableAudio": "Klicken Sie, um Audio zu aktivieren",
+      "endSession": "Sitzung beenden",
+      "endCall": "Anruf beenden",
+      "mute": "Stummschalten",
+      "unmute": "Stummschaltung aufheben",
+      "backToTextChat": "Zurück zum Textchat"
+    },
+    "transcript": {
+      "title": "Live-Transkript",
+      "download": "Transkript herunterladen",
+      "minimize": "Minimieren",
+      "maximize": "Maximieren",
+      "emptyState": "Ihr Gespräch wird hier erscheinen",
+      "saving": "Wird gespeichert...",
+      "show": "Transkript anzeigen",
+      "viewPrevious": "Vorheriges Transkript anzeigen"
+    },
+    "upload": {
+      "title": "Dokument für den Assistenten zur Analyse hochladen"
+    },
+    "limitExceeded": {
+      "sessionEnded": "Sprachsitzung beendet",
+      "unavailable": "Sprachchat nicht verfügbar",
+      "conversationEnded": "Ihr Gespräch mit {{name}} ist beendet.",
+      "unavailableMessage": "Sprachchat mit {{name}} ist derzeit nicht verfügbar.",
+      "continueWithText": "Sie können Ihr Gespräch per Textchat fortsetzen.",
+      "useTextInstead": "Sie können immer noch per Textchat kommunizieren.",
+      "continueWithTextButton": "Mit Textchat fortfahren"
+    }
+  },
+  "session": {
+    "inactivity": {
+      "title": "Sind Sie noch da?",
+      "description": "Ihre Sitzung wird getrennt in",
+      "dismiss": "Ich bin noch da",
+      "hint": "Klicken Sie irgendwo oder drücken Sie eine Taste, um fortzufahren"
+    },
+    "timeLimit": {
+      "title": "Sitzung endet bald",
+      "description": "Ihre Sitzung endet in",
+      "dismiss": "Verstanden",
+      "info": "Sie können nach dieser Sitzung eine neue starten. Ihr Gespräch wird gespeichert."
+    },
+    "disconnected": {
+      "title": "Sitzung getrennt",
+      "ended": "Sitzung beendet",
+      "connectionLost": "Verbindung verloren",
+      "reconnect": "Erneut verbinden",
+      "reconnecting": "Verbindung wird wiederhergestellt...",
+      "messagesSaved": "Ihre Nachrichten sind gespeichert",
+      "reasons": {
+        "inactivity": {
+          "title": "Sitzung getrennt",
+          "description": "Ihre Chat-Sitzung wurde wegen Inaktivität getrennt. Ihr Gespräch wurde gespeichert."
+        },
+        "manual": {
+          "title": "Sitzung beendet",
+          "description": "Sie haben diese Chat-Sitzung beendet. Ihr Gespräch wurde gespeichert."
+        },
+        "error": {
+          "title": "Verbindung verloren",
+          "description": "Die Verbindung wurde unerwartet unterbrochen. Bitte verbinden Sie sich erneut, um weiterzuchatten."
+        }
+      }
+    },
+    "timer": {
+      "remaining": "{{time}} verbleibend"
+    },
+    "endConfirm": {
+      "title": "Chat-Sitzung beenden?",
+      "description": "Ihr Gespräch wird gespeichert."
+    },
+    "timeLimitExceeded": {
+      "title": "Sitzungszeitlimit erreicht",
+      "sessionEnded": "Ihre Sitzung mit {{name}} ist beendet.",
+      "duration": "Dauer",
+      "messagesCount": "Nachrichten",
+      "conversationSaved": "Ihr Gespräch wurde gespeichert. Sie können das Transkript ansehen oder eine neue Sitzung starten.",
+      "viewTranscript": "Transkript anzeigen",
+      "startNewSession": "Neue Sitzung starten",
+      "downloadTranscript": "Transkript herunterladen"
+    }
+  },
+  "email": {
+    "prompt": {
+      "title": "Bleiben Sie verbunden!",
+      "description": "Erhalten Sie eine Kopie dieses Gesprächs und setzen Sie es per E-Mail fort",
+      "placeholder": "E-Mail eingeben",
+      "submit": "Fortfahren",
+      "submitting": "Wird gesendet...",
+      "skip": "Jetzt überspringen",
+      "errors": {
+        "required": "Bitte geben Sie Ihre E-Mail ein",
+        "invalid": "Bitte geben Sie eine gültige E-Mail ein"
+      }
+    },
+    "banner": {
+      "title": "Dieses Gespräch speichern",
+      "description": "Geben Sie Ihre Daten ein, um diesen Chat zu speichern und später fortzusetzen",
+      "emailLabel": "E-Mail-Adresse",
+      "emailPlaceholder": "ihre@email.com",
+      "fullnameLabel": "Vollständiger Name",
+      "phoneLabel": "Telefonnummer",
+      "phonePlaceholder": "+49 123 456 7890",
+      "continueConversation": "Gespräch fortsetzen"
+    },
+    "otp": {
+      "continue": "Dieses Gespräch fortsetzen",
+      "verify": "E-Mail bestätigen",
+      "completeProfile": "Profil vervollständigen",
+      "verifyDescription": "Bestätigen Sie Ihre E-Mail, um Ihren Fortschritt zu speichern und jederzeit fortzufahren",
+      "codeSentTo": "Wir haben einen 6-stelligen Code an {{email}} gesendet",
+      "detailsDescription": "Fügen Sie Ihre Daten hinzu, um dieses Gespräch zu speichern",
+      "sendCode": "Code senden",
+      "verifyCode": "Code bestätigen",
+      "verificationCode": "Bestätigungscode",
+      "resendCode": "Code erneut senden",
+      "resendIn": "Erneut senden in {{seconds}}s",
+      "changeEmail": "E-Mail ändern",
+      "complete": "Abschließen",
+      "fullNamePlaceholder": "Max Mustermann",
+      "checkingProfile": "Profil wird überprüft...",
+      "back": "Zurück",
+      "errors": {
+        "sendFailed": "Code senden fehlgeschlagen",
+        "invalidCode": "Ungültiger Bestätigungscode",
+        "linkFailed": "Sitzungsverknüpfung fehlgeschlagen",
+        "resendFailed": "Code erneut senden fehlgeschlagen"
+      }
+    }
+  },
+  "widget": {
+    "aiPowered": "KI-gestützter digitaler Klon",
+    "bubbleText": "Chatten Sie mit mir",
+    "noUsername": "Kein Benutzername konfiguriert",
+    "closeChat": "Chat schließen",
+    "openChat": "Chat öffnen",
+    "tooltips": {
+      "talkToMe": "Sprich mit mir!",
+      "askAnything": "Frag mich alles",
+      "needHelp": "Brauchst du Hilfe?",
+      "letsChat": "Lass uns chatten!"
+    }
+  },
+  "assistant": {
+    "error": {
+      "unableToLoad": "Assistent konnte nicht geladen werden. Bitte versuchen Sie es später erneut."
+    }
+  },
+  "textLimit": {
+    "title": "Nachrichtenlimit erreicht",
+    "quotaReached": "Das monatliche Nachrichtenkontingent von {{name}} wurde erreicht.",
+    "usageInfo": "{{used}} / {{limit}} Nachrichten diesen Monat verwendet",
+    "continueWithVoice": "Sie können immer noch per Sprachchat kommunizieren.",
+    "tryAgainLater": "Bitte versuchen Sie es später erneut, wenn das Kontingent zurückgesetzt wird.",
+    "continueWithVoiceButton": "Mit Sprachchat fortfahren"
+  },
+  "avatar": {
+    "aiClone": "KI-Klon"
+  },
+  "source": "Quelle",
+  "sources": "Quellen",
+  "settings": {
+    "language": {
+      "title": "Sprache",
+      "description": "Wählen Sie Ihre bevorzugte Sprache für die Benutzeroberfläche",
+      "saved": "Spracheinstellung gespeichert"
+    }
+  },
+  "calendar": {
+    "bookCall": "Anruf buchen",
+    "scheduleMeeting": "Termin vereinbaren"
+  },
+  "contentOutput": {
+    "viewFull": "Vollständigen Inhalt anzeigen",
+    "copyMarkdown": "Markdown kopieren",
+    "copied": "Kopiert!",
+    "downloadMd": "Herunterladen .md"
+  }
+}

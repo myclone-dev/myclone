@@ -1,0 +1,67 @@
+# Minimal pre-commit hooks for code formatting and critical linting
+# Install: pre-commit install
+# Run manually: pre-commit run --all-files
+#
+# Tools: Black (formatter), isort (imports), Ruff (critical errors only)
+
+repos:
+  # General file checks (Python files only)
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        types: [python]
+        exclude: ^alembic/versions/
+      - id: end-of-file-fixer
+        types: [python]
+        exclude: ^alembic/versions/
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: detect-private-key
+        exclude: '\.(md|txt|rst|yml|yaml)$'
+      - id: mixed-line-ending
+        types: [python]
+        exclude: ^alembic/versions/
+
+  # Python imports sorting
+  - repo: https://github.com/PyCQA/isort
+    rev: 7.0.0
+    hooks:
+      - id: isort
+        args: ["--profile", "black", "--line-length", "100"]
+        exclude: ^alembic/versions/
+
+  # Python code formatting
+  - repo: https://github.com/psf/black
+    rev: 25.9.0
+    hooks:
+      - id: black
+        language_version: python3.11
+        args: ["--line-length", "100"]
+        exclude: ^alembic/versions/
+
+  # Python linting with ruff - minimal rules only (syntax errors, undefined names, unused imports)
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.14.0
+    hooks:
+      - id: ruff
+        args: ["--fix"]
+        exclude: ^alembic/versions/
+
+# Global configuration
+default_language_version:
+  python: python3.11
+
+# Fail fast: stop on first failure
+fail_fast: false
+
+# Exclude patterns
+exclude: |
+  (?x)^(
+      alembic/versions/.*|
+      \.venv/.*|
+      build/.*|
+      dist/.*|
+      \.git/.*|
+      __pycache__/.*
+  )$

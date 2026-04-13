@@ -1,0 +1,83 @@
+# Build stage
+FROM python:3.11-slim AS builder
+
+WORKDIR /app
+
+# Install build dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+
+# Copy dependency files
+COPY pyproject.toml uv.lock* ./
+
+# Install dependencies
+ENV UV_COMPILE_BYTECODE=1
+RUN uv sync --frozen --no-dev --no-install-project
+
+# Download NLTK data
+RUN uv run python -c "import nltk; nltk.download('punkt'); nltk.download('punkt_tab'); nltk.download('stopwords'); nltk.download('averaged_perceptron_tagger'); nltk.download('averaged_perceptron_tagger_eng')" || echo "NLTK downloads completed with warnings"
+
+# Runtime stage
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install runtime dependencies only
+RUN apt-get update && apt-get install -y \
+    postgresql-client \
+    curl \
+    procps \
+    ffmpeg \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy virtual environment from builder
+COPY --from=builder /app/.venv /app/.venv
+
+# Copy NLTK data from builder
+COPY --from=builder /root/nltk_data /home/appuser/nltk_data
+
+# Copy Alembic configuration and migrations
+COPY alembic.ini ./alembic.ini
+COPY alembic/ ./alembic/
+
+# Copy shared modules
+COPY shared/ ./shared/
+
+# Copy application code
+COPY app/ ./app/
+
+# Copy LiveKit agent worker files
+COPY livekit/ ./livekit/
+
+# Copy evaluation files
+COPY evaluations/ ./evaluations/
+
+# Create directory for file uploads
+RUN mkdir -p /app/uploads
+
+# Copy entrypoint script
+COPY docker/entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
+
+# Create non-root user
+RUN groupadd -r --gid 1000 appuser && \
+    useradd -r --uid 1000 -g appuser -m appuser && \
+    chown -R appuser:appuser /app /home/appuser
+
+USER appuser
+
+ENV NLTK_DATA=/home/appuser/nltk_data
+ENV PYTHONPATH=/app
+
+EXPOSE 8001
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost:8001/api/v1/health || exit 1
+
+ENTRYPOINT ["/app/entrypoint.sh"]
+CMD ["/app/.venv/bin/uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8001"]

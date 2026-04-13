@@ -1,0 +1,56 @@
+# Voice Processing Dependencies
+# Separate from backend due to audio/video processing requirements
+# Note: CLI removed - this is API/worker only
+
+# Core Python libraries
+python-dotenv>=1.0.0
+
+# Audio/Video processing
+ffmpeg-python>=0.2.0      # FFmpeg Python bindings for audio extraction
+pydub>=0.25.1             # Audio manipulation and format conversion
+yt-dlp==2025.9.26         # YouTube video downloading
+
+# YouTube transcript extraction (NEW - for YouTube ingestion)
+youtube-transcript-api>=0.6.0  # Extract transcripts from YouTube videos
+
+# Audio analysis (minimal - only for segment selection)
+numpy>=1.21.0,<2.0        # Required by segment_selector.py
+soundfile>=0.12.1         # Required by segment_selector.py for audio I/O
+
+# Transcription and AI services
+assemblyai>=0.17.0        # AssemblyAI API for speech-to-text (fallback transcription)
+openai>=1.0.0             # OpenAI API for summaries, keywords, and embeddings
+requests>=2.31.0          # HTTP client for API calls
+httpx==0.26.0
+
+# Logging and configuration
+loguru>=0.7.0             # Structured logging
+pyyaml>=6.0               # YAML configuration files
+sentry-sdk>=1.40.0        # Error monitoring and tracking
+
+# API Server (integrated into main backend)
+fastapi>=0.104.0          # Modern async web framework
+uvicorn>=0.24.0           # ASGI server for FastAPI
+pydantic>=2.0.0           # Data validation
+pydantic-settings>=2.0.0  # Pydantic settings management (required by app.config)
+email-validator>=2.0.0    # Email validation for Pydantic EmailStr (required by shared schemas)
+
+# Async Job Queue
+nats-py>=2.6.0            # NATS client for async job processing
+
+# Database (PostgreSQL for shared job state)
+sqlalchemy>=2.0.0         # ORM for database access
+asyncpg>=0.29.0           # Async PostgreSQL driver
+pgvector>=0.2.0           # PostgreSQL vector extension (required by database models)
+
+# AWS S3 Storage (for PDF and document storage)
+botocore>=1.34.0          # AWS SDK core library
+
+
+llama-index>=0.10.0       # LlamaIndex for RAG ingestion and embeddings
+llama-index-embeddings-openai>=0.1.0  # OpenAI embeddings for LlamaIndex
+llama-index-embeddings-voyageai  # Voyage AI embeddings for LlamaIndex
+llama-index-vector-stores-postgres>=0.1.0  # PostgreSQL vector store for LlamaIndex
+tiktoken>=0.5.0           # Token counting for OpenAI models
+# AWS S3 for file storage
+aioboto3>=15.2.0          # Async boto3 for S3 operations

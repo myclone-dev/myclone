@@ -1,0 +1,127 @@
+services:
+  # PostgreSQL Database with pgvector
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: myclone_postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-persona_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-persona_pass}
+      POSTGRES_DB: ${POSTGRES_DB:-persona_db}
+      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256 --auth-local=scram-sha-256"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER:-persona_user} -d ${POSTGRES_DB:-persona_db}",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # NATS Server with JetStream for job queue
+  nats:
+    image: nats:alpine
+    container_name: myclone_nats
+    ports:
+      - "4222:4222"  # Client connections
+      - "8222:8222"  # HTTP monitoring
+    command: ["-js", "-m", "8222"]  # Enable JetStream and monitoring
+    restart: unless-stopped
+
+  # LocalStack for local AWS S3 development
+  localstack:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.localstack
+    container_name: myclone_localstack
+    ports:
+      - "4566:4566"
+    env_file:
+      - .env
+    environment:
+      - USER_DATA_BUCKET=${USER_DATA_BUCKET:-myclone-user-data-dev}
+    volumes:
+      - localstack_data:/var/lib/localstack
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4566/_localstack/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # FastAPI API Service
+  api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.api
+    container_name: myclone_api
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    env_file:
+      - .env
+    environment:
+      POSTGRES_HOST: postgres
+      PYTHONPATH: /app
+      NATS_URL: nats://nats:4222
+    ports:
+      - "${HOST_PORT:-8000}:8001"
+    volumes:
+      - ./shared:/app/shared
+      - ./app:/app/app
+      - ./livekit:/app/livekit
+      - ./evaluations/:/app/evaluations
+      - ./scripts:/app/scripts
+      - ./alembic:/app/alembic
+      - ./alembic.ini:/app/alembic.ini
+      - ./uploads:/app/uploads
+      - ./logs:/app/logs
+      - uv_cache:/root/.cache/uv
+    command: >
+      /app/.venv/bin/uvicorn app.main:app
+      --host 0.0.0.0
+      --port 8001
+      --reload
+      --reload-dir /app/app
+      --reload-dir /app/shared
+      --reload-dir /app/livekit
+    depends_on:
+      - postgres
+      - nats
+      - localstack
+    restart: unless-stopped
+
+  # Voice Processing Background Workers
+  voice-processing-worker:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.voice-processing
+    env_file:
+      - .env
+    environment:
+      POSTGRES_HOST: postgres
+      PYTHONPATH: /app/dependencies:/app/voice_processing:/app
+      NATS_URL: nats://nats:4222
+    volumes:
+      - ./shared:/app/shared
+      - ./app:/app/app
+      - ./workers/voice_processing:/app/voice_processing
+      - ./uploads:/app/uploads
+    command: python -m worker
+    restart: unless-stopped
+    depends_on:
+      - nats
+      - postgres
+      - localstack
+    deploy:
+      replicas: 2
+
+volumes:
+  postgres_data:
+  uv_cache:
+  localstack_data:

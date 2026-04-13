@@ -1,0 +1,256 @@
+{
+  "common": {
+    "loading": "読み込み中...",
+    "error": "エラー",
+    "retry": "再試行",
+    "close": "閉じる",
+    "cancel": "キャンセル",
+    "continue": "続ける",
+    "submit": "送信",
+    "skip": "今はスキップ",
+    "seconds": "秒",
+    "minutes": "分",
+    "you": "あなた",
+    "goBack": "戻る",
+    "optional": "任意",
+    "save": "保存",
+    "saving": "保存中...",
+    "messages": "メッセージ",
+    "message": "メッセージ",
+    "at": "所属"
+  },
+  "chat": {
+    "modeToggle": {
+      "voice": "音声",
+      "text": "テキスト"
+    },
+    "connection": {
+      "connecting": "接続中...",
+      "settingUp": "チャットを設定中...",
+      "takeMoment": "少々お待ちください"
+    },
+    "input": {
+      "placeholder": "メッセージを入力...",
+      "send": "メッセージを送信",
+      "uploading": "アップロード中...",
+      "provideInfo": "続行するには情報を入力してください..."
+    },
+    "emptyState": {
+      "title": "会話を始めましょう。",
+      "subtitle": "何でも聞いてください！専門的な洞察とサポートを提供します。",
+      "connectionError": "接続エラー",
+      "retryConnection": "接続を再試行"
+    },
+    "fileTypes": {
+      "pdf": "PDF",
+      "doc": "Word文書",
+      "docx": "Word文書",
+      "xls": "Excelスプレッドシート",
+      "xlsx": "Excelスプレッドシート",
+      "ppt": "PowerPoint",
+      "pptx": "PowerPoint",
+      "png": "画像",
+      "jpg": "画像",
+      "jpeg": "画像",
+      "file": "ファイル"
+    },
+    "errors": {
+      "sessionNotInitialized": "セッションが初期化されていません",
+      "failedToUpload": "ファイルのアップロードに失敗しました",
+      "unknownError": "不明なエラー"
+    }
+  },
+  "voice": {
+    "status": {
+      "connected": "接続済み",
+      "readyToTalk": "話す準備ができました",
+      "readyToStart": "開始準備完了",
+      "readyToHelp": "サポート準備完了",
+      "initializing": "初期化中...",
+      "connecting": "接続中...",
+      "speaking": "話しています...",
+      "listening": "聞いています..."
+    },
+    "buttons": {
+      "startConversation": "会話を開始",
+      "startVoiceChat": "音声チャットを開始",
+      "enableAudio": "クリックして音声を有効にする",
+      "endSession": "セッションを終了",
+      "endCall": "通話を終了",
+      "mute": "ミュート",
+      "unmute": "ミュート解除",
+      "backToTextChat": "テキストチャットに戻る"
+    },
+    "transcript": {
+      "title": "ライブ文字起こし",
+      "download": "文字起こしをダウンロード",
+      "minimize": "最小化",
+      "maximize": "最大化",
+      "emptyState": "会話がここに表示されます",
+      "saving": "保存中...",
+      "show": "文字起こしを表示",
+      "viewPrevious": "前の文字起こしを表示"
+    },
+    "upload": {
+      "title": "アシスタントが分析するドキュメントをアップロード"
+    },
+    "limitExceeded": {
+      "sessionEnded": "音声セッション終了",
+      "unavailable": "音声チャット利用不可",
+      "conversationEnded": "{{name}}との会話が終了しました。",
+      "unavailableMessage": "{{name}}との音声チャットは現在利用できません。",
+      "continueWithText": "テキストチャットで会話を続けることができます。",
+      "useTextInstead": "テキストチャットで会話することもできます。",
+      "continueWithTextButton": "テキストチャットで続ける"
+    }
+  },
+  "session": {
+    "inactivity": {
+      "title": "まだいらっしゃいますか？",
+      "description": "セッションが切断されます",
+      "dismiss": "まだここにいます",
+      "hint": "続けるには任意の場所をクリックするかキーを押してください"
+    },
+    "timeLimit": {
+      "title": "セッションがまもなく終了します",
+      "description": "セッションが終了します",
+      "dismiss": "了解しました",
+      "info": "このセッション終了後に新しいセッションを開始できます。会話は保存されます。"
+    },
+    "disconnected": {
+      "title": "セッション切断",
+      "ended": "セッション終了",
+      "connectionLost": "接続が失われました",
+      "reconnect": "再接続",
+      "reconnecting": "再接続中...",
+      "messagesSaved": "メッセージは保存されています",
+      "reasons": {
+        "inactivity": {
+          "title": "セッション切断",
+          "description": "非アクティブのためチャットセッションが切断されました。会話は保存されています。"
+        },
+        "manual": {
+          "title": "セッション終了",
+          "description": "このチャットセッションを終了しました。会話は保存されています。"
+        },
+        "error": {
+          "title": "接続が失われました",
+          "description": "接続が予期せず失われました。チャットを続けるには再接続してください。"
+        }
+      }
+    },
+    "timer": {
+      "remaining": "残り{{time}}"
+    },
+    "endConfirm": {
+      "title": "チャットセッションを終了しますか？",
+      "description": "会話は保存されます。"
+    },
+    "timeLimitExceeded": {
+      "title": "セッション時間制限に達しました",
+      "sessionEnded": "{{name}}とのセッションが終了しました。",
+      "duration": "時間",
+      "messagesCount": "メッセージ数",
+      "conversationSaved": "会話は保存されました。文字起こしを見るか、新しいセッションを開始できます。",
+      "viewTranscript": "文字起こしを見る",
+      "startNewSession": "新しいセッションを開始",
+      "downloadTranscript": "文字起こしをダウンロード"
+    }
+  },
+  "email": {
+    "prompt": {
+      "title": "つながりを保ちましょう！",
+      "description": "この会話のコピーを受け取り、メールで続けましょう",
+      "placeholder": "メールアドレスを入力",
+      "submit": "続ける",
+      "submitting": "送信中...",
+      "skip": "今はスキップ",
+      "errors": {
+        "required": "メールアドレスを入力してください",
+        "invalid": "有効なメールアドレスを入力してください"
+      }
+    },
+    "banner": {
+      "title": "この会話を保存",
+      "description": "このチャットを保存して後で続けるには情報を入力してください",
+      "emailLabel": "メールアドレス",
+      "emailPlaceholder": "your@email.com",
+      "fullnameLabel": "氏名",
+      "phoneLabel": "電話番号",
+      "phonePlaceholder": "+81 90 1234 5678",
+      "continueConversation": "会話を続ける"
+    },
+    "otp": {
+      "continue": "この会話を続ける",
+      "verify": "メールを確認",
+      "completeProfile": "プロフィールを完成",
+      "verifyDescription": "進捗を保存していつでも再開するにはメールを確認してください",
+      "codeSentTo": "{{email}}に6桁のコードを送信しました",
+      "detailsDescription": "この会話を保存するには詳細を追加してください",
+      "sendCode": "コードを送信",
+      "verifyCode": "コードを確認",
+      "verificationCode": "確認コード",
+      "resendCode": "コードを再送信",
+      "resendIn": "{{seconds}}秒後に再送信",
+      "changeEmail": "メールを変更",
+      "complete": "完了",
+      "fullNamePlaceholder": "山田太郎",
+      "checkingProfile": "プロフィールを確認中...",
+      "back": "戻る",
+      "errors": {
+        "sendFailed": "コードの送信に失敗しました",
+        "invalidCode": "無効な確認コード",
+        "linkFailed": "セッションのリンクに失敗しました",
+        "resendFailed": "コードの再送信に失敗しました"
+      }
+    }
+  },
+  "widget": {
+    "aiPowered": "AI搭載デジタルクローン",
+    "bubbleText": "チャットする",
+    "noUsername": "ユーザー名が設定されていません",
+    "closeChat": "チャットを閉じる",
+    "openChat": "チャットを開く",
+    "tooltips": {
+      "talkToMe": "話しかけてください！",
+      "askAnything": "何でも聞いてください",
+      "needHelp": "お困りですか？",
+      "letsChat": "チャットしましょう！"
+    }
+  },
+  "assistant": {
+    "error": {
+      "unableToLoad": "アシスタントを読み込めません。後でもう一度お試しください。"
+    }
+  },
+  "textLimit": {
+    "title": "メッセージ上限に達しました",
+    "quotaReached": "{{name}}の月間メッセージ枠に達しました。",
+    "usageInfo": "今月{{used}} / {{limit}}メッセージ使用",
+    "continueWithVoice": "音声チャットで会話を続けることができます。",
+    "tryAgainLater": "枠がリセットされてから再度お試しください。",
+    "continueWithVoiceButton": "音声チャットで続ける"
+  },
+  "avatar": {
+    "aiClone": "AIクローン"
+  },
+  "source": "ソース",
+  "sources": "ソース",
+  "settings": {
+    "language": {
+      "title": "言語",
+      "description": "インターフェースの言語を選択してください",
+      "saved": "言語設定が保存されました"
+    }
+  },
+  "calendar": {
+    "bookCall": "通話を予約",
+    "scheduleMeeting": "ミーティングを予約"
+  },
+  "contentOutput": {
+    "viewFull": "全文を表示",
+    "copyMarkdown": "マークダウンをコピー",
+    "copied": "コピーしました！",
+    "downloadMd": "ダウンロード .md"
+  }
+}

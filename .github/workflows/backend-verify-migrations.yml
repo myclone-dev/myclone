@@ -1,0 +1,83 @@
+name: Backend Verify Migrations
+
+on:
+  workflow_call:
+    outputs:
+      valid:
+        description: "Whether migrations are valid"
+        value: ${{ jobs.verify.outputs.valid }}
+
+defaults:
+  run:
+    working-directory: backend
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    outputs:
+      valid: ${{ steps.check.outputs.valid }}
+
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_pass
+          POSTGRES_DB: test_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Install dependencies
+        run: uv sync --frozen --group migrations
+
+      - name: Set environment variables
+        run: |
+          echo "POSTGRES_USER=test_user" >> $GITHUB_ENV
+          echo "POSTGRES_PASSWORD=test_pass" >> $GITHUB_ENV
+          echo "POSTGRES_HOST=localhost" >> $GITHUB_ENV
+          echo "POSTGRES_PORT=5432" >> $GITHUB_ENV
+          echo "POSTGRES_DB=test_db" >> $GITHUB_ENV
+          echo "LIVEKIT_API_KEY=test-key" >> $GITHUB_ENV
+          echo "LIVEKIT_API_SECRET=test-secret" >> $GITHUB_ENV
+          echo "OPENAI_API_KEY=test-key" >> $GITHUB_ENV
+          echo "JWT_SECRET_KEY=test-jwt-secret" >> $GITHUB_ENV
+          echo "ENCRYPTION_KEY=test-encryption-key" >> $GITHUB_ENV
+
+      - name: Verify single migration head
+        id: check
+        run: |
+          HEADS=$(uv run alembic heads 2>&1) || {
+            echo "$HEADS"
+            echo "valid=false" >> $GITHUB_OUTPUT
+            exit 1
+          }
+          HEAD_COUNT=$(echo "$HEADS" | grep -c "^[a-f0-9]" || true)
+          if [ "$HEAD_COUNT" -gt 1 ]; then
+            echo "Multiple migration heads detected!"
+            echo "$HEADS"
+            echo "Fix: uv run alembic merge heads -m 'merge'"
+            echo "valid=false" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+          echo "valid=true" >> $GITHUB_OUTPUT
+
+      - name: Verify migrations apply cleanly
+        run: uv run alembic upgrade head

@@ -1,0 +1,118 @@
+{
+  "test_cases": [
+    {
+      "id": "conv-context-basic",
+      "category": "context_retention",
+      "description": "Basic context retention test - asking about a topic and then follow-up questions",
+      "turns": [
+        {
+          "query": "What are the main benefits of using React?",
+          "ground_truth": "React offers benefits like component-based architecture, virtual DOM for performance, one-way data binding, and a large ecosystem with extensive community support.",
+          "expected_keywords": ["component", "virtual DOM", "performance"]
+        },
+        {
+          "query": "Can you elaborate more on the component-based architecture you mentioned?",
+          "ground_truth": "Component-based architecture in React allows you to break down the UI into reusable, self-contained pieces. Each component manages its own state and can be composed together to build complex interfaces. This promotes code reusability and easier maintenance.",
+          "expected_keywords": ["reusable", "state", "UI"],
+          "context_check": "Should reference the previous discussion about React benefits and expand on components specifically"
+        },
+        {
+          "query": "How does this compare to traditional approaches?",
+          "ground_truth": "Traditional approaches often use monolithic structures where UI elements are tightly coupled. React's component approach provides better separation of concerns, easier testing, and the ability to update individual parts without affecting the whole application.",
+          "expected_keywords": ["separation", "testing", "traditional"],
+          "context_check": "Should understand 'this' refers to React's component-based architecture from earlier turns"
+        }
+      ]
+    },
+    {
+      "id": "conv-pronoun-resolution",
+      "category": "context_retention",
+      "description": "Tests if agent can resolve pronouns and references to previous conversation",
+      "turns": [
+        {
+          "query": "Tell me about Python's list comprehension feature",
+          "ground_truth": "List comprehension in Python provides a concise way to create lists. The syntax is [expression for item in iterable if condition]. It's more readable and often faster than traditional for loops for creating lists.",
+          "expected_keywords": ["list", "concise", "syntax"]
+        },
+        {
+          "query": "Can you show me an example of it?",
+          "ground_truth": "Here's an example: [x**2 for x in range(10)] creates a list of squares from 0 to 81. Another example: [x for x in numbers if x > 0] filters positive numbers from a list.",
+          "expected_keywords": ["example", "range", "filter"],
+          "context_check": "Should understand 'it' refers to list comprehension from the previous turn"
+        },
+        {
+          "query": "What about dictionary comprehension? Is the syntax similar?",
+          "ground_truth": "Yes, dictionary comprehension has similar syntax: {key: value for item in iterable if condition}. For example, {x: x**2 for x in range(5)} creates a dictionary mapping numbers to their squares.",
+          "expected_keywords": ["dictionary", "key", "value"],
+          "context_check": "Should relate this to the earlier list comprehension discussion and highlight similarities"
+        }
+      ]
+    },
+    {
+      "id": "conv-correction-handling",
+      "category": "clarification",
+      "description": "Tests if agent handles corrections and clarifications properly",
+      "turns": [
+        {
+          "query": "What is machine learning?",
+          "ground_truth": "Machine learning is a subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed. It uses algorithms to analyze data, learn patterns, and make predictions or decisions.",
+          "expected_keywords": ["AI", "algorithms", "patterns", "data"]
+        },
+        {
+          "query": "Actually, I meant specifically supervised learning. Can you explain that?",
+          "ground_truth": "Supervised learning is a type of machine learning where the model is trained on labeled data. The algorithm learns from input-output pairs to make predictions on new, unseen data. Common examples include classification and regression tasks.",
+          "expected_keywords": ["labeled", "training", "classification", "regression"],
+          "context_check": "Should acknowledge the correction and pivot to supervised learning specifically"
+        }
+      ]
+    },
+    {
+      "id": "conv-deep-dive",
+      "category": "depth_exploration",
+      "description": "Tests progressively deeper questions on a topic",
+      "turns": [
+        {
+          "query": "What is an API?",
+          "ground_truth": "An API (Application Programming Interface) is a set of protocols and tools that allows different software applications to communicate with each other. It defines how requests and responses should be formatted.",
+          "expected_keywords": ["interface", "communication", "software"]
+        },
+        {
+          "query": "What's the difference between REST and GraphQL APIs?",
+          "ground_truth": "REST APIs use multiple endpoints for different resources and standard HTTP methods. GraphQL uses a single endpoint and lets clients specify exactly what data they need. REST can lead to over-fetching or under-fetching, while GraphQL gives more flexibility but adds complexity.",
+          "expected_keywords": ["REST", "GraphQL", "endpoint", "HTTP"],
+          "context_check": "Should build on the general API explanation and compare these two specific types"
+        },
+        {
+          "query": "Which one would you recommend for a mobile app with limited bandwidth?",
+          "ground_truth": "For a mobile app with limited bandwidth, GraphQL is often better because clients can request only the data they need, reducing payload size. However, REST with proper design and caching can also be efficient. Consider your team's expertise and the app's specific requirements.",
+          "expected_keywords": ["mobile", "bandwidth", "payload", "caching"],
+          "context_check": "Should apply the previous REST vs GraphQL comparison to this specific use case"
+        }
+      ]
+    },
+    {
+      "id": "conv-multi-topic",
+      "category": "topic_switching",
+      "description": "Tests context retention when referencing information from earlier in conversation after topic change",
+      "turns": [
+        {
+          "query": "What is Docker used for?",
+          "ground_truth": "Docker is a platform for containerization that packages applications and their dependencies into isolated containers. This ensures consistency across different environments and simplifies deployment.",
+          "expected_keywords": ["container", "deployment", "isolation"]
+        },
+        {
+          "query": "And what about Kubernetes?",
+          "ground_truth": "Kubernetes is a container orchestration platform that automates the deployment, scaling, and management of containerized applications. It works well with Docker containers to manage large-scale deployments.",
+          "expected_keywords": ["orchestration", "scaling", "management"],
+          "context_check": "Should relate Kubernetes back to Docker containers mentioned in the previous turn"
+        },
+        {
+          "query": "How do they work together in production?",
+          "ground_truth": "In production, Docker creates the containers while Kubernetes manages them at scale. Docker packages the application, and Kubernetes handles scheduling, load balancing, self-healing, and rolling updates across a cluster of machines.",
+          "expected_keywords": ["production", "cluster", "load balancing"],
+          "context_check": "Should synthesize information from both previous turns about Docker and Kubernetes"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "description": "Document attachment evaluation test cases for LiveKit text-only agent",
+  "version": "1.0",
+  "test_cases": [
+    {
+      "id": "doc-pdf-report",
+      "document_url": "https://your-s3-bucket.s3.amazonaws.com/test-documents/quarterly_report_2025.pdf",
+      "document_name": "quarterly_report_2025.pdf",
+      "document_type": "pdf",
+      "category": "business_report",
+      "description": "Test Q&A on a quarterly business report PDF",
+      "questions": [
+        {
+          "query": "What is the total revenue mentioned in this report?",
+          "ground_truth": "The total revenue for Q4 2025 was $12.5 million, representing a 15% increase from the previous quarter.",
+          "expected_keywords": ["revenue", "million", "quarter"],
+          "requires_specific_section": "Financial Summary"
+        },
+        {
+          "query": "What were the key challenges mentioned?",
+          "ground_truth": "The report highlights supply chain disruptions, increased raw material costs, and talent acquisition as the main challenges faced during the quarter.",
+          "expected_keywords": ["supply chain", "costs", "challenges"],
+          "requires_specific_section": "Challenges and Risks"
+        },
+        {
+          "query": "What are the projected goals for next quarter?",
+          "ground_truth": "The company aims to achieve 20% revenue growth, expand into two new markets, and launch three new product lines in the upcoming quarter.",
+          "expected_keywords": ["growth", "markets", "products"],
+          "requires_specific_section": "Future Outlook"
+        }
+      ]
+    },
+    {
+      "id": "doc-technical-spec",
+      "document_url": "https://your-s3-bucket.s3.amazonaws.com/test-documents/api_specification.pdf",
+      "document_name": "api_specification.pdf",
+      "document_type": "pdf",
+      "category": "technical",
+      "description": "Test Q&A on API technical specification document",
+      "questions": [
+        {
+          "query": "What authentication method does the API use?",
+          "ground_truth": "The API uses OAuth 2.0 with JWT tokens for authentication. Access tokens expire after 1 hour and refresh tokens are valid for 30 days.",
+          "expected_keywords": ["OAuth", "JWT", "token", "authentication"],
+          "requires_specific_section": "Authentication"
+        },
+        {
+          "query": "What is the rate limit for API requests?",
+          "ground_truth": "The standard rate limit is 1000 requests per minute per API key. Enterprise plans have a limit of 10,000 requests per minute.",
+          "expected_keywords": ["rate limit", "requests", "minute"],
+          "requires_specific_section": "Rate Limiting"
+        }
+      ]
+    },
+    {
+      "id": "doc-meeting-notes",
+      "document_url": "https://your-s3-bucket.s3.amazonaws.com/test-documents/meeting_notes_jan2026.txt",
+      "document_name": "meeting_notes_jan2026.txt",
+      "document_type": "txt",
+      "category": "meeting_notes",
+      "description": "Test Q&A on meeting notes text file",
+      "questions": [
+        {
+          "query": "Who attended the meeting?",
+          "ground_truth": "The meeting was attended by John Smith (CEO), Sarah Johnson (CTO), Mike Brown (CFO), and Emily Davis (Product Lead).",
+          "expected_keywords": ["John", "Sarah", "Mike", "Emily"],
+          "requires_specific_section": "Attendees"
+        },
+        {
+          "query": "What action items were assigned?",
+          "ground_truth": "Action items include: Sarah to complete technical review by Jan 15, Mike to prepare budget proposal by Jan 20, and Emily to finalize product roadmap by Jan 25.",
+          "expected_keywords": ["action", "review", "budget", "roadmap"],
+          "requires_specific_section": "Action Items"
+        },
+        {
+          "query": "When is the next meeting scheduled?",
+          "ground_truth": "The next meeting is scheduled for January 30, 2026 at 2:00 PM in the main conference room.",
+          "expected_keywords": ["January", "30", "meeting"],
+          "requires_specific_section": "Next Steps"
+        }
+      ]
+    },
+    {
+      "id": "doc-research-paper",
+      "document_url": "https://your-s3-bucket.s3.amazonaws.com/test-documents/ml_research_paper.pdf",
+      "document_name": "ml_research_paper.pdf",
+      "document_type": "pdf",
+      "category": "research",
+      "description": "Test Q&A on machine learning research paper",
+      "questions": [
+        {
+          "query": "What is the main contribution of this paper?",
+          "ground_truth": "The paper introduces a novel transformer architecture that reduces computational complexity from O(n²) to O(n log n) while maintaining comparable accuracy on benchmark tasks.",
+          "expected_keywords": ["transformer", "complexity", "accuracy"],
+          "requires_specific_section": "Abstract"
+        },
+        {
+          "query": "What datasets were used for evaluation?",
+          "ground_truth": "The model was evaluated on ImageNet, COCO, and the custom SyntheticVision dataset, achieving state-of-the-art results on two of three benchmarks.",
+          "expected_keywords": ["ImageNet", "COCO", "dataset", "benchmark"],
+          "requires_specific_section": "Experiments"
+        }
+      ]
+    },
+    {
+      "id": "doc-contract",
+      "document_url": "https://your-s3-bucket.s3.amazonaws.com/test-documents/service_agreement.pdf",
+      "document_name": "service_agreement.pdf",
+      "document_type": "pdf",
+      "category": "legal",
+      "description": "Test Q&A on service agreement contract",
+      "questions": [
+        {
+          "query": "What is the contract term and renewal policy?",
+          "ground_truth": "The initial contract term is 12 months, with automatic renewal for successive 12-month periods unless either party provides 30 days written notice before expiration.",
+          "expected_keywords": ["12 months", "renewal", "notice"],
+          "requires_specific_section": "Term and Termination"
+        },
+        {
+          "query": "What are the payment terms?",
+          "ground_truth": "Payment is due within 30 days of invoice date. Late payments incur a 1.5% monthly interest charge. Annual prepayment receives a 10% discount.",
+          "expected_keywords": ["30 days", "payment", "invoice"],
+          "requires_specific_section": "Payment Terms"
+        },
+        {
+          "query": "What is the liability cap mentioned?",
+          "ground_truth": "The total liability is capped at the fees paid in the 12 months preceding the claim, excluding cases of gross negligence or willful misconduct.",
+          "expected_keywords": ["liability", "cap", "fees"],
+          "requires_specific_section": "Limitation of Liability"
+        }
+      ]
+    }
+  ]
+}

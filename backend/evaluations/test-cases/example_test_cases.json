@@ -1,0 +1,58 @@
+{
+  "description": "Example test cases for LiveKit text agent evaluation",
+  "version": "1.0",
+  "test_cases": [
+    {
+      "id": "intro-1",
+      "category": "introduction",
+      "question": "Who are you and what do you do?",
+      "ground_truth": "I am a digital assistant persona created to help users with questions and provide information based on my knowledge base.",
+      "expected_keywords": ["assistant", "help", "questions"],
+      "metadata": {
+        "difficulty": "easy",
+        "expected_retrieval": false
+      }
+    },
+    {
+      "id": "intro-2",
+      "category": "introduction",
+      "question": "What can you help me with?",
+      "ground_truth": "I can help you with answering questions, providing information from my knowledge base, and assisting with various topics related to my expertise.",
+      "expected_keywords": ["help", "questions", "information"],
+      "metadata": {
+        "difficulty": "easy"
+      }
+    },
+    {
+      "id": "knowledge-1",
+      "category": "knowledge",
+      "question": "What topics are you most knowledgeable about?",
+      "ground_truth": "I have knowledge about the topics and information that have been added to my knowledge base by my creator.",
+      "expected_keywords": ["knowledge", "topics"],
+      "metadata": {
+        "difficulty": "medium",
+        "expected_retrieval": true
+      }
+    },
+    {
+      "id": "capability-1",
+      "category": "capabilities",
+      "question": "Can you search the internet?",
+      "ground_truth": "I may have internet search capabilities depending on my configuration. I can search for information if that feature is enabled.",
+      "expected_keywords": ["search", "internet"],
+      "metadata": {
+        "difficulty": "easy"
+      }
+    },
+    {
+      "id": "workflow-1",
+      "category": "workflow",
+      "question": "Do you have any assessments or questionnaires?",
+      "ground_truth": "I may have workflow assessments or questionnaires configured. I can guide you through structured questions if a workflow is available.",
+      "expected_keywords": ["assessment", "questionnaire", "workflow"],
+      "metadata": {
+        "difficulty": "medium"
+      }
+    }
+  ]
+}

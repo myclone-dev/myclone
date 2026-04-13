@@ -1,0 +1,256 @@
+{
+  "common": {
+    "loading": "Ładowanie...",
+    "error": "Błąd",
+    "retry": "Spróbuj ponownie",
+    "close": "Zamknij",
+    "cancel": "Anuluj",
+    "continue": "Kontynuuj",
+    "submit": "Wyślij",
+    "skip": "Pomiń na razie",
+    "seconds": "sekundy",
+    "minutes": "minuty",
+    "you": "Ty",
+    "goBack": "Wróć",
+    "optional": "opcjonalne",
+    "save": "Zapisz",
+    "saving": "Zapisywanie...",
+    "messages": "wiadomości",
+    "message": "wiadomość",
+    "at": "w"
+  },
+  "chat": {
+    "modeToggle": {
+      "voice": "Głos",
+      "text": "Tekst"
+    },
+    "connection": {
+      "connecting": "Łączenie...",
+      "settingUp": "Konfigurowanie czatu...",
+      "takeMoment": "To zajmie tylko chwilę"
+    },
+    "input": {
+      "placeholder": "Wpisz swoją wiadomość...",
+      "send": "Wyślij wiadomość",
+      "uploading": "Przesyłanie...",
+      "provideInfo": "Proszę podać swoje dane, aby kontynuować..."
+    },
+    "emptyState": {
+      "title": "Rozpocznij ze mną rozmowę.",
+      "subtitle": "Zapytaj mnie o cokolwiek! Jestem tu, aby dostarczyć eksperckie spostrzeżenia i pomoc.",
+      "connectionError": "Błąd połączenia",
+      "retryConnection": "Spróbuj połączyć ponownie"
+    },
+    "fileTypes": {
+      "pdf": "PDF",
+      "doc": "Dokument Word",
+      "docx": "Dokument Word",
+      "xls": "Arkusz Excel",
+      "xlsx": "Arkusz Excel",
+      "ppt": "PowerPoint",
+      "pptx": "PowerPoint",
+      "png": "Obraz",
+      "jpg": "Obraz",
+      "jpeg": "Obraz",
+      "file": "Plik"
+    },
+    "errors": {
+      "sessionNotInitialized": "Sesja nie została zainicjowana",
+      "failedToUpload": "Nie udało się przesłać pliku",
+      "unknownError": "Nieznany błąd"
+    }
+  },
+  "voice": {
+    "status": {
+      "connected": "Połączono",
+      "readyToTalk": "Gotowy do rozmowy",
+      "readyToStart": "Gotowy do rozpoczęcia",
+      "readyToHelp": "Gotowy do pomocy",
+      "initializing": "Inicjalizacja...",
+      "connecting": "Łączenie...",
+      "speaking": "Mówi...",
+      "listening": "Słucha..."
+    },
+    "buttons": {
+      "startConversation": "Rozpocznij rozmowę",
+      "startVoiceChat": "Rozpocznij czat głosowy",
+      "enableAudio": "Kliknij, aby włączyć dźwięk",
+      "endSession": "Zakończ sesję",
+      "endCall": "Zakończ połączenie",
+      "mute": "Wycisz",
+      "unmute": "Włącz mikrofon",
+      "backToTextChat": "Powrót do czatu tekstowego"
+    },
+    "transcript": {
+      "title": "Transkrypcja na żywo",
+      "download": "Pobierz transkrypcję",
+      "minimize": "Minimalizuj",
+      "maximize": "Maksymalizuj",
+      "emptyState": "Twoja rozmowa pojawi się tutaj",
+      "saving": "Zapisywanie...",
+      "show": "Pokaż transkrypcję",
+      "viewPrevious": "Zobacz poprzednią transkrypcję"
+    },
+    "upload": {
+      "title": "Prześlij dokument dla asystenta do analizy"
+    },
+    "limitExceeded": {
+      "sessionEnded": "Sesja głosowa zakończona",
+      "unavailable": "Czat głosowy niedostępny",
+      "conversationEnded": "Twoja rozmowa z {{name}} została zakończona.",
+      "unavailableMessage": "Czat głosowy z {{name}} jest obecnie niedostępny.",
+      "continueWithText": "Możesz kontynuować rozmowę przez czat tekstowy.",
+      "useTextInstead": "Nadal możesz prowadzić rozmowę przez czat tekstowy.",
+      "continueWithTextButton": "Kontynuuj przez czat tekstowy"
+    }
+  },
+  "session": {
+    "inactivity": {
+      "title": "Czy nadal tu jesteś?",
+      "description": "Twoja sesja zostanie rozłączona za",
+      "dismiss": "Nadal tu jestem",
+      "hint": "Kliknij gdziekolwiek lub naciśnij dowolny klawisz, aby kontynuować"
+    },
+    "timeLimit": {
+      "title": "Sesja wkrótce się kończy",
+      "description": "Twoja sesja zakończy się za",
+      "dismiss": "Rozumiem",
+      "info": "Możesz rozpocząć nową sesję po zakończeniu tej. Twoja rozmowa zostanie zapisana."
+    },
+    "disconnected": {
+      "title": "Sesja rozłączona",
+      "ended": "Sesja zakończona",
+      "connectionLost": "Utracono połączenie",
+      "reconnect": "Połącz ponownie",
+      "reconnecting": "Ponowne łączenie...",
+      "messagesSaved": "Twoje wiadomości zostały zapisane",
+      "reasons": {
+        "inactivity": {
+          "title": "Sesja rozłączona",
+          "description": "Twoja sesja czatu została rozłączona z powodu braku aktywności. Twoja rozmowa została zapisana."
+        },
+        "manual": {
+          "title": "Sesja zakończona",
+          "description": "Zakończyłeś tę sesję czatu. Twoja rozmowa została zapisana."
+        },
+        "error": {
+          "title": "Utracono połączenie",
+          "description": "Połączenie zostało nieoczekiwanie utracone. Połącz się ponownie, aby kontynuować czat."
+        }
+      }
+    },
+    "timer": {
+      "remaining": "Pozostało {{time}}"
+    },
+    "endConfirm": {
+      "title": "Zakończyć sesję czatu?",
+      "description": "Twoja rozmowa zostanie zapisana."
+    },
+    "timeLimitExceeded": {
+      "title": "Osiągnięto limit czasu sesji",
+      "sessionEnded": "Twoja sesja z {{name}} została zakończona.",
+      "duration": "Czas trwania",
+      "messagesCount": "Wiadomości",
+      "conversationSaved": "Twoja rozmowa została zapisana. Możesz zobaczyć transkrypcję lub rozpocząć nową sesję.",
+      "viewTranscript": "Zobacz transkrypcję",
+      "startNewSession": "Nowa sesja",
+      "downloadTranscript": "Pobierz transkrypcję"
+    }
+  },
+  "email": {
+    "prompt": {
+      "title": "Pozostań w kontakcie!",
+      "description": "Otrzymaj kopię tej rozmowy i kontynuuj przez e-mail",
+      "placeholder": "Wpisz swój e-mail",
+      "submit": "Kontynuuj",
+      "submitting": "Wysyłanie...",
+      "skip": "Pomiń na razie",
+      "errors": {
+        "required": "Proszę wpisać swój e-mail",
+        "invalid": "Proszę wpisać prawidłowy e-mail"
+      }
+    },
+    "banner": {
+      "title": "Zapisz tę rozmowę",
+      "description": "Wpisz swoje dane, aby zapisać ten czat i kontynuować później",
+      "emailLabel": "Adres e-mail",
+      "emailPlaceholder": "twoj@email.pl",
+      "fullnameLabel": "Imię i nazwisko",
+      "phoneLabel": "Numer telefonu",
+      "phonePlaceholder": "+48 123 456 789",
+      "continueConversation": "Kontynuuj rozmowę"
+    },
+    "otp": {
+      "continue": "Kontynuuj tę rozmowę",
+      "verify": "Zweryfikuj swój e-mail",
+      "completeProfile": "Uzupełnij swój profil",
+      "verifyDescription": "Zweryfikuj swój e-mail, aby zapisać postęp i wznowić w dowolnym momencie",
+      "codeSentTo": "Wysłaliśmy 6-cyfrowy kod na {{email}}",
+      "detailsDescription": "Dodaj swoje dane, aby zapisać tę rozmowę",
+      "sendCode": "Wyślij kod",
+      "verifyCode": "Zweryfikuj kod",
+      "verificationCode": "Kod weryfikacyjny",
+      "resendCode": "Wyślij kod ponownie",
+      "resendIn": "Wyślij ponownie za {{seconds}}s",
+      "changeEmail": "Zmień e-mail",
+      "complete": "Zakończ",
+      "fullNamePlaceholder": "Jan Kowalski",
+      "checkingProfile": "Sprawdzanie profilu...",
+      "back": "Wstecz",
+      "errors": {
+        "sendFailed": "Nie udało się wysłać kodu",
+        "invalidCode": "Nieprawidłowy kod weryfikacyjny",
+        "linkFailed": "Nie udało się połączyć sesji",
+        "resendFailed": "Nie udało się ponownie wysłać kodu"
+      }
+    }
+  },
+  "widget": {
+    "aiPowered": "Cyfrowy klon napędzany przez AI",
+    "bubbleText": "Porozmawiaj ze mną",
+    "noUsername": "Nie skonfigurowano nazwy użytkownika",
+    "closeChat": "Zamknij czat",
+    "openChat": "Otwórz czat",
+    "tooltips": {
+      "talkToMe": "Porozmawiaj ze mną!",
+      "askAnything": "Zapytaj mnie o cokolwiek",
+      "needHelp": "Potrzebujesz pomocy?",
+      "letsChat": "Porozmawiajmy!"
+    }
+  },
+  "assistant": {
+    "error": {
+      "unableToLoad": "Nie można załadować asystenta. Spróbuj ponownie później."
+    }
+  },
+  "textLimit": {
+    "title": "Osiągnięto limit wiadomości",
+    "quotaReached": "Miesięczny limit wiadomości {{name}} został osiągnięty.",
+    "usageInfo": "{{used}} / {{limit}} wiadomości wykorzystanych w tym miesiącu",
+    "continueWithVoice": "Nadal możesz prowadzić rozmowę przez czat głosowy.",
+    "tryAgainLater": "Spróbuj ponownie później, gdy limit zostanie zresetowany.",
+    "continueWithVoiceButton": "Kontynuuj przez czat głosowy"
+  },
+  "avatar": {
+    "aiClone": "Klon AI"
+  },
+  "source": "Źródło",
+  "sources": "Źródła",
+  "settings": {
+    "language": {
+      "title": "Język",
+      "description": "Wybierz preferowany język interfejsu",
+      "saved": "Preferencja językowa zapisana"
+    }
+  },
+  "calendar": {
+    "bookCall": "Zarezerwuj rozmowę",
+    "scheduleMeeting": "Zaplanuj spotkanie"
+  },
+  "contentOutput": {
+    "viewFull": "Zobacz pełną treść",
+    "copyMarkdown": "Kopiuj markdown",
+    "copied": "Skopiowano!",
+    "downloadMd": "Pobierz .md"
+  }
+}

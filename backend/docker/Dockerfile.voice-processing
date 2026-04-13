@@ -1,0 +1,111 @@
+# Voice Processing Service Dockerfile
+#
+# Multi-stage build optimized for:
+# - Smaller final image size (~300MB smaller by removing build tools)
+# - Faster builds with layer caching
+# - Production-ready deployment
+#
+# Separate from backend due to:
+# - FFmpeg and audio system dependencies
+# - Audio processing libraries (pydub, ffmpeg-python, yt-dlp)
+# - YouTube transcript extraction and OpenAI enrichment
+# - Independent scaling in production (ECS)
+
+# =============================================================================
+# Build Stage: Install Python dependencies
+# =============================================================================
+FROM python:3.11-slim AS builder
+
+WORKDIR /build
+
+# Install build dependencies (needed for packages with C extensions)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy only requirements first for better layer caching
+COPY workers/voice_processing/requirements.txt .
+
+# Configure pip for reliability
+ENV PIP_TIMEOUT=900
+ENV PIP_RETRIES=5
+ENV PIP_DEFAULT_TIMEOUT=900
+ENV PIP_NO_CACHE_DIR=1
+
+# Install dependencies to /build/dependencies
+RUN pip install --upgrade pip && \
+    pip install --timeout 900 --retries 5 --target=/build/dependencies -r requirements.txt && \
+    echo "All dependencies installed successfully"
+
+# =============================================================================
+# Runtime Stage: Minimal production image
+# =============================================================================
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install only runtime system dependencies (no build tools)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    # FFmpeg for audio/video processing
+    ffmpeg \
+    # Audio runtime libraries (required by pydub/soundfile)
+    libsndfile1 \
+    libportaudio2 \
+    libportaudiocpp0 \
+    # Network tools for health checks
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy Python dependencies from builder stage
+COPY --from=builder /build/dependencies /app/dependencies
+
+# Create necessary directories under /app/uploads
+RUN mkdir -p /app/uploads/input && \
+    mkdir -p /app/uploads/output/{raw,segments} && \
+    mkdir -p /app/uploads/temp && \
+    mkdir -p /app/voice_processing/logs && \
+    mkdir -p /tmp/youtube_audio && \
+    mkdir -p /tmp/yt-dlp-cache && \
+    mkdir -p /app/cookies
+
+# Copy shared modules (includes database, RAG, services, config)
+COPY shared/ ./shared/
+
+# Copy worker-specific voice processing code
+COPY workers/voice_processing/ ./voice_processing/
+
+# Copy config directory (worker-specific configuration)
+COPY workers/voice_processing/config/ ./config/
+
+# Set Python path to include dependencies, voice processing, app, and shared modules
+ENV PYTHONPATH=/app/dependencies:/app/voice_processing:/app
+
+# Set HOME to /tmp to prevent yt-dlp from trying to access /home/appuser/.cache
+# yt-dlp will use YT_DLP_CACHE_DIR (/tmp/yt-dlp-cache) as primary cache location
+ENV HOME=/tmp
+
+# Create non-root user with explicit UID 1000 (same as backend)
+# This ensures consistent file ownership across backend and worker containers
+RUN groupadd -r --gid 1000 appuser && \
+    useradd -r --uid 1000 -g appuser appuser && \
+    chown -R appuser:appuser /app && \
+    chmod -R 755 /app/uploads && \
+    chown appuser:appuser /tmp/yt-dlp-cache && \
+    chmod 755 /tmp/yt-dlp-cache && \
+    chown appuser:appuser /app/cookies && \
+    chmod 755 /app/cookies
+USER appuser
+
+# Expose port for potential API interface
+EXPOSE 8002
+
+# Health check - test that critical dependencies are available
+# Tests: Python, NATS client, yt-dlp, youtube-transcript-api, openai, llama-index, ffmpeg-python, and FFmpeg binary
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD python -c "import nats, yt_dlp, youtube_transcript_api, openai, llama_index, ffmpeg; print('Voice processing service healthy')" && \
+        ffmpeg -version > /dev/null 2>&1
+
+# Run the voice processing worker
+# Uses system python - dependencies in /app/dependencies via pip
+CMD ["python", "/app/voice_processing/worker.py"]

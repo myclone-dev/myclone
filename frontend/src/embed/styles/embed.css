@@ -1,0 +1,1515 @@
+/**
+ * ConvoxAI Embed Widget Styles - Modern shadcn/ui inspired
+ */
+
+:root {
+  /* shadcn/ui color system */
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  --primary: 221.2 83.2% 53.3%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 221.2 83.2% 53.3%;
+  --radius: 0.5rem;
+
+  /* Legacy support */
+  --primary-color: hsl(var(--primary));
+  --text-primary: hsl(var(--foreground));
+  --text-secondary: hsl(var(--muted-foreground));
+  --bg-white: hsl(var(--background));
+  --bg-gray: hsl(var(--muted));
+  --border-color: hsl(var(--border));
+}
+
+/* Widget Container */
+.embed-widget {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  /* Allow clicks to pass through to parent page elements underneath */
+  pointer-events: none;
+}
+
+/* Ensure interactive elements inside the widget are clickable */
+.embed-widget > * {
+  pointer-events: auto;
+}
+
+/* Modal Overlay - appears when chat is open */
+.embed-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2px);
+  display: flex;
+  /* Center the chat window by default */
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 999999;
+  animation: fadeIn 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  /* Allow clicks to pass through to page elements underneath */
+  pointer-events: none;
+}
+
+/* Modal Overlay - positioned mode (for chatbot-style UI) */
+.embed-modal-overlay-positioned {
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  padding: 20px !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Bubble Button - Intercom/Chatwoot inspired */
+.embed-bubble {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  width: 3.75rem;
+  height: 3.75rem;
+  border-radius: 9999px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary)) 0%,
+    hsl(var(--primary) / 0.85) 100%
+  );
+  color: hsl(var(--primary-foreground));
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    0 0 0 0 hsl(var(--primary) / 0.4);
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* Position is set dynamically via inline styles */
+  overflow: hidden;
+  outline: none;
+}
+
+.embed-bubble:hover {
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.2),
+    0 0 0 4px hsl(var(--primary) / 0.15);
+  transform: scale(1.05);
+}
+
+.embed-bubble:active {
+  transform: scale(0.98);
+}
+
+.embed-bubble:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Ripple effect on click */
+.embed-bubble::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(0);
+  opacity: 0;
+  transition:
+    transform 0.5s,
+    opacity 0.5s;
+}
+
+.embed-bubble:active::before {
+  transform: scale(1);
+  opacity: 1;
+  transition: 0s;
+}
+
+/* Subtle pulse for attention */
+@keyframes intercom-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.15),
+      0 0 0 0 hsl(var(--primary) / 0.4);
+  }
+  50% {
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.15),
+      0 0 0 8px hsl(var(--primary) / 0);
+  }
+}
+
+.embed-bubble.pulse {
+  animation: intercom-pulse 2s ease-in-out infinite;
+}
+
+.embed-bubble-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.embed-bubble-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.embed-bubble-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.embed-bubble-text {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Chat Container - Centered Modal */
+.embed-chat-container {
+  width: 90vw;
+  height: 85vh;
+  max-width: 56rem; /* 896px on large screens */
+  max-height: 48rem; /* 768px on large screens */
+  background: hsl(var(--background));
+  border-radius: 1rem;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.05),
+    0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: modalZoomIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  /* Re-enable pointer events for the chat container itself */
+  pointer-events: auto;
+}
+
+/* Tablet optimization (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .embed-chat-container {
+    width: 95vw;
+    height: 90vh;
+    max-width: 48rem; /* 768px */
+  }
+}
+
+/* Inline mode - fill parent container */
+.embed-inline-container .embed-chat-container {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  border-radius: 0 !important;
+}
+
+@keyframes modalZoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Centered modal animation - smooth scale up from center */
+@keyframes centeredModalZoomIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Apply centered modal animation - includes translate for centering */
+.centered-modal-enter {
+  animation: centeredModalZoomIn 0.2s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+
+/* Centered overlay fade in */
+.centered-modal-overlay {
+  animation: fadeIn 0.15s ease-out forwards;
+}
+
+/* Chat Header - Intercom style */
+.embed-chat-header {
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary)) 0%,
+    hsl(var(--primary) / 0.9) 100%
+  );
+  color: hsl(var(--primary-foreground));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.embed-chat-header h3 {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.025em;
+  color: hsl(var(--primary-foreground));
+}
+
+.embed-chat-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: hsl(var(--primary-foreground));
+  font-size: 1.125rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  line-height: 1;
+  width: 2rem;
+  height: 2rem;
+  opacity: 0.9;
+}
+
+.embed-chat-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  opacity: 1;
+}
+
+.embed-chat-close:active {
+  transform: scale(0.95);
+}
+
+.embed-chat-close:focus-visible {
+  outline: 2px solid hsl(var(--primary-foreground));
+  outline-offset: 2px;
+}
+
+/* Chat Body - Intercom style */
+.embed-chat-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  background: #f7f8fa;
+}
+
+.embed-welcome-message {
+  background: hsl(var(--card));
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid hsl(var(--border) / 0.5);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.25rem;
+  color: hsl(var(--foreground));
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.embed-placeholder-text {
+  text-align: center;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.875rem;
+  padding: 3rem 1.5rem;
+  font-style: normal;
+}
+
+/* Scrollbar Styles */
+.embed-chat-body::-webkit-scrollbar {
+  width: 0.375rem;
+}
+
+.embed-chat-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.embed-chat-body::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: calc(var(--radius) / 2);
+}
+
+.embed-chat-body::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* Responsive Design */
+
+/* Header responsive text sizing */
+.embed-header-title {
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+
+@media (min-width: 768px) {
+  .embed-header-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .embed-header-title {
+    font-size: 1.75rem;
+  }
+}
+
+/* Small tablets and large phones (640px - 767px) */
+@media (max-width: 767px) {
+  /* Centered overlay mode goes fullscreen on mobile */
+  .embed-chat-container:not(.chatbot-mode-container) {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Chatbot mode stays compact on mobile - centered horizontally */
+  .embed-chat-container.chatbot-mode-container {
+    width: calc(100vw - 32px) !important;
+    max-width: 380px !important;
+    height: calc(100vh - 100px) !important;
+    max-height: 600px !important;
+    border-radius: 1rem !important;
+    /* Center horizontally using transform */
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+  }
+
+  .embed-modal-overlay {
+    padding: 0 !important;
+    /* Center on mobile for better UX */
+    align-items: stretch !important;
+    justify-content: stretch !important;
+  }
+
+  .embed-bubble {
+    width: 3.5rem !important;
+    height: 3.5rem !important;
+  }
+
+  .embed-header {
+    padding: 1rem 0.75rem 0.75rem 0.75rem !important;
+  }
+
+  .embed-header-title {
+    font-size: 1.125rem !important;
+    padding: 0 0.25rem !important;
+  }
+
+  .embed-widget-chat-wrapper {
+    padding: 0 0.75rem 1rem 0.75rem !important;
+  }
+
+  /* Avatar size on tablets */
+  .embed-avatar {
+    width: 3.5rem !important;
+    height: 3.5rem !important;
+  }
+
+  .embed-ai-badge {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+  }
+
+  .embed-ai-badge svg {
+    width: 0.875rem !important;
+    height: 0.875rem !important;
+  }
+}
+
+/* Mobile phones (up to 480px) */
+@media (max-width: 480px) {
+  .embed-widget {
+    padding: 0;
+  }
+
+  /* Centered overlay mode goes fullscreen on mobile */
+  .embed-chat-container:not(.chatbot-mode-container) {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  /* Chatbot mode stays compact on small mobile - centered horizontally */
+  .embed-chat-container.chatbot-mode-container {
+    width: calc(100vw - 24px) !important;
+    max-width: 340px !important;
+    height: calc(100vh - 90px) !important;
+    max-height: 580px !important;
+    border-radius: 0.875rem !important;
+    /* Center horizontally using transform */
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+  }
+
+  .embed-bubble {
+    padding: 0.75rem;
+    width: 3.25rem !important;
+    height: 3.25rem !important;
+  }
+
+  .embed-bubble-text {
+    font-size: 13px;
+  }
+
+  .embed-header {
+    padding: 0.75rem 0.5rem 0.5rem 0.5rem !important;
+  }
+
+  .embed-header-title {
+    font-size: 1rem !important;
+  }
+
+  .embed-widget-chat-wrapper {
+    padding: 0 0.5rem 0.75rem 0.5rem !important;
+  }
+
+  /* Avatar size on mobile */
+  .embed-avatar {
+    width: 3rem !important;
+    height: 3rem !important;
+  }
+
+  .embed-ai-badge {
+    width: 1.25rem !important;
+    height: 1.25rem !important;
+  }
+
+  .embed-ai-badge svg {
+    width: 0.75rem !important;
+    height: 0.75rem !important;
+  }
+
+  /* Smaller text on mobile */
+  .embed-header p {
+    font-size: 0.75rem !important;
+  }
+}
+
+/* Widget-specific overrides for ExpertChatInterface */
+.embed-widget-chat-wrapper > div {
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Custom message colors from CSS variables */
+.embed-chat-container .embed-user-message,
+.embed-chat-container [data-message-type="user"] {
+  background: var(
+    --embed-user-message-bg,
+    linear-gradient(to right, #3b82f6, #2563eb)
+  ) !important;
+  color: var(--embed-user-message-text, #ffffff) !important;
+}
+
+.embed-chat-container .embed-bot-message,
+.embed-chat-container [data-message-type="bot"] {
+  background: var(--embed-bot-message-bg, #ffffff) !important;
+  border-color: var(--embed-bot-message-border, #e5e7eb) !important;
+  color: var(--embed-bot-message-text, #1f2937) !important;
+}
+
+/* Ensure text inside messages inherits color */
+.embed-chat-container .embed-user-message *,
+.embed-chat-container [data-message-type="user"] * {
+  color: inherit !important;
+}
+
+.embed-chat-container .embed-bot-message *,
+.embed-chat-container [data-message-type="bot"] * {
+  color: inherit !important;
+}
+
+/* Apply text colors from CSS variables */
+.embed-chat-container {
+  color: var(--embed-text-color, #111827);
+}
+
+/* Remove fixed height from chat container in widget */
+.embed-widget-chat-wrapper .bg-white\/90 {
+  height: auto !important;
+  min-height: 400px !important;
+  max-height: none !important;
+}
+
+/* Widget-specific toggle styling */
+.embed-widget-chat-wrapper > div > div:first-child {
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
+}
+
+/* Responsive toggle spacing in widget */
+@media (max-width: 767px) {
+  .embed-widget-chat-wrapper > div > div:first-child {
+    margin-top: 0.75rem !important;
+    margin-bottom: 0.75rem !important;
+    padding: 0 0.5rem !important;
+  }
+
+  /* Make toggle more compact on mobile in widget */
+  .embed-widget-chat-wrapper .relative.inline-flex {
+    padding: 0.25rem !important;
+  }
+
+  .embed-widget-chat-wrapper button {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.75rem !important;
+  }
+
+  .embed-widget-chat-wrapper button svg {
+    width: 0.875rem !important;
+    height: 0.875rem !important;
+  }
+}
+
+/* Note: Bubble animations are now handled by Framer Motion in EmbedBubble.tsx */
+/* The following styles are kept for fallback but animations are CSS-only for non-React usage */
+
+/* Bubble wrapper for containing ripple effects */
+.embed-bubble-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Email Prompt Overlay - shadcn dialog overlay */
+.embed-email-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Email Prompt Card - shadcn dialog content */
+.embed-email-prompt {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: calc(var(--radius) + 4px);
+  padding: 1.5rem;
+  max-width: 28rem;
+  width: calc(100% - 2rem);
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  position: relative;
+  animation: slideUpBounce 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUpBounce {
+  from {
+    opacity: 0;
+    transform: translateY(1rem) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.embed-email-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: hsl(var(--muted-foreground));
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: var(--radius);
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  line-height: 1;
+  opacity: 0.7;
+}
+
+.embed-email-close:hover {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  opacity: 1;
+}
+
+.embed-email-icon {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.embed-email-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  text-align: center;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.025em;
+}
+
+.embed-email-description {
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+  text-align: center;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.5;
+}
+
+.embed-email-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.embed-email-input {
+  width: 100%;
+  height: 2.5rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid hsl(var(--input));
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.embed-email-input::placeholder {
+  color: hsl(var(--muted-foreground));
+}
+
+.embed-email-input:focus {
+  border-color: hsl(var(--ring));
+  box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);
+}
+
+.embed-email-input:disabled {
+  background: hsl(var(--muted));
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.embed-email-error {
+  color: hsl(var(--destructive));
+  font-size: 0.875rem;
+  margin-top: -0.5rem;
+  font-weight: 500;
+}
+
+.embed-email-submit {
+  width: 100%;
+  height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+
+.embed-email-submit:hover:not(:disabled) {
+  background: hsl(var(--primary) / 0.9);
+}
+
+.embed-email-submit:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.embed-email-submit:disabled {
+  background: hsl(var(--muted));
+  color: hsl(var(--muted-foreground));
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.embed-email-submit:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+.embed-email-skip {
+  width: 100%;
+  height: 2.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  color: hsl(var(--muted-foreground));
+  border: none;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: var(--radius);
+}
+
+.embed-email-skip:hover {
+  color: hsl(var(--foreground));
+  background: hsl(var(--accent));
+}
+
+.embed-email-skip:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Voice Chat Styles - shadcn style */
+.embed-voice-chat {
+  width: 100%;
+  height: 100%;
+}
+
+.embed-voice-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: hsl(var(--card));
+}
+
+.embed-voice-header {
+  padding: 1rem 1.25rem;
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+.embed-voice-header h3 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.025em;
+}
+
+.embed-voice-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: hsl(var(--primary-foreground));
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: var(--radius);
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  line-height: 1;
+  opacity: 0.9;
+}
+
+.embed-voice-close:hover {
+  background: hsl(var(--primary-foreground) / 0.1);
+  opacity: 1;
+}
+
+.embed-voice-status {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.25rem;
+  background: hsl(var(--muted) / 0.3);
+}
+
+.embed-voice-avatar {
+  width: 7.5rem;
+  height: 7.5rem;
+  border-radius: 50%;
+  background: hsl(var(--background));
+  border: 2px solid hsl(var(--border));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.75rem;
+  margin-bottom: 1.25rem;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.embed-voice-avatar.active {
+  background: hsl(var(--primary));
+  border-color: hsl(var(--primary));
+  animation: voicePulse 2s ease-in-out infinite;
+}
+
+@keyframes voicePulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow:
+      0 0 0 0 hsl(var(--primary) / 0.7),
+      0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow:
+      0 0 0 1.25rem hsl(var(--primary) / 0),
+      0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.embed-voice-status-text {
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+  font-weight: 500;
+}
+
+.embed-voice-controls {
+  padding: 1.25rem;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  border-top: 1px solid hsl(var(--border));
+  background: hsl(var(--background));
+}
+
+.embed-voice-btn {
+  height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  flex: 1;
+  max-width: 9.375rem;
+  white-space: nowrap;
+}
+
+.embed-voice-btn-primary {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+.embed-voice-btn-primary:hover {
+  background: hsl(var(--primary) / 0.9);
+}
+
+.embed-voice-btn-primary:active {
+  transform: scale(0.98);
+}
+
+.embed-voice-btn-primary:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+.embed-voice-btn-secondary {
+  background: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+}
+
+.embed-voice-btn-secondary:hover {
+  background: hsl(var(--secondary) / 0.8);
+}
+
+.embed-voice-btn-secondary:active {
+  transform: scale(0.98);
+}
+
+.embed-voice-btn-secondary:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+.embed-voice-btn-danger {
+  background: hsl(var(--destructive));
+  color: hsl(var(--destructive-foreground));
+}
+
+.embed-voice-btn-danger:hover {
+  background: hsl(var(--destructive) / 0.9);
+}
+
+.embed-voice-btn-danger:active {
+  transform: scale(0.98);
+}
+
+.embed-voice-btn-danger:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+.embed-voice-transcripts {
+  padding: 1rem 1.25rem;
+  background: hsl(var(--background));
+  border-top: 1px solid hsl(var(--border));
+  max-height: 12.5rem;
+  overflow-y: auto;
+}
+
+.embed-voice-transcripts h4 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: hsl(var(--muted-foreground));
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 0.75rem 0;
+}
+
+.embed-voice-transcript-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.embed-voice-transcript-msg {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius);
+  background: hsl(var(--muted) / 0.5);
+  color: hsl(var(--foreground));
+}
+
+.embed-voice-transcript-msg.user {
+  background: hsl(var(--primary) / 0.1);
+}
+
+.embed-voice-transcript-msg .speaker {
+  font-weight: 600;
+  margin-right: 0.375rem;
+  color: hsl(var(--foreground));
+}
+
+.embed-voice-transcript-msg .text {
+  color: hsl(var(--muted-foreground));
+}
+
+/* Mode Toggle - Intercom style */
+.embed-mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid hsl(var(--border) / 0.5);
+  border-radius: 0.625rem;
+  margin: 1rem 1.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.embed-mode-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex: 1;
+  padding: 0.625rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  outline: none;
+}
+
+.embed-mode-toggle-btn:hover:not(.active) {
+  background: hsl(var(--muted) / 0.4);
+  color: hsl(var(--foreground));
+}
+
+.embed-mode-toggle-btn.active {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.embed-mode-toggle-btn:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+.embed-mode-toggle-btn span {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===========================================
+   GUIDE STYLE MODAL
+   AssistantWidget-inspired clean design with
+   centered avatar and inline transcript
+   =========================================== */
+
+/* Guide style modal wrapper */
+.guide-style-modal-wrapper {
+  pointer-events: auto;
+}
+
+/* Guide style modal container */
+.guide-style-modal {
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  border-radius: 1rem;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.05),
+    0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+/* Guide style modal animation is handled by Framer Motion in GuideStyleModal.tsx */
+/* CSS animation removed to avoid conflicts */
+
+/* Guide modal responsive adjustments */
+/* Desktop: Use full configured size (default 420px × 700px to match AssistantWidget) */
+/* Tablet/Mobile: Scale down proportionally */
+
+@media (max-width: 767px) {
+  .guide-style-modal-wrapper {
+    /* Center horizontally on mobile */
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    width: calc(100vw - 24px) !important;
+    max-width: 400px !important;
+    height: calc(100vh - 120px) !important;
+    max-height: 650px !important;
+    bottom: 100px !important;
+    top: auto !important;
+  }
+
+  /* Guide modal internal styles for mobile */
+  .guide-style-modal {
+    border-radius: 1rem !important;
+  }
+
+  /* Live transcript panel on mobile */
+  .guide-style-modal .border-t.border-gray-200 {
+    max-height: 180px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .guide-style-modal-wrapper {
+    width: calc(100vw - 16px) !important;
+    max-width: 100% !important;
+    height: calc(100vh - 100px) !important;
+    max-height: 600px !important;
+    bottom: 90px !important;
+  }
+
+  /* Live transcript panel on small phones */
+  .guide-style-modal .border-t.border-gray-200 {
+    max-height: 160px !important;
+  }
+
+  /* Smaller header padding */
+  .guide-style-modal > div:first-child {
+    padding: 0.5rem 0.625rem !important;
+  }
+
+  /* Smaller mode toggle buttons */
+  .guide-style-modal .px-4 {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+
+  .guide-style-modal .text-xs {
+    font-size: 0.65rem !important;
+  }
+
+  /* Start button smaller */
+  .guide-style-modal .h-12 {
+    height: 2.75rem !important;
+  }
+
+  /* Transcript panel smaller */
+  .guide-style-modal .border-t.border-gray-200 {
+    max-height: 130px !important;
+  }
+}
+
+/* ===========================================
+   CHATBOT MODE STYLES (CLASSIC)
+   Intercom/Drift-style floating chat widget
+   =========================================== */
+
+/* Chatbot modal slide-up animation */
+@keyframes chatbotSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes chatbotSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Apply animation to chatbot modal when it appears */
+.chatbot-modal-enter {
+  animation: chatbotSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* For top positions, slide down instead of up */
+.chatbot-modal-enter-top {
+  animation: chatbotSlideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ===========================================
+   CHATBOT MODE VOICE INTERFACE OVERRIDES
+   Stack vertically and use smaller sizes
+   =========================================== */
+
+/* Bubble container in chatbot mode */
+.chatbot-bubble-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mark chatbot mode container */
+.chatbot-mode-container {
+  --chatbot-mode: 1;
+  overflow: hidden !important;
+  overflow-x: hidden !important;
+}
+
+/* Prevent horizontal overflow in all children */
+.chatbot-mode-container * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Voice interface in chatbot mode - vertical stack layout */
+.chatbot-mode-container .flex-col.sm\:flex-row {
+  flex-direction: column !important;
+}
+
+/* Reduce min-height in chatbot mode */
+.chatbot-mode-container .min-h-\[500px\] {
+  min-height: 280px !important;
+}
+
+.chatbot-mode-container .sm\:h-\[500px\] {
+  height: auto !important;
+}
+
+/* Ensure chat content doesn't overflow */
+.chatbot-mode-container .embed-chat-content {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+/* Widget toggle - yellow selected state background */
+.embed-widget .bg-ai-gold,
+.embed-widget [class*="bg-ai-gold"] {
+  background-color: #ffc329 !important; /* ai-gold */
+}
+
+/* Ensure toggle container has white background */
+.embed-widget .inline-flex.rounded-full.border.bg-white\/80 {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Voice avatar section - balanced padding */
+.chatbot-mode-container .p-8,
+.chatbot-mode-container .sm\:p-12 {
+  padding: 1.25rem 1rem !important;
+}
+
+/* Smaller avatar and text */
+.chatbot-mode-container .space-y-8 {
+  gap: 0.75rem !important;
+}
+
+/* Smaller name text */
+.chatbot-mode-container .text-2xl,
+.chatbot-mode-container .sm\:text-3xl {
+  font-size: 1.125rem !important;
+  margin-bottom: 0.25rem !important;
+}
+
+/* Smaller status text */
+.chatbot-mode-container .text-sm,
+.chatbot-mode-container .sm\:text-base {
+  font-size: 0.75rem !important;
+}
+
+/* Smaller control buttons in chatbot mode */
+.chatbot-mode-container .w-16.h-16 {
+  width: 3rem !important;
+  height: 3rem !important;
+}
+
+.chatbot-mode-container .w-16.h-16 svg {
+  width: 1.25rem !important;
+  height: 1.25rem !important;
+}
+
+/* Smaller start button */
+.chatbot-mode-container .px-8.py-3 {
+  padding: 0.5rem 1.25rem !important;
+  font-size: 0.875rem !important;
+}
+
+/* Transcript panel in chatbot mode - below avatar, not side */
+/* Force transcript panel to show on mobile in chatbot mode (override hidden sm:flex) */
+.chatbot-mode-container .hidden.sm\:flex,
+.chatbot-mode-container .bg-white.rounded-3xl.border {
+  display: flex !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 280px !important;
+  min-height: 250px !important;
+  max-height: 320px !important;
+  flex-direction: column !important;
+}
+
+/* Ensure LiveTranscriptPanel shows in chatbot mode */
+.chatbot-mode-container [class*="LiveTranscriptPanel"],
+.chatbot-mode-container .rounded-2xl.border.shadow-lg {
+  display: flex !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 280px !important;
+  min-height: 250px !important;
+  max-height: 320px !important;
+  flex-direction: column !important;
+}
+
+/* Ensure transcript content area is scrollable */
+.chatbot-mode-container .flex-1.bg-gray-50\/30,
+.chatbot-mode-container [class*="ConversationContent"] {
+  flex: 1 !important;
+  overflow-y: auto !important;
+  min-height: 0 !important;
+}
+
+/* Compact transcript header */
+.chatbot-mode-container .px-4.py-3,
+.chatbot-mode-container .p-3.border-b {
+  padding: 0.375rem 0.5rem !important;
+}
+
+/* Smaller header icon */
+.chatbot-mode-container .w-9.h-9 {
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+}
+
+.chatbot-mode-container .w-9.h-9 svg {
+  width: 0.875rem !important;
+  height: 0.875rem !important;
+}
+
+/* Smaller header text */
+.chatbot-mode-container .text-sm.font-semibold {
+  font-size: 0.7rem !important;
+}
+
+.chatbot-mode-container .text-xs.text-gray-400 {
+  font-size: 0.6rem !important;
+  display: none !important;
+}
+
+.chatbot-mode-container .text-base.font-semibold {
+  font-size: 0.7rem !important;
+}
+
+/* Hide footer in chatbot mode to save space (message count already in header) */
+.chatbot-mode-container .bg-white.border-t.border-gray-200.px-4.py-2\.5 {
+  display: none !important;
+}
+
+/* Smaller transcript text */
+.chatbot-mode-container .text-\[13px\] {
+  font-size: 11px !important;
+}
+
+.chatbot-mode-container .leading-relaxed {
+  line-height: 1.4 !important;
+}
+
+/* Compact transcript messages */
+.chatbot-mode-container .space-y-3 {
+  gap: 0.5rem !important;
+}
+
+.chatbot-mode-container .p-2\.5 {
+  padding: 0.375rem !important;
+}
+
+/* Gradient orbs - smaller in chatbot mode */
+.chatbot-mode-container .w-64.h-64,
+.chatbot-mode-container .w-56.h-56 {
+  width: 6rem !important;
+  height: 6rem !important;
+}
+
+/* Gap between avatar panel and transcript */
+.chatbot-mode-container .gap-4 {
+  gap: 0.5rem !important;
+}
+
+/* Mobile fullscreen override - only for centered overlay mode, NOT chatbot mode */
+@media (max-width: 767px) {
+  /* Centered overlay goes fullscreen on mobile */
+  .embed-widget[style*="fixed"]
+    .embed-chat-container:not(.chatbot-mode-container) {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    border-radius: 0 !important;
+    bottom: auto !important;
+    right: auto !important;
+    left: auto !important;
+    top: auto !important;
+  }
+
+  /* Hide bubble when modal is open on mobile - only for centered overlay */
+  .embed-widget[style*="fixed"]
+    .embed-chat-container:not(.chatbot-mode-container)
+    ~ .embed-bubble {
+    display: none !important;
+  }
+
+  /* Chatbot mode: keep bubble visible and adjust modal position for mobile */
+  .embed-widget .embed-chat-container.chatbot-mode-container {
+    /* Override any inline fixed positioning for mobile-friendly placement */
+    bottom: 90px !important; /* Above the bubble, accounting for browser nav */
+    top: auto !important;
+    /* Center horizontally on mobile with proper width constraints */
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    width: calc(100vw - 24px) !important;
+    max-width: 380px !important;
+    height: calc(100vh - 100px) !important;
+    max-height: 600px !important;
+  }
+
+  /* Move bubble up to avoid mobile browser navigation bar */
+  .embed-widget .embed-bubble {
+    bottom: 28px !important;
+  }
+
+  /* Force transcript panel to show on mobile in chatbot mode */
+  .chatbot-mode-container .hidden.sm\:flex,
+  .chatbot-mode-container .bg-white.rounded-3xl.border,
+  .chatbot-mode-container [class*="LiveTranscriptPanel"] {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: 250px !important;
+    min-height: 220px !important;
+    max-height: 280px !important;
+  }
+
+  /* Ensure transcript content is scrollable on mobile */
+  .chatbot-mode-container .flex-1.bg-gray-50\/30,
+  .chatbot-mode-container [class*="ConversationContent"] {
+    flex: 1 !important;
+    overflow-y: auto !important;
+    min-height: 0 !important;
+  }
+
+  /* Voice avatar section on mobile - proper spacing */
+  .chatbot-mode-container .flex-1.rounded-3xl {
+    flex: 0 0 auto !important;
+    min-height: 200px !important;
+    max-height: 240px !important;
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+
+  /* Add padding to the voice interface container */
+  .chatbot-mode-container .flex.items-center.justify-center.relative {
+    padding: 1rem 0 !important;
+  }
+}

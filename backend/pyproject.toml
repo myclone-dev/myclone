@@ -1,0 +1,151 @@
+[project]
+name = "myclone"
+version = "0.1.0"
+description = "MyClone - AI-powered digital persona platform"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+
+dependencies = [
+    # Core FastAPI and server
+    "fastapi",
+    "uvicorn[standard]",
+    "pydantic[email]>=2.12.3",
+    "pydantic-settings",
+    "sentry-sdk[fastapi]",
+
+    # Database
+    "sqlalchemy==2.0.25",
+    "asyncpg==0.29.0",
+    "pgvector==0.2.4",
+
+    # AI
+    "openai>=1.107.2",
+
+    # LlamaIndex for RAG
+    "llama-index-core==0.12.6",
+    "llama-index-readers-file",
+    "llama-index-llms-openai",
+    "llama-index-embeddings-openai",
+    "llama-index-embeddings-voyageai",
+    "llama-index-vector-stores-postgres",
+    "llama-index-instrumentation",
+    "openinference-instrumentation-llama-index==4.3.8",
+    "langfuse",
+    "aiosqlite",
+
+    # Text processing and embeddings
+    "tiktoken>=0.7.0",
+    "numpy==1.26.3",
+    "nltk>=3.9",
+    "textblob==0.18.0",
+
+    # File handling
+    "python-multipart==0.0.6",
+    "pymupdf",
+    "pypdf>=5.1.0,<7.0.0",
+    "pydub",
+    "Pillow>=10.0.0",
+    "openpyxl>=3.1.5",
+    "olefile==0.47",
+
+    # Utilities
+    "python-dotenv==1.0.0",
+    "httpx==0.26.0",
+    "slowapi>=0.1.9",
+    "loguru>=0.7.0",
+    "rich>=13.0.0",
+    "cryptography>=41.0.0",
+
+    # Message Queue
+    "nats-py>=2.7.0",
+
+    # Web content extraction (for RAG URL fetching)
+    "beautifulsoup4>=4.12.3",
+    "lxml>=4.9.4",
+    "ddgs>=9.0.0",
+
+    # ElevenLabs integration
+    "elevenlabs==2.16.0",
+
+    # AWS S3
+    "aioboto3>=15.2.0",
+
+    # Email service
+    "resend==2.18.0",
+
+    # LiveKit integration
+    "livekit-agents>=1.3.12",
+    "livekit-plugins-openai>=1.3.12",
+    "livekit-plugins-elevenlabs>=1.3.12",
+    "livekit-plugins-deepgram>=1.3.12",
+    "livekit-plugins-silero>=1.3.12",
+    "livekit-plugins-cartesia>=1.3.12",
+    "PyJWT",
+    "bcrypt==5.0.0",
+
+    # OpenTelemetry (pinned for livekit-agents compatibility)
+    "opentelemetry-sdk==1.39.0",
+    "opentelemetry-api==1.39.0",
+    "opentelemetry-exporter-otlp-proto-http==1.39.0",
+]
+
+[dependency-groups]
+migrations = [
+    "alembic>=1.16.5",
+    "psycopg2-binary==2.9.9",
+]
+dev = [
+    "pytest==7.4.4",
+    "pytest-asyncio==0.23.3",
+    "black==23.12.1",
+    "ruff==0.1.11",
+    "isort==5.13.2",
+    "pre-commit==3.6.0",
+]
+
+[tool.black]
+line-length = 100
+target-version = ['py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+  | alembic/versions
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 100
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+skip_glob = ["alembic/versions/*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = [
+    "alembic/versions",
+    ".venv",
+    "build",
+    "dist"
+]
+
+[tool.ruff.lint]
+select = [
+    "F",  # pyflakes - syntax errors, undefined names, unused imports
+]
+ignore = []
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]

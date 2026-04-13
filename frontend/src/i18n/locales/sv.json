@@ -1,0 +1,256 @@
+{
+  "common": {
+    "loading": "Laddar...",
+    "error": "Fel",
+    "retry": "Försök igen",
+    "close": "Stäng",
+    "cancel": "Avbryt",
+    "continue": "Fortsätt",
+    "submit": "Skicka",
+    "skip": "Hoppa över för nu",
+    "seconds": "sekunder",
+    "minutes": "minuter",
+    "you": "Du",
+    "goBack": "Gå tillbaka",
+    "optional": "valfritt",
+    "save": "Spara",
+    "saving": "Sparar...",
+    "messages": "meddelanden",
+    "message": "meddelande",
+    "at": "kl"
+  },
+  "chat": {
+    "modeToggle": {
+      "voice": "Röst",
+      "text": "Text"
+    },
+    "connection": {
+      "connecting": "Ansluter...",
+      "settingUp": "Konfigurerar chatt...",
+      "takeMoment": "Det tar bara en stund"
+    },
+    "input": {
+      "placeholder": "Skriv ditt meddelande...",
+      "send": "Skicka meddelande",
+      "uploading": "Laddar upp...",
+      "provideInfo": "Vänligen ange din information för att fortsätta..."
+    },
+    "emptyState": {
+      "title": "Starta en konversation med mig.",
+      "subtitle": "Fråga mig vad som helst! Jag är här för att ge expertinsikter och hjälp.",
+      "connectionError": "Anslutningsfel",
+      "retryConnection": "Försök ansluta igen"
+    },
+    "fileTypes": {
+      "pdf": "PDF",
+      "doc": "Word-dokument",
+      "docx": "Word-dokument",
+      "xls": "Excel-kalkylblad",
+      "xlsx": "Excel-kalkylblad",
+      "ppt": "PowerPoint",
+      "pptx": "PowerPoint",
+      "png": "Bild",
+      "jpg": "Bild",
+      "jpeg": "Bild",
+      "file": "Fil"
+    },
+    "errors": {
+      "sessionNotInitialized": "Sessionen är inte initierad",
+      "failedToUpload": "Kunde inte ladda upp filen",
+      "unknownError": "Okänt fel"
+    }
+  },
+  "voice": {
+    "status": {
+      "connected": "Ansluten",
+      "readyToTalk": "Redo att prata",
+      "readyToStart": "Redo att börja",
+      "readyToHelp": "Redo att hjälpa",
+      "initializing": "Initierar...",
+      "connecting": "Ansluter...",
+      "speaking": "Talar...",
+      "listening": "Lyssnar..."
+    },
+    "buttons": {
+      "startConversation": "Starta konversation",
+      "startVoiceChat": "Starta röstchatt",
+      "enableAudio": "Klicka för att aktivera ljud",
+      "endSession": "Avsluta session",
+      "endCall": "Avsluta samtal",
+      "mute": "Stäng av mikrofon",
+      "unmute": "Slå på mikrofon",
+      "backToTextChat": "Tillbaka till textchatt"
+    },
+    "transcript": {
+      "title": "Livetranskription",
+      "download": "Ladda ner transkription",
+      "minimize": "Minimera",
+      "maximize": "Maximera",
+      "emptyState": "Din konversation visas här",
+      "saving": "Sparar...",
+      "show": "Visa transkription",
+      "viewPrevious": "Visa tidigare transkription"
+    },
+    "upload": {
+      "title": "Ladda upp dokument för assistenten att analysera"
+    },
+    "limitExceeded": {
+      "sessionEnded": "Röstsessionen avslutad",
+      "unavailable": "Röstchatt ej tillgänglig",
+      "conversationEnded": "Din konversation med {{name}} har avslutats.",
+      "unavailableMessage": "Röstchatt med {{name}} är för närvarande inte tillgänglig.",
+      "continueWithText": "Du kan fortsätta konversationen via textchatt.",
+      "useTextInstead": "Du kan fortfarande ha en konversation via textchatt.",
+      "continueWithTextButton": "Fortsätt med textchatt"
+    }
+  },
+  "session": {
+    "inactivity": {
+      "title": "Är du fortfarande där?",
+      "description": "Din session kopplas bort om",
+      "dismiss": "Jag är fortfarande här",
+      "hint": "Klicka var som helst eller tryck på valfri tangent för att fortsätta"
+    },
+    "timeLimit": {
+      "title": "Sessionen avslutas snart",
+      "description": "Din session avslutas om",
+      "dismiss": "Jag förstår",
+      "info": "Du kan starta en ny session efter att denna avslutas. Din konversation sparas."
+    },
+    "disconnected": {
+      "title": "Sessionen bortkopplad",
+      "ended": "Sessionen avslutad",
+      "connectionLost": "Anslutningen bruten",
+      "reconnect": "Återanslut",
+      "reconnecting": "Återansluter...",
+      "messagesSaved": "Dina meddelanden är sparade",
+      "reasons": {
+        "inactivity": {
+          "title": "Sessionen bortkopplad",
+          "description": "Din chattsession kopplades bort på grund av inaktivitet. Din konversation har sparats."
+        },
+        "manual": {
+          "title": "Sessionen avslutad",
+          "description": "Du avslutade chattsessionen. Din konversation har sparats."
+        },
+        "error": {
+          "title": "Anslutningen bruten",
+          "description": "Anslutningen bröts oväntat. Vänligen återanslut för att fortsätta chatta."
+        }
+      }
+    },
+    "timer": {
+      "remaining": "{{time}} återstår"
+    },
+    "endConfirm": {
+      "title": "Avsluta chattsessionen?",
+      "description": "Din konversation kommer att sparas."
+    },
+    "timeLimitExceeded": {
+      "title": "Sessionens tidsgräns nådd",
+      "sessionEnded": "Din session med {{name}} har avslutats.",
+      "duration": "Varaktighet",
+      "messagesCount": "Meddelanden",
+      "conversationSaved": "Din konversation har sparats. Du kan visa transkriptionen eller starta en ny session.",
+      "viewTranscript": "Visa transkription",
+      "startNewSession": "Starta ny session",
+      "downloadTranscript": "Ladda ner transkription"
+    }
+  },
+  "email": {
+    "prompt": {
+      "title": "Håll kontakten!",
+      "description": "Få en kopia av denna konversation och fortsätt via e-post",
+      "placeholder": "Ange din e-post",
+      "submit": "Fortsätt",
+      "submitting": "Skickar...",
+      "skip": "Hoppa över för nu",
+      "errors": {
+        "required": "Vänligen ange din e-post",
+        "invalid": "Vänligen ange en giltig e-postadress"
+      }
+    },
+    "banner": {
+      "title": "Spara denna konversation",
+      "description": "Ange din information nedan för att spara denna chatt och fortsätta senare",
+      "emailLabel": "E-postadress",
+      "emailPlaceholder": "din@epost.se",
+      "fullnameLabel": "Fullständigt namn",
+      "phoneLabel": "Telefonnummer",
+      "phonePlaceholder": "+46 70 123 4567",
+      "continueConversation": "Fortsätt konversationen"
+    },
+    "otp": {
+      "continue": "Fortsätt denna konversation",
+      "verify": "Verifiera din e-post",
+      "completeProfile": "Fyll i din profil",
+      "verifyDescription": "Verifiera din e-post för att spara dina framsteg och återuppta när som helst",
+      "codeSentTo": "Vi skickade en 6-siffrig kod till {{email}}",
+      "detailsDescription": "Lägg till dina uppgifter för att spara denna konversation",
+      "sendCode": "Skicka kod",
+      "verifyCode": "Verifiera kod",
+      "verificationCode": "Verifieringskod",
+      "resendCode": "Skicka kod igen",
+      "resendIn": "Skicka igen om {{seconds}}s",
+      "changeEmail": "Ändra e-post",
+      "complete": "Slutför",
+      "fullNamePlaceholder": "Anna Andersson",
+      "checkingProfile": "Kontrollerar din profil...",
+      "back": "Tillbaka",
+      "errors": {
+        "sendFailed": "Kunde inte skicka OTP",
+        "invalidCode": "Ogiltig verifieringskod",
+        "linkFailed": "Kunde inte länka sessionen",
+        "resendFailed": "Kunde inte skicka OTP igen"
+      }
+    }
+  },
+  "widget": {
+    "aiPowered": "AI-driven digital klon",
+    "bubbleText": "Chatta med mig",
+    "noUsername": "Inget användarnamn konfigurerat",
+    "closeChat": "Stäng chatt",
+    "openChat": "Öppna chatt",
+    "tooltips": {
+      "talkToMe": "Prata med mig!",
+      "askAnything": "Fråga mig vad som helst",
+      "needHelp": "Behöver du hjälp?",
+      "letsChat": "Låt oss chatta!"
+    }
+  },
+  "assistant": {
+    "error": {
+      "unableToLoad": "Kunde inte ladda assistenten. Vänligen försök igen senare."
+    }
+  },
+  "textLimit": {
+    "title": "Meddelandegräns nådd",
+    "quotaReached": "{{name}}s månatliga meddelandekvot har nåtts.",
+    "usageInfo": "{{used}} / {{limit}} meddelanden använda denna månad",
+    "continueWithVoice": "Du kan fortfarande ha en konversation via röstchatt.",
+    "tryAgainLater": "Vänligen försök igen senare när kvoten återställs.",
+    "continueWithVoiceButton": "Fortsätt med röstchatt"
+  },
+  "avatar": {
+    "aiClone": "AI-klon"
+  },
+  "source": "Källa",
+  "sources": "Källor",
+  "settings": {
+    "language": {
+      "title": "Språk",
+      "description": "Välj ditt föredragna språk för gränssnittet",
+      "saved": "Språkinställningen sparad"
+    }
+  },
+  "calendar": {
+    "bookCall": "Boka ett samtal",
+    "scheduleMeeting": "Boka ett möte"
+  },
+  "contentOutput": {
+    "viewFull": "Visa hela innehållet",
+    "copyMarkdown": "Kopiera markdown",
+    "copied": "Kopierat!",
+    "downloadMd": "Ladda ner .md"
+  }
+}
