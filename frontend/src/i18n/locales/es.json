@@ -1,0 +1,256 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "retry": "Reintentar",
+    "close": "Cerrar",
+    "cancel": "Cancelar",
+    "continue": "Continuar",
+    "submit": "Enviar",
+    "skip": "Omitir por ahora",
+    "seconds": "segundos",
+    "minutes": "minutos",
+    "you": "Tú",
+    "goBack": "Volver",
+    "optional": "opcional",
+    "save": "Guardar",
+    "saving": "Guardando...",
+    "messages": "mensajes",
+    "message": "mensaje",
+    "at": "en"
+  },
+  "chat": {
+    "modeToggle": {
+      "voice": "Voz",
+      "text": "Texto"
+    },
+    "connection": {
+      "connecting": "Conectando...",
+      "settingUp": "Configurando el chat...",
+      "takeMoment": "Esto solo tomará un momento"
+    },
+    "input": {
+      "placeholder": "Escribe tu mensaje...",
+      "send": "Enviar mensaje",
+      "uploading": "Subiendo...",
+      "provideInfo": "Por favor proporciona tu información para continuar..."
+    },
+    "emptyState": {
+      "title": "Inicia una conversación conmigo.",
+      "subtitle": "¡Pregúntame lo que quieras! Estoy aquí para brindarte información y asistencia experta.",
+      "connectionError": "Error de conexión",
+      "retryConnection": "Reintentar conexión"
+    },
+    "fileTypes": {
+      "pdf": "PDF",
+      "doc": "Documento de Word",
+      "docx": "Documento de Word",
+      "xls": "Hoja de cálculo Excel",
+      "xlsx": "Hoja de cálculo Excel",
+      "ppt": "PowerPoint",
+      "pptx": "PowerPoint",
+      "png": "Imagen",
+      "jpg": "Imagen",
+      "jpeg": "Imagen",
+      "file": "Archivo"
+    },
+    "errors": {
+      "sessionNotInitialized": "Sesión no inicializada",
+      "failedToUpload": "Error al subir el archivo",
+      "unknownError": "Error desconocido"
+    }
+  },
+  "voice": {
+    "status": {
+      "connected": "Conectado",
+      "readyToTalk": "Listo para hablar",
+      "readyToStart": "Listo para comenzar",
+      "readyToHelp": "Listo para ayudar",
+      "initializing": "Inicializando...",
+      "connecting": "Conectando...",
+      "speaking": "Hablando...",
+      "listening": "Escuchando..."
+    },
+    "buttons": {
+      "startConversation": "Iniciar conversación",
+      "startVoiceChat": "Iniciar chat de voz",
+      "enableAudio": "Haz clic para activar el audio",
+      "endSession": "Finalizar sesión",
+      "endCall": "Finalizar llamada",
+      "mute": "Silenciar",
+      "unmute": "Activar sonido",
+      "backToTextChat": "Volver al chat de texto"
+    },
+    "transcript": {
+      "title": "Transcripción en vivo",
+      "download": "Descargar transcripción",
+      "minimize": "Minimizar",
+      "maximize": "Maximizar",
+      "emptyState": "Tu conversación aparecerá aquí",
+      "saving": "Guardando...",
+      "show": "Mostrar transcripción",
+      "viewPrevious": "Ver transcripción anterior"
+    },
+    "upload": {
+      "title": "Sube un documento para que el asistente lo analice"
+    },
+    "limitExceeded": {
+      "sessionEnded": "Sesión de voz finalizada",
+      "unavailable": "Chat de voz no disponible",
+      "conversationEnded": "Tu conversación con {{name}} ha terminado.",
+      "unavailableMessage": "El chat de voz con {{name}} no está disponible actualmente.",
+      "continueWithText": "Puedes continuar tu conversación por chat de texto.",
+      "useTextInstead": "Aún puedes tener una conversación por chat de texto.",
+      "continueWithTextButton": "Continuar con chat de texto"
+    }
+  },
+  "session": {
+    "inactivity": {
+      "title": "¿Sigues ahí?",
+      "description": "Tu sesión se desconectará en",
+      "dismiss": "Sigo aquí",
+      "hint": "Haz clic en cualquier lugar o presiona cualquier tecla para continuar"
+    },
+    "timeLimit": {
+      "title": "La sesión está por terminar",
+      "description": "Tu sesión terminará en",
+      "dismiss": "Entendido",
+      "info": "Puedes iniciar una nueva sesión cuando esta termine. Tu conversación se guardará."
+    },
+    "disconnected": {
+      "title": "Sesión desconectada",
+      "ended": "Sesión finalizada",
+      "connectionLost": "Conexión perdida",
+      "reconnect": "Reconectar",
+      "reconnecting": "Reconectando...",
+      "messagesSaved": "Tus mensajes están guardados",
+      "reasons": {
+        "inactivity": {
+          "title": "Sesión desconectada",
+          "description": "Tu sesión de chat se desconectó por inactividad. Tu conversación ha sido guardada."
+        },
+        "manual": {
+          "title": "Sesión finalizada",
+          "description": "Has terminado esta sesión de chat. Tu conversación ha sido guardada."
+        },
+        "error": {
+          "title": "Conexión perdida",
+          "description": "La conexión se perdió inesperadamente. Por favor reconecta para continuar chateando."
+        }
+      }
+    },
+    "timer": {
+      "remaining": "{{time}} restante"
+    },
+    "endConfirm": {
+      "title": "¿Finalizar sesión de chat?",
+      "description": "Tu conversación será guardada."
+    },
+    "timeLimitExceeded": {
+      "title": "Límite de tiempo de sesión alcanzado",
+      "sessionEnded": "Tu sesión con {{name}} ha terminado.",
+      "duration": "Duración",
+      "messagesCount": "Mensajes",
+      "conversationSaved": "Tu conversación ha sido guardada. Puedes ver la transcripción o iniciar una nueva sesión.",
+      "viewTranscript": "Ver transcripción",
+      "startNewSession": "Iniciar nueva sesión",
+      "downloadTranscript": "Descargar transcripción"
+    }
+  },
+  "email": {
+    "prompt": {
+      "title": "¡Mantente conectado!",
+      "description": "Recibe una copia de esta conversación y continúa por correo electrónico",
+      "placeholder": "Ingresa tu correo electrónico",
+      "submit": "Continuar",
+      "submitting": "Enviando...",
+      "skip": "Omitir por ahora",
+      "errors": {
+        "required": "Por favor ingresa tu correo electrónico",
+        "invalid": "Por favor ingresa un correo electrónico válido"
+      }
+    },
+    "banner": {
+      "title": "Guardar esta conversación",
+      "description": "Ingresa tu información para guardar este chat y continuar después",
+      "emailLabel": "Correo electrónico",
+      "emailPlaceholder": "tu@email.com",
+      "fullnameLabel": "Nombre completo",
+      "phoneLabel": "Número de teléfono",
+      "phonePlaceholder": "+1 (555) 123-4567",
+      "continueConversation": "Continuar conversación"
+    },
+    "otp": {
+      "continue": "Continuar esta conversación",
+      "verify": "Verifica tu correo electrónico",
+      "completeProfile": "Completa tu perfil",
+      "verifyDescription": "Verifica tu correo para guardar tu progreso y continuar cuando quieras",
+      "codeSentTo": "Enviamos un código de 6 dígitos a {{email}}",
+      "detailsDescription": "Agrega tus datos para guardar esta conversación",
+      "sendCode": "Enviar código",
+      "verifyCode": "Verificar código",
+      "verificationCode": "Código de verificación",
+      "resendCode": "Reenviar código",
+      "resendIn": "Reenviar en {{seconds}}s",
+      "changeEmail": "Cambiar correo",
+      "complete": "Completar",
+      "fullNamePlaceholder": "Juan Pérez",
+      "checkingProfile": "Verificando tu perfil...",
+      "back": "Volver",
+      "errors": {
+        "sendFailed": "Error al enviar el código",
+        "invalidCode": "Código de verificación inválido",
+        "linkFailed": "Error al vincular la sesión",
+        "resendFailed": "Error al reenviar el código"
+      }
+    }
+  },
+  "widget": {
+    "aiPowered": "Clon digital impulsado por IA",
+    "bubbleText": "Chatea conmigo",
+    "noUsername": "No hay usuario configurado",
+    "closeChat": "Cerrar chat",
+    "openChat": "Abrir chat",
+    "tooltips": {
+      "talkToMe": "¡Habla conmigo!",
+      "askAnything": "Pregúntame lo que quieras",
+      "needHelp": "¿Necesitas ayuda?",
+      "letsChat": "¡Vamos a chatear!"
+    }
+  },
+  "assistant": {
+    "error": {
+      "unableToLoad": "No se pudo cargar el asistente. Por favor intenta más tarde."
+    }
+  },
+  "textLimit": {
+    "title": "Límite de mensajes alcanzado",
+    "quotaReached": "Se ha alcanzado la cuota mensual de mensajes de {{name}}.",
+    "usageInfo": "{{used}} / {{limit}} mensajes usados este mes",
+    "continueWithVoice": "Aún puedes tener una conversación por chat de voz.",
+    "tryAgainLater": "Por favor intenta más tarde cuando se restablezca la cuota.",
+    "continueWithVoiceButton": "Continuar con chat de voz"
+  },
+  "avatar": {
+    "aiClone": "Clon IA"
+  },
+  "source": "Fuente",
+  "sources": "Fuentes",
+  "settings": {
+    "language": {
+      "title": "Idioma",
+      "description": "Selecciona tu idioma preferido para la interfaz",
+      "saved": "Preferencia de idioma guardada"
+    }
+  },
+  "calendar": {
+    "bookCall": "Reservar una llamada",
+    "scheduleMeeting": "Programar una reunión"
+  },
+  "contentOutput": {
+    "viewFull": "Ver contenido completo",
+    "copyMarkdown": "Copiar markdown",
+    "copied": "¡Copiado!",
+    "downloadMd": "Descargar .md"
+  }
+}

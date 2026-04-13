@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Run TypeScript type check
+echo "Running TypeScript type check..."
+bun type-check || exit 1
+
+# Run lint-staged
+echo "Running lint-staged..."
+bun lint-staged

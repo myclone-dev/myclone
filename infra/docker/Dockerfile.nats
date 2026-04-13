@@ -1,0 +1,5 @@
+# Extend the official NATS image
+FROM nats:alpine
+
+# Install curl
+RUN apk add --no-cache curl

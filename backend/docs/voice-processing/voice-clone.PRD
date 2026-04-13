@@ -1,0 +1,297 @@
+# Voice Cloning Audio Processing System - PRD
+
+## 1. Overview
+
+**Product**: Backend Voice Cloning Audio Processing System  
+**Purpose**: Extract and process high-quality audio samples from video content for voice cloning services  
+**Scope**: Admin-only backend tool for preparing audio samples  
+**Timeline**: Phase 1 implementation  
+
+## 2. Problem Statement
+
+The expert clone platform needs to create voice clones of experts/speakers, but manually extracting and processing audio from videos is time-consuming and inconsistent. We need an automated system that can:
+- Extract audio from various video sources (YouTube, uploaded files)
+- Process audio to meet voice cloning service requirements
+- Generate consistent, high-quality output suitable for services like Eleven Labs
+
+## 3. Target Users
+
+**Primary Users**: Platform administrators and content managers  
+**Secondary Users**: Future integration with frontend user interface (Phase 2)  
+
+## 4. Core Requirements
+
+### 4.1 Input Sources
+- **YouTube Videos**: Support YouTube URL processing (interviews, podcasts, lectures)
+- **Video Files**: MP4, AVI, MOV, WebM formats
+- **Audio Files**: MP3, WAV, M4A formats (direct processing)
+- **Multi-Speaker Content**: Podcasts, interviews, panel discussions
+- **Noisy Environments**: Background music, audience questions, ambient noise
+- **Batch Processing**: Multiple files/URLs at once
+
+### 4.2 Audio Processing Pipeline (Multi-Speaker & Noise Handling)
+1. **Extraction**: Extract audio tracks from video files
+2. **Content Analysis**: Identify content type (interview, podcast, lecture, solo speech)
+3. **Speaker Diarization**: Map speaker segments and identify unique voices using AI clustering
+4. **Speaker Analysis & Profiling**: Generate speaker statistics, quality scores, and audio samples
+5. **Manual Speaker Selection**: User selects target speaker via CLI with preview samples
+6. **Target Speaker Filtering**: Filter all processing to selected speaker segments only
+7. **Noise Profiling**: Analyze background noise characteristics and music presence
+8. **Music/Voice Separation**: Remove background music using AI separation models
+9. **Multi-Speaker Filtering**: Remove segments with overlapping speech/interruptions
+10. **Voice Activity Detection**: Isolate clean speech segments from target speaker
+11. **Noise Reduction**: Remove ambient noise, audience sounds, microphone artifacts
+12. **Speech Segmentation**: Identify continuous speech segments (avoid chopped sentences)
+13. **Consistency Analysis**: Evaluate tone and performance consistency within speaker
+14. **Normalization**: Target -23 to -18 dB RMS, -3 dB true peak
+15. **Multi-Segment Selection**: Extract multiple diverse 60-second segments with highest speech quality and variety
+16. **Final Quality Validation**: Ensure Eleven Labs compliance and speaker purity (>95% target speaker)
+
+### 4.3 Output Requirements (Aligned with Eleven Labs Best Practices)
+- **Duration**: 60 seconds (1 minute) per segment of clean speech
+  - Minimum: 10 seconds (Eleven Labs requirement)
+  - Target: 60 seconds per segment (optimal balance of quality and file size)
+  - **Multiple Segments**: Generate 2-5 segments from longer content for improved voice modeling
+  - **Rationale**: Eleven Labs supports multiple files (10MB each), enabling diverse voice samples
+- **File Size**: Maximum 10MB per individual file (Eleven Labs hard limit)
+  - 60 seconds WAV ≈ 5-6MB per file (safe under limit)
+  - Multiple files allowed for richer voice training data
+  - Prefer WAV format for maximum audio fidelity
+- **Quality**: Minimum 22kHz sample rate, preferably 44.1kHz
+- **Formats**: WAV (primary for quality), MP3 fallback only if needed
+- **Bit Depth**: 16-bit minimum, 24-bit preferred
+- **Volume Levels**: -23 dB to -18 dB RMS with true peak of -3 dB
+- **Content**: Clear speech with no reverb, artifacts, background noise, or overlapping voices
+- **Speaker Purity**: 95%+ single-speaker content (minimal cross-talk or interruptions)
+- **Speaker Selection**: Manual selection from detected speakers with preview samples and statistics
+- **Multi-Segment Selection**: Intelligent selection of multiple diverse 60-second portions from source material
+  - **Diversity Priority**: Select segments with different speaking patterns, emotions, or content types
+  - **Quality Ranking**: Order segments by quality score and audio characteristics
+  - **Non-Overlapping**: Ensure segments don't overlap to maximize content diversity
+  - **Minimum Spacing**: 30-second gap between selected segments to ensure variety
+
+### 4.4 Service Compatibility
+- **Eleven Labs**: Primary target service
+- **Other Services**: Flexible output for future voice cloning providers
+- **Metadata**: Generate compatibility reports for each service
+
+## 5. Technical Requirements
+
+### 5.1 Core Technologies
+- **Language**: Python 3.9+
+- **Audio Processing**: FFmpeg, pydub, librosa
+- **Video Processing**: yt-dlp for YouTube, moviepy for general video
+- **Speaker Diarization**: pyannote-audio, speechbrain
+- **Noise Reduction**: noisereduce, spectral gating algorithms
+- **Music Separation**: spleeter, demucs (AI-based source separation)
+- **Voice Activity Detection**: webrtcvad, silero-vad
+- **AI/ML**: Speech enhancement and separation models
+- **Storage**: Local file system (Phase 1)
+
+### 5.2 Performance Requirements
+- **Processing Speed**: Handle 1-hour video within 10-15 minutes (includes AI processing)
+- **Speaker Diarization**: Real-time or faster speaker identification
+- **Music Separation**: 2-4x real-time processing for AI models
+- **Concurrent Processing**: Support 2-3 simultaneous jobs (AI-intensive)
+- **Memory Usage**: Efficient memory management for large files and AI models
+- **File Size Limits**: Support videos up to 2GB
+
+### 5.3 Quality Standards (Multi-Speaker Environment Optimized)
+- **Speaker Identification**: Accurate speaker diarization (>95% accuracy)
+- **Speaker Purity**: Target speaker content >95% of final output
+- **Cross-talk Elimination**: Remove overlapping speech and interruptions
+- **Music Contamination**: <5% music/background audio in final output
+- **Noise Floor**: Background noise <-40dB relative to speech
+- **Consistency Analysis**: Ensure consistent tone, performance, and audio quality throughout
+- **Performance Preservation**: Maintain original speaking style (speed, emotion, inflection)
+- **Voice Activity Detection**: Precise speech/non-speech boundary detection
+- **Dynamic Range Control**: Avoid wide fluctuations in pitch and volume
+- **Quality Scoring**: Rate output quality and purity (1-10 scale)
+- **Error Handling**: Graceful failure with detailed error messages
+
+## 6. System Architecture
+
+### 6.1 Directory Structure
+```
+/app/voice-processing/
+├── src/
+│   ├── extractors/          # Video/audio extraction
+│   ├── processors/          # Audio processing pipeline
+│   ├── quality/             # Quality assessment
+│   ├── utils/               # Shared utilities
+│   └── cli/                 # Command-line interface
+├── config/                  # Configuration files
+├── output/
+│   ├── raw/                 # Original extracted audio
+│   ├── speakers/            # Speaker analysis results and samples
+│   ├── diarization/         # Speaker identification results
+│   ├── separated/           # Speaker-separated audio streams
+│   ├── denoised/            # Noise-reduced audio
+│   ├── segments/            # Clean speech segments
+│   └── final/               # Ready for voice cloning
+├── logs/                    # Processing logs
+└── temp/                    # Temporary processing files
+```
+
+### 6.2 Processing Workflow
+```
+Input (Video/URL) → Validation → Audio Extraction → Content Analysis → 
+Speaker Diarization → Speaker Analysis & Profiling → Manual Speaker Selection → 
+Target Speaker Filtering → Music/Voice Separation → Noise Reduction → 
+Voice Activity Detection → Speech Segmentation → Quality Analysis → 
+Normalization → Multi-Segment Selection → Final Output
+```
+
+## 7. User Interface (CLI)
+
+### 7.1 Basic Commands
+```bash
+# Speaker analysis and profiling (Step 1)
+python voice-clone.py analyze-speakers video.mp4
+python voice-clone.py analyze-speakers "https://youtube.com/watch?v=xyz"
+
+# Single video processing with speaker selection (Step 2)
+python voice-clone.py process video.mp4 --profile=elevenlabs --speaker=1
+
+# YouTube URL processing with manual speaker selection
+python voice-clone.py process "https://youtube.com/watch?v=xyz" --profile=elevenlabs --speaker=2
+
+# Multiple segments with specific speaker
+python voice-clone.py process-multiple video.mp4 --max-segments=3 --speaker=1
+
+# Auto-select primary speaker (fallback)
+python voice-clone.py process video.mp4 --profile=elevenlabs --speaker=auto
+
+# Advanced processing with custom settings
+python voice-clone.py process video.mp4 --profile=elevenlabs --speaker=1 --denoise=aggressive --music-separation=true
+```
+
+### 7.2 Configuration Profiles
+- **elevenlabs**: Optimized for Eleven Labs requirements
+- **generic**: General-purpose voice cloning output
+- **custom**: User-defined parameters
+
+## 8. Data Requirements
+
+### 8.1 Input Metadata
+- Source URL/file path
+- Original duration and format
+- Content description (optional)
+
+### 8.2 Output Metadata
+- Processing timestamp
+- Quality metrics (SNR, speech ratio, etc.)
+- Service compatibility scores
+- File paths and formats generated
+- Processing parameters used
+
+### 8.3 Logging
+- Processing status and progress
+- Error logs with detailed stack traces
+- Performance metrics (processing time, memory usage)
+- Quality assessment results
+
+## 9. Quality Assurance
+
+### 9.1 Audio Quality Metrics (Multi-Speaker & Noise Handling)
+- **Signal-to-Noise Ratio (SNR)**: Minimum 20dB
+- **Volume Normalization**: Target -23 dB to -18 dB RMS, true peak -3 dB
+- **Speaker Purity Score**: >95% target speaker content
+- **Cross-talk Contamination**: <5% overlapping speech
+- **Music Separation Quality**: <5% musical content in final output
+- **Background Noise Level**: <-40dB relative to speech
+- **Speech Clarity**: Detect mumbling, fast speech, inconsistent delivery
+- **Voice Activity Precision**: Accurate speech/silence boundary detection
+- **Consistency Score**: Measure tone and performance consistency throughout sample
+- **Dynamic Range**: Control to prevent wide pitch/volume fluctuations
+- **Speech-to-Total Ratio**: Maximize clean speech content, minimize silence/non-speech
+
+### 9.2 Validation Checks (Eleven Labs Focused)
+- **File format validation**: WAV preferred, MP3 128kbps+ as fallback
+- **File size validation**: Maximum 10MB hard limit enforcement
+- **Duration requirements**: 10 seconds minimum, 60 seconds maximum
+- **Audio quality thresholds**: Volume levels, SNR, consistency scores
+- **Content validation**: Speech-only content, no music/background noise
+- **Performance consistency**: Flag samples with high variance in delivery
+- **Segment selection quality**: Validate best 60-second portion selection
+- **Service-specific requirement validation**: Eleven Labs compliance scoring
+
+## 10. Error Handling
+
+### 10.1 Common Error Scenarios
+- Invalid YouTube URLs or restricted videos
+- Corrupted or unsupported file formats
+- Insufficient audio quality after processing
+- No clear target speaker identified in multi-speaker content
+- Excessive background music that cannot be separated
+- High cross-talk ratio in interview/podcast content
+- Network timeouts during downloads
+- AI model loading failures (speaker diarization, music separation)
+- Disk space limitations for temporary processing files
+
+### 10.2 Recovery Mechanisms
+- Retry logic for network failures
+- Fallback quality settings
+- Partial processing recovery
+- Detailed error reporting for manual intervention
+
+## 11. Future Considerations (Phase 2+)
+
+### 11.1 Frontend Integration
+- Web interface for non-technical users
+- Progress tracking and status updates
+- Preview and approval workflow
+
+### 11.2 Advanced Features
+- Real-time processing status
+- Cloud storage integration
+- API endpoints for frontend consumption
+- Advanced AI-based voice enhancement
+
+### 11.3 Scalability
+- Distributed processing
+- Database integration for metadata
+- User management and permissions
+- Integration with expert profile system
+
+## 12. Success Metrics
+
+### 12.1 Technical Metrics
+- Processing success rate: >95%
+- Average processing time: <10 minutes per hour of video
+- Output quality score: >8/10 average
+- Error rate: <5%
+
+### 12.2 Business Metrics
+- Reduction in manual audio processing time: 80%
+- Voice cloning sample acceptance rate: >90%
+- Admin user satisfaction: High
+
+## 13. Risks and Mitigation
+
+### 13.1 Technical Risks
+- **YouTube ToS Changes**: Monitor and adapt to API changes
+- **Large File Processing**: Implement chunking and streaming
+- **Quality Inconsistency**: Develop robust quality assessment
+
+### 13.2 Legal/Compliance Risks
+- **Copyright**: Only process content with proper permissions
+- **Privacy**: Ensure secure handling of audio data
+- **YouTube ToS**: Comply with download restrictions
+
+## 14. Deliverables
+
+### 14.1 Phase 1 (MVP)
+- Core CLI tool with basic processing
+- YouTube and local file support
+- Eleven Labs output profile
+- Basic quality assessment
+- Documentation and setup instructions
+
+### 14.2 Phase 1.5 (Enhancement)
+- Batch processing capabilities
+- Advanced audio cleaning
+- Multiple output profiles
+- Comprehensive logging and monitoring
+
+This PRD defines a focused, achievable system that can be implemented incrementally while providing immediate value to the platform's voice cloning initiatives.

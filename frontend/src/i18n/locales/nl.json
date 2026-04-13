@@ -1,0 +1,256 @@
+{
+  "common": {
+    "loading": "Laden...",
+    "error": "Fout",
+    "retry": "Opnieuw proberen",
+    "close": "Sluiten",
+    "cancel": "Annuleren",
+    "continue": "Doorgaan",
+    "submit": "Verzenden",
+    "skip": "Nu overslaan",
+    "seconds": "seconden",
+    "minutes": "minuten",
+    "you": "Jij",
+    "goBack": "Terug",
+    "optional": "optioneel",
+    "save": "Opslaan",
+    "saving": "Opslaan...",
+    "messages": "berichten",
+    "message": "bericht",
+    "at": "bij"
+  },
+  "chat": {
+    "modeToggle": {
+      "voice": "Spraak",
+      "text": "Tekst"
+    },
+    "connection": {
+      "connecting": "Verbinden...",
+      "settingUp": "Chat wordt ingesteld...",
+      "takeMoment": "Dit duurt slechts een moment"
+    },
+    "input": {
+      "placeholder": "Typ je bericht...",
+      "send": "Bericht versturen",
+      "uploading": "Uploaden...",
+      "provideInfo": "Geef alsjeblieft je gegevens op om door te gaan..."
+    },
+    "emptyState": {
+      "title": "Begin een gesprek met mij.",
+      "subtitle": "Vraag me alles! Ik ben hier om deskundige inzichten en hulp te bieden.",
+      "connectionError": "Verbindingsfout",
+      "retryConnection": "Verbinding opnieuw proberen"
+    },
+    "fileTypes": {
+      "pdf": "PDF",
+      "doc": "Word-document",
+      "docx": "Word-document",
+      "xls": "Excel-spreadsheet",
+      "xlsx": "Excel-spreadsheet",
+      "ppt": "PowerPoint",
+      "pptx": "PowerPoint",
+      "png": "Afbeelding",
+      "jpg": "Afbeelding",
+      "jpeg": "Afbeelding",
+      "file": "Bestand"
+    },
+    "errors": {
+      "sessionNotInitialized": "Sessie niet geïnitialiseerd",
+      "failedToUpload": "Bestand uploaden mislukt",
+      "unknownError": "Onbekende fout"
+    }
+  },
+  "voice": {
+    "status": {
+      "connected": "Verbonden",
+      "readyToTalk": "Klaar om te praten",
+      "readyToStart": "Klaar om te starten",
+      "readyToHelp": "Klaar om te helpen",
+      "initializing": "Initialiseren...",
+      "connecting": "Verbinden...",
+      "speaking": "Spreekt...",
+      "listening": "Luistert..."
+    },
+    "buttons": {
+      "startConversation": "Gesprek starten",
+      "startVoiceChat": "Spraakchat starten",
+      "enableAudio": "Klik om audio in te schakelen",
+      "endSession": "Sessie beëindigen",
+      "endCall": "Gesprek beëindigen",
+      "mute": "Dempen",
+      "unmute": "Dempen opheffen",
+      "backToTextChat": "Terug naar tekstchat"
+    },
+    "transcript": {
+      "title": "Live transcriptie",
+      "download": "Transcriptie downloaden",
+      "minimize": "Minimaliseren",
+      "maximize": "Maximaliseren",
+      "emptyState": "Je gesprek verschijnt hier",
+      "saving": "Opslaan...",
+      "show": "Transcriptie tonen",
+      "viewPrevious": "Vorige transcriptie bekijken"
+    },
+    "upload": {
+      "title": "Upload een document voor de assistent om te analyseren"
+    },
+    "limitExceeded": {
+      "sessionEnded": "Spraaksessie beëindigd",
+      "unavailable": "Spraakchat niet beschikbaar",
+      "conversationEnded": "Je gesprek met {{name}} is beëindigd.",
+      "unavailableMessage": "Spraakchat met {{name}} is momenteel niet beschikbaar.",
+      "continueWithText": "Je kunt je gesprek voortzetten via tekstchat.",
+      "useTextInstead": "Je kunt nog steeds een gesprek voeren via tekstchat.",
+      "continueWithTextButton": "Doorgaan met tekstchat"
+    }
+  },
+  "session": {
+    "inactivity": {
+      "title": "Ben je er nog?",
+      "description": "Je sessie wordt verbroken over",
+      "dismiss": "Ik ben er nog",
+      "hint": "Klik ergens of druk op een toets om door te gaan"
+    },
+    "timeLimit": {
+      "title": "Sessie eindigt binnenkort",
+      "description": "Je sessie eindigt over",
+      "dismiss": "Begrepen",
+      "info": "Je kunt een nieuwe sessie starten nadat deze is afgelopen. Je gesprek wordt opgeslagen."
+    },
+    "disconnected": {
+      "title": "Sessie verbroken",
+      "ended": "Sessie beëindigd",
+      "connectionLost": "Verbinding verloren",
+      "reconnect": "Opnieuw verbinden",
+      "reconnecting": "Opnieuw verbinden...",
+      "messagesSaved": "Je berichten zijn opgeslagen",
+      "reasons": {
+        "inactivity": {
+          "title": "Sessie verbroken",
+          "description": "Je chatsessie is verbroken wegens inactiviteit. Je gesprek is opgeslagen."
+        },
+        "manual": {
+          "title": "Sessie beëindigd",
+          "description": "Je hebt deze chatsessie beëindigd. Je gesprek is opgeslagen."
+        },
+        "error": {
+          "title": "Verbinding verloren",
+          "description": "De verbinding is onverwacht verloren. Maak opnieuw verbinding om verder te chatten."
+        }
+      }
+    },
+    "timer": {
+      "remaining": "{{time}} resterend"
+    },
+    "endConfirm": {
+      "title": "Chatsessie beëindigen?",
+      "description": "Je gesprek wordt opgeslagen."
+    },
+    "timeLimitExceeded": {
+      "title": "Sessietijdslimiet bereikt",
+      "sessionEnded": "Je sessie met {{name}} is beëindigd.",
+      "duration": "Duur",
+      "messagesCount": "Berichten",
+      "conversationSaved": "Je gesprek is opgeslagen. Je kunt de transcriptie bekijken of een nieuwe sessie starten.",
+      "viewTranscript": "Transcriptie bekijken",
+      "startNewSession": "Nieuwe sessie starten",
+      "downloadTranscript": "Transcriptie downloaden"
+    }
+  },
+  "email": {
+    "prompt": {
+      "title": "Blijf verbonden!",
+      "description": "Ontvang een kopie van dit gesprek en ga verder via e-mail",
+      "placeholder": "Voer je e-mail in",
+      "submit": "Doorgaan",
+      "submitting": "Verzenden...",
+      "skip": "Nu overslaan",
+      "errors": {
+        "required": "Voer je e-mail in",
+        "invalid": "Voer een geldig e-mailadres in"
+      }
+    },
+    "banner": {
+      "title": "Dit gesprek opslaan",
+      "description": "Voer je gegevens in om deze chat op te slaan en later verder te gaan",
+      "emailLabel": "E-mailadres",
+      "emailPlaceholder": "jouw@email.nl",
+      "fullnameLabel": "Volledige naam",
+      "phoneLabel": "Telefoonnummer",
+      "phonePlaceholder": "+31 6 12 34 56 78",
+      "continueConversation": "Gesprek voortzetten"
+    },
+    "otp": {
+      "continue": "Dit gesprek voortzetten",
+      "verify": "Verifieer je e-mail",
+      "completeProfile": "Voltooi je profiel",
+      "verifyDescription": "Verifieer je e-mail om je voortgang op te slaan en op elk moment te hervatten",
+      "codeSentTo": "We hebben een 6-cijferige code naar {{email}} gestuurd",
+      "detailsDescription": "Voeg je gegevens toe om dit gesprek op te slaan",
+      "sendCode": "Code versturen",
+      "verifyCode": "Code verifiëren",
+      "verificationCode": "Verificatiecode",
+      "resendCode": "Code opnieuw versturen",
+      "resendIn": "Opnieuw versturen over {{seconds}}s",
+      "changeEmail": "E-mail wijzigen",
+      "complete": "Voltooien",
+      "fullNamePlaceholder": "Jan Jansen",
+      "checkingProfile": "Profiel controleren...",
+      "back": "Terug",
+      "errors": {
+        "sendFailed": "Code versturen mislukt",
+        "invalidCode": "Ongeldige verificatiecode",
+        "linkFailed": "Sessie koppelen mislukt",
+        "resendFailed": "Code opnieuw versturen mislukt"
+      }
+    }
+  },
+  "widget": {
+    "aiPowered": "AI-aangedreven digitale kloon",
+    "bubbleText": "Chat met mij",
+    "noUsername": "Geen gebruikersnaam geconfigureerd",
+    "closeChat": "Chat sluiten",
+    "openChat": "Chat openen",
+    "tooltips": {
+      "talkToMe": "Praat met mij!",
+      "askAnything": "Vraag me alles",
+      "needHelp": "Hulp nodig?",
+      "letsChat": "Laten we chatten!"
+    }
+  },
+  "assistant": {
+    "error": {
+      "unableToLoad": "Kan assistent niet laden. Probeer het later opnieuw."
+    }
+  },
+  "textLimit": {
+    "title": "Berichtlimiet bereikt",
+    "quotaReached": "Het maandelijkse berichtquotum van {{name}} is bereikt.",
+    "usageInfo": "{{used}} / {{limit}} berichten gebruikt deze maand",
+    "continueWithVoice": "Je kunt nog steeds een gesprek voeren via spraakchat.",
+    "tryAgainLater": "Probeer het later opnieuw wanneer het quotum is gereset.",
+    "continueWithVoiceButton": "Doorgaan met spraakchat"
+  },
+  "avatar": {
+    "aiClone": "AI-kloon"
+  },
+  "source": "Bron",
+  "sources": "Bronnen",
+  "settings": {
+    "language": {
+      "title": "Taal",
+      "description": "Selecteer je voorkeurstaal voor de interface",
+      "saved": "Taalvoorkeur opgeslagen"
+    }
+  },
+  "calendar": {
+    "bookCall": "Gesprek boeken",
+    "scheduleMeeting": "Vergadering plannen"
+  },
+  "contentOutput": {
+    "viewFull": "Volledige inhoud bekijken",
+    "copyMarkdown": "Markdown kopiëren",
+    "copied": "Gekopieerd!",
+    "downloadMd": "Downloaden .md"
+  }
+}

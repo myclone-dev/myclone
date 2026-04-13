@@ -1,0 +1,110 @@
+name: Backend Alembic Migration Check
+
+on:
+  push:
+    branches: [ main, staging ]
+    paths:
+      - 'backend/alembic/versions/*.py'
+      - 'backend/shared/database/models/*.py'
+      - '.github/workflows/backend-alembic-check.yml'
+  pull_request:
+    branches: [ main, staging ]
+    paths:
+      - 'backend/alembic/versions/*.py'
+      - 'backend/shared/database/models/*.py'
+      - '.github/workflows/backend-alembic-check.yml'
+
+defaults:
+  run:
+    working-directory: backend
+
+jobs:
+  check-migrations:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_pass
+          POSTGRES_DB: test_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v4
+
+    - name: Cache uv dependencies
+      uses: actions/cache@v4
+      with:
+        path: backend/.venv
+        key: ${{ runner.os }}-uv-${{ hashFiles('backend/uv.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-uv-
+
+    - name: Install dependencies
+      run: uv sync --frozen --group migrations
+
+    - name: Set test database credentials
+      run: |
+        echo "POSTGRES_USER=test_user" >> $GITHUB_ENV
+        echo "POSTGRES_PASSWORD=test_pass" >> $GITHUB_ENV
+        echo "POSTGRES_HOST=localhost" >> $GITHUB_ENV
+        echo "POSTGRES_PORT=5432" >> $GITHUB_ENV
+        echo "POSTGRES_DB=test_db" >> $GITHUB_ENV
+
+    - name: Set dummy app environment variables
+      run: |
+        echo "LIVEKIT_API_KEY=test-key" >> $GITHUB_ENV
+        echo "LIVEKIT_API_SECRET=test-secret" >> $GITHUB_ENV
+        echo "OPENAI_API_KEY=test-key" >> $GITHUB_ENV
+        echo "JWT_SECRET_KEY=test-jwt-secret" >> $GITHUB_ENV
+        echo "ENCRYPTION_KEY=test-encryption-key" >> $GITHUB_ENV
+
+    - name: Check for multiple heads
+      run: |
+        echo "Checking for multiple migration heads..."
+        HEADS=$(uv run alembic heads 2>&1)
+        HEAD_COUNT=$(echo "$HEADS" | grep -c "^[a-f0-9]" || true)
+        if [ "$HEAD_COUNT" -gt 1 ]; then
+          echo "ERROR: Multiple migration heads detected!"
+          echo "$HEADS"
+          echo "Fix: uv run alembic merge -m 'merge migration branches'"
+          exit 1
+        fi
+
+    - name: Test migration upgrade
+      run: |
+        uv run alembic upgrade base
+        uv run alembic upgrade head
+
+    - name: Test migration downgrade
+      run: |
+        uv run alembic downgrade base
+
+    - name: Verify schema consistency
+      run: |
+        uv run alembic upgrade head
+        uv run alembic check
+
+    - name: Debug migration issues
+      if: failure()
+      run: |
+        uv run alembic current
+        uv run alembic history --verbose

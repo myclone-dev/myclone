@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ConvoxAI Widget</title>
+    <style>
+      /* Minimal scoped resets - NO global * reset */
+      html,
+      body,
+      #root {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        box-sizing: border-box;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: inherit;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+          "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+          "Helvetica Neue", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background: transparent;
+      }
+    </style>
+    <script type="module" crossorigin src="/embed/assets/app.js"></script>
+    <link rel="stylesheet" crossorigin href="/embed/assets/app.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

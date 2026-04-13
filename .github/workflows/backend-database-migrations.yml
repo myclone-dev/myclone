@@ -1,0 +1,216 @@
+name: Database Migrations (ECS)
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        type: choice
+        options:
+          - staging
+          - production
+
+env:
+  AWS_REGION: us-east-1
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  run-migrations:
+    name: Run Database Migrations via ECS
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Set environment-specific variables
+        id: env-vars
+        run: |
+          if [ "${{ github.event.inputs.environment }}" == "production" ]; then
+            echo "cluster=migrations-production-cluster" >> $GITHUB_OUTPUT
+            echo "service=migrations-production-service" >> $GITHUB_OUTPUT
+            echo "log_group=/ecs/migrations-production-migrations" >> $GITHUB_OUTPUT
+          else
+            echo "cluster=migrations-staging-cluster" >> $GITHUB_OUTPUT
+            echo "service=migrations-staging-service" >> $GITHUB_OUTPUT
+            echo "log_group=/ecs/migrations-staging-migrations" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check migration service exists
+        run: |
+          echo "🔍 Checking ECS migration infrastructure..."
+
+          # Check if cluster exists
+          if aws ecs describe-clusters --clusters ${{ steps.env-vars.outputs.cluster }} \
+             --query 'clusters[0].status' --output text | grep -q ACTIVE; then
+            echo "✅ Cluster found: ${{ steps.env-vars.outputs.cluster }}"
+          else
+            echo "❌ Cluster not found: ${{ steps.env-vars.outputs.cluster }}"
+            echo "Please run Terraform to create migration infrastructure"
+            exit 1
+          fi
+
+          # Check if service exists
+          if aws ecs describe-services \
+             --cluster ${{ steps.env-vars.outputs.cluster }} \
+             --services ${{ steps.env-vars.outputs.service }} \
+             --query 'services[0].serviceName' --output text 2>/dev/null; then
+            echo "✅ Service found: ${{ steps.env-vars.outputs.service }}"
+          else
+            echo "❌ Service not found: ${{ steps.env-vars.outputs.service }}"
+            echo "Please run Terraform to create migration infrastructure"
+            exit 1
+          fi
+
+      - name: Run Migration Task
+        id: run-migration
+        run: |
+          echo "🚀 Starting migration by setting desired count to 1..."
+
+          # Update service to run migration task with latest task definition
+          aws ecs update-service \
+            --cluster ${{ steps.env-vars.outputs.cluster }} \
+            --service ${{ steps.env-vars.outputs.service }} \
+            --desired-count 1 \
+            --force-new-deployment \
+            --region ${{ env.AWS_REGION }}
+
+          echo "✅ Migration task triggered"
+          echo "migration_started=true" >> $GITHUB_OUTPUT
+
+      - name: Wait for Task to Start
+        run: |
+          echo "⏳ Waiting for migration task to start..."
+          sleep 15
+
+          # List running tasks
+          TASKS=$(aws ecs list-tasks \
+            --cluster ${{ steps.env-vars.outputs.cluster }} \
+            --service-name ${{ steps.env-vars.outputs.service }} \
+            --desired-status RUNNING \
+            --output text)
+
+          if [ -z "$TASKS" ]; then
+            echo "⚠️  No running tasks found yet, checking stopped tasks..."
+            aws ecs list-tasks \
+              --cluster ${{ steps.env-vars.outputs.cluster }} \
+              --service-name ${{ steps.env-vars.outputs.service }} \
+              --desired-status STOPPED \
+              --max-results 1
+          else
+            echo "✅ Migration task is running"
+          fi
+
+      - name: Monitor Migration Progress
+        run: |
+          echo "📋 Monitoring migration logs (last 5 minutes)..."
+          echo "Log group: ${{ steps.env-vars.outputs.log_group }}"
+
+          # Wait a bit for logs to appear
+          sleep 10
+
+          # Tail logs for up to 3 minutes
+          timeout 180 aws logs tail ${{ steps.env-vars.outputs.log_group }} \
+            --follow \
+            --since 5m \
+            --region ${{ env.AWS_REGION }} || true
+
+      - name: Check Migration Result
+        id: check-result
+        run: |
+          echo "🔍 Waiting for migration task to complete..."
+
+          # Poll for stopped task with timeout (5 minutes max)
+          MAX_ATTEMPTS=30
+          SLEEP_INTERVAL=10
+          ATTEMPT=0
+
+          while [ $ATTEMPT -lt $MAX_ATTEMPTS ]; do
+            TASK_ARN=$(aws ecs list-tasks \
+              --cluster ${{ steps.env-vars.outputs.cluster }} \
+              --service-name ${{ steps.env-vars.outputs.service }} \
+              --desired-status STOPPED \
+              --max-results 1 \
+              --query 'taskArns[0]' \
+              --output text)
+
+            if [ "$TASK_ARN" != "None" ] && [ -n "$TASK_ARN" ]; then
+              echo "✅ Found stopped task: $TASK_ARN"
+
+              # Get exit code
+              EXIT_CODE=$(aws ecs describe-tasks \
+                --cluster ${{ steps.env-vars.outputs.cluster }} \
+                --tasks $TASK_ARN \
+                --query 'tasks[0].containers[0].exitCode' \
+                --output text)
+
+              echo "Exit code: $EXIT_CODE"
+
+              if [ "$EXIT_CODE" = "0" ]; then
+                echo "✅ Migration completed successfully"
+                exit 0
+              else
+                echo "❌ Migration failed with exit code: $EXIT_CODE"
+
+                # Show full task details
+                echo "Task details:"
+                aws ecs describe-tasks \
+                  --cluster ${{ steps.env-vars.outputs.cluster }} \
+                  --tasks $TASK_ARN \
+                  --query 'tasks[0].{StoppedReason:stoppedReason,StopCode:stopCode,Container:containers[0]}'
+
+                exit 1
+              fi
+            fi
+
+            ATTEMPT=$((ATTEMPT + 1))
+            echo "⏳ Waiting for task to stop... (attempt $ATTEMPT/$MAX_ATTEMPTS)"
+            sleep $SLEEP_INTERVAL
+          done
+
+          # Timeout - no stopped task found
+          echo "⚠️  Timeout: Migration task did not complete within 5 minutes"
+          echo "Please check CloudWatch logs and ECS console manually"
+          exit 1
+
+      - name: Show Final Logs
+        if: always()
+        run: |
+          echo "📋 Final migration logs (last 10 minutes):"
+          aws logs tail ${{ steps.env-vars.outputs.log_group }} \
+            --since 10m \
+            --region ${{ env.AWS_REGION }} || echo "No logs available"
+
+      - name: Reset Service to 0
+        if: always() && steps.run-migration.outputs.migration_started == 'true'
+        run: |
+          echo "🧹 Resetting migration service to desired count 0..."
+          aws ecs update-service \
+            --cluster ${{ steps.env-vars.outputs.cluster }} \
+            --service ${{ steps.env-vars.outputs.service }} \
+            --desired-count 0 \
+            --region ${{ env.AWS_REGION }}
+
+          echo "✅ Service reset to 0 tasks"
+
+      - name: Notify on success
+        if: success()
+        run: |
+          echo "✅ Migrations applied successfully to ${{ github.event.inputs.environment }}"
+          echo "View logs in CloudWatch: ${{ steps.env-vars.outputs.log_group }}"
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "❌ Migration failed for ${{ github.event.inputs.environment }}"
+          echo "Check CloudWatch logs: ${{ steps.env-vars.outputs.log_group }}"
+          echo "Please investigate and potentially restore from backup if needed"

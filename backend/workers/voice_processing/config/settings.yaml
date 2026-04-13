@@ -1,0 +1,74 @@
+# Voice Cloning Audio Processing Configuration
+
+# Eleven Labs Profile Settings
+profiles:
+  elevenlabs:
+    # File size limit (ElevenLabs max is 10MB, use 9MB for safety)
+    max_file_size_mb: 9.0
+
+    # Duration requirements (optimized for 9MB WAV file)
+    # Max duration for 9MB: ~107 seconds (44.1kHz, 16-bit, mono)
+    min_duration: 30      # 30 seconds minimum
+    max_duration: 107     # ~107 seconds maximum (9MB limit)
+    target_duration: 107  # Use full 9MB capacity for best quality
+
+    # Audio quality specifications
+    sample_rate: 44100    # 44.1kHz preferred
+    bit_depth: 16         # 16-bit minimum
+    channels: 1           # Mono output
+
+    # Volume normalization (in dB)
+    target_rms_min: -23   # Minimum RMS level
+    target_rms_max: -18   # Maximum RMS level
+    true_peak_max: -3     # True peak maximum
+
+    # Output format (LOCKED to WAV for size prediction accuracy)
+    format: "wav"         # Always WAV for ElevenLabs
+
+    # Quality thresholds
+    min_snr: 20           # Signal-to-noise ratio (dB)
+    max_silence_ratio: 0.1  # Maximum 10% silence
+
+  generic:
+    min_duration: 30
+    max_duration: 600
+    target_duration: 120
+    sample_rate: 22050
+    format: "wav"
+
+# Processing settings
+processing:
+  # Temporary files cleanup
+  cleanup_temp: true
+
+  # Logging level
+  log_level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+
+  # Output directories
+  output_base: "output"
+
+  # FFmpeg settings
+  ffmpeg:
+    threads: 4
+    quality: "high"
+
+# File validation
+validation:
+  max_file_size_mb: 2048  # 2GB input file limit
+  # Supported input formats (restricted to common formats only)
+  supported_video_formats:
+    - "mp4"   # Video - universal
+    - "mov"   # Video - Apple
+  supported_audio_formats:
+    - "wav"   # Audio - uncompressed
+    - "mp3"   # Audio - compressed
+    - "m4a"   # Audio - Apple
+
+# YouTube processing
+youtube:
+  # Audio quality preference for downloads
+  quality: "bestaudio"
+  # Maximum video length to process (in seconds)
+  max_length: 3600  # 10 minutes
+  # Retry attempts for failed downloads
+  retry_attempts: 3

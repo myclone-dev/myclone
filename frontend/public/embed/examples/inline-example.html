@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyClone Inline Widget Example</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(to bottom right, #f8fafc, #f1f5f9);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #1e293b;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #64748b;
+      font-size: 1.125rem;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .sidebar {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      height: fit-content;
+    }
+
+    .sidebar h2 {
+      font-size: 1.25rem;
+      margin-bottom: 15px;
+      color: #1e293b;
+    }
+
+    .sidebar p {
+      color: #64748b;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .sidebar ul {
+      color: #64748b;
+      line-height: 1.8;
+    }
+
+    .chat-section {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .chat-section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #1e293b;
+    }
+
+    /* Inline widget container */
+    #myclone-inline {
+      width: 100%;
+      height: 600px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    @media (max-width: 768px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      #myclone-inline {
+        height: 500px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🎯 Inline Widget Example</h1>
+      <p class="subtitle">Embed AI chat directly into your page content</p>
+    </header>
+
+    <div class="layout">
+      <!-- Sidebar with info -->
+      <div class="sidebar">
+        <h2>About Inline Mode</h2>
+        <p>
+          The inline widget embeds directly into your page, taking up space in the document flow.
+        </p>
+
+        <h2>Features</h2>
+        <ul>
+          <li>No floating bubble button</li>
+          <li>Always visible chat interface</li>
+          <li>Customizable height</li>
+          <li>Scrolls with page content</li>
+          <li>Perfect for contact pages</li>
+        </ul>
+
+        <h2>Use Cases</h2>
+        <ul>
+          <li>Contact/Support pages</li>
+          <li>Product demos</li>
+          <li>Help centers</li>
+          <li>Landing pages</li>
+        </ul>
+      </div>
+
+      <!-- Main chat area -->
+      <div class="chat-section">
+        <h2>Chat with MyClone AI</h2>
+
+        <!-- Inline widget will render here -->
+        <div id="myclone-inline"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load MyClone Widget SDK -->
+  <script src="/embed/myclone-embed.js"></script>
+
+  <script>
+    // Initialize inline widget
+    const widget = MyClone({
+      mode: "inline",
+      container: "#myclone-inline",
+      height: "600px",
+      expertUsername: "YOUR_USERNAME", // Replace with your username
+      widgetToken: "YOUR_WIDGET_TOKEN", // Replace with your token
+      primaryColor: "#6366f1",
+      enableVoice: true,
+    });
+
+    console.log("✅ Inline widget initialized:", widget);
+  </script>
+</body>
+</html>

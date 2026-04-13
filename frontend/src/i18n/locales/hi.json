@@ -1,0 +1,256 @@
+{
+  "common": {
+    "loading": "लोड हो रहा है...",
+    "error": "त्रुटि",
+    "retry": "पुनः प्रयास करें",
+    "close": "बंद करें",
+    "cancel": "रद्द करें",
+    "continue": "जारी रखें",
+    "submit": "सबमिट करें",
+    "skip": "अभी छोड़ें",
+    "seconds": "सेकंड",
+    "minutes": "मिनट",
+    "you": "आप",
+    "goBack": "वापस जाएं",
+    "optional": "वैकल्पिक",
+    "save": "सहेजें",
+    "saving": "सहेज रहा है...",
+    "messages": "संदेश",
+    "message": "संदेश",
+    "at": "में"
+  },
+  "chat": {
+    "modeToggle": {
+      "voice": "आवाज़",
+      "text": "टेक्स्ट"
+    },
+    "connection": {
+      "connecting": "कनेक्ट हो रहा है...",
+      "settingUp": "चैट सेटअप हो रहा है...",
+      "takeMoment": "इसमें बस एक पल लगेगा"
+    },
+    "input": {
+      "placeholder": "अपना संदेश लिखें...",
+      "send": "संदेश भेजें",
+      "uploading": "अपलोड हो रहा है...",
+      "provideInfo": "जारी रखने के लिए कृपया अपनी जानकारी प्रदान करें..."
+    },
+    "emptyState": {
+      "title": "मेरे साथ बातचीत शुरू करें।",
+      "subtitle": "मुझसे कुछ भी पूछें! मैं विशेषज्ञ जानकारी और सहायता प्रदान करने के लिए यहां हूं।",
+      "connectionError": "कनेक्शन त्रुटि",
+      "retryConnection": "कनेक्शन पुनः प्रयास करें"
+    },
+    "fileTypes": {
+      "pdf": "PDF",
+      "doc": "Word दस्तावेज़",
+      "docx": "Word दस्तावेज़",
+      "xls": "Excel स्प्रेडशीट",
+      "xlsx": "Excel स्प्रेडशीट",
+      "ppt": "PowerPoint",
+      "pptx": "PowerPoint",
+      "png": "छवि",
+      "jpg": "छवि",
+      "jpeg": "छवि",
+      "file": "फ़ाइल"
+    },
+    "errors": {
+      "sessionNotInitialized": "सत्र प्रारंभ नहीं हुआ",
+      "failedToUpload": "फ़ाइल अपलोड विफल",
+      "unknownError": "अज्ञात त्रुटि"
+    }
+  },
+  "voice": {
+    "status": {
+      "connected": "कनेक्ट हो गया",
+      "readyToTalk": "बात करने के लिए तैयार",
+      "readyToStart": "शुरू करने के लिए तैयार",
+      "readyToHelp": "मदद के लिए तैयार",
+      "initializing": "प्रारंभ हो रहा है...",
+      "connecting": "कनेक्ट हो रहा है...",
+      "speaking": "बोल रहा है...",
+      "listening": "सुन रहा है..."
+    },
+    "buttons": {
+      "startConversation": "बातचीत शुरू करें",
+      "startVoiceChat": "वॉयस चैट शुरू करें",
+      "enableAudio": "ऑडियो सक्षम करने के लिए क्लिक करें",
+      "endSession": "सत्र समाप्त करें",
+      "endCall": "कॉल समाप्त करें",
+      "mute": "म्यूट करें",
+      "unmute": "अनम्यूट करें",
+      "backToTextChat": "टेक्स्ट चैट पर वापस जाएं"
+    },
+    "transcript": {
+      "title": "लाइव ट्रांसक्रिप्ट",
+      "download": "ट्रांसक्रिप्ट डाउनलोड करें",
+      "minimize": "छोटा करें",
+      "maximize": "बड़ा करें",
+      "emptyState": "आपकी बातचीत यहां दिखाई देगी",
+      "saving": "सहेज रहा है...",
+      "show": "ट्रांसक्रिप्ट दिखाएं",
+      "viewPrevious": "पिछला ट्रांसक्रिप्ट देखें"
+    },
+    "upload": {
+      "title": "विश्लेषण के लिए सहायक को दस्तावेज़ अपलोड करें"
+    },
+    "limitExceeded": {
+      "sessionEnded": "वॉयस सत्र समाप्त",
+      "unavailable": "वॉयस चैट उपलब्ध नहीं",
+      "conversationEnded": "{{name}} के साथ आपकी बातचीत समाप्त हो गई है।",
+      "unavailableMessage": "{{name}} के साथ वॉयस चैट वर्तमान में उपलब्ध नहीं है।",
+      "continueWithText": "आप टेक्स्ट चैट के माध्यम से अपनी बातचीत जारी रख सकते हैं।",
+      "useTextInstead": "आप अभी भी टेक्स्ट चैट के माध्यम से बातचीत कर सकते हैं।",
+      "continueWithTextButton": "टेक्स्ट चैट के साथ जारी रखें"
+    }
+  },
+  "session": {
+    "inactivity": {
+      "title": "क्या आप अभी भी यहां हैं?",
+      "description": "आपका सत्र डिस्कनेक्ट हो जाएगा",
+      "dismiss": "मैं अभी भी यहां हूं",
+      "hint": "जारी रखने के लिए कहीं भी क्लिक करें या कोई कुंजी दबाएं"
+    },
+    "timeLimit": {
+      "title": "सत्र जल्द समाप्त हो रहा है",
+      "description": "आपका सत्र समाप्त हो जाएगा",
+      "dismiss": "समझ गया",
+      "info": "इसके बाद आप नया सत्र शुरू कर सकते हैं। आपकी बातचीत सहेजी जाएगी।"
+    },
+    "disconnected": {
+      "title": "सत्र डिस्कनेक्ट हो गया",
+      "ended": "सत्र समाप्त",
+      "connectionLost": "कनेक्शन टूट गया",
+      "reconnect": "पुनः कनेक्ट करें",
+      "reconnecting": "पुनः कनेक्ट हो रहा है...",
+      "messagesSaved": "आपके संदेश सहेजे गए हैं",
+      "reasons": {
+        "inactivity": {
+          "title": "सत्र डिस्कनेक्ट हो गया",
+          "description": "निष्क्रियता के कारण आपका चैट सत्र डिस्कनेक्ट हो गया। आपकी बातचीत सहेज ली गई है।"
+        },
+        "manual": {
+          "title": "सत्र समाप्त",
+          "description": "आपने यह चैट सत्र समाप्त कर दिया है। आपकी बातचीत सहेज ली गई है।"
+        },
+        "error": {
+          "title": "कनेक्शन टूट गया",
+          "description": "कनेक्शन अप्रत्याशित रूप से टूट गया। चैट जारी रखने के लिए पुनः कनेक्ट करें।"
+        }
+      }
+    },
+    "timer": {
+      "remaining": "{{time}} शेष"
+    },
+    "endConfirm": {
+      "title": "चैट सत्र समाप्त करें?",
+      "description": "आपकी बातचीत सहेज ली जाएगी।"
+    },
+    "timeLimitExceeded": {
+      "title": "सत्र समय सीमा पूरी हो गई",
+      "sessionEnded": "{{name}} के साथ आपका सत्र समाप्त हो गया है।",
+      "duration": "अवधि",
+      "messagesCount": "संदेश",
+      "conversationSaved": "आपकी बातचीत सहेज ली गई है। आप ट्रांसक्रिप्ट देख सकते हैं या नया सत्र शुरू कर सकते हैं।",
+      "viewTranscript": "ट्रांसक्रिप्ट देखें",
+      "startNewSession": "नया सत्र शुरू करें",
+      "downloadTranscript": "ट्रांसक्रिप्ट डाउनलोड करें"
+    }
+  },
+  "email": {
+    "prompt": {
+      "title": "जुड़े रहें!",
+      "description": "इस बातचीत की कॉपी प्राप्त करें और ईमेल के माध्यम से जारी रखें",
+      "placeholder": "अपना ईमेल दर्ज करें",
+      "submit": "जारी रखें",
+      "submitting": "सबमिट हो रहा है...",
+      "skip": "अभी छोड़ें",
+      "errors": {
+        "required": "कृपया अपना ईमेल दर्ज करें",
+        "invalid": "कृपया वैध ईमेल दर्ज करें"
+      }
+    },
+    "banner": {
+      "title": "इस बातचीत को सहेजें",
+      "description": "इस चैट को सहेजने और बाद में जारी रखने के लिए अपनी जानकारी दर्ज करें",
+      "emailLabel": "ईमेल पता",
+      "emailPlaceholder": "aapka@email.com",
+      "fullnameLabel": "पूरा नाम",
+      "phoneLabel": "फ़ोन नंबर",
+      "phonePlaceholder": "+91 98765 43210",
+      "continueConversation": "बातचीत जारी रखें"
+    },
+    "otp": {
+      "continue": "इस बातचीत को जारी रखें",
+      "verify": "अपना ईमेल सत्यापित करें",
+      "completeProfile": "अपना प्रोफ़ाइल पूरा करें",
+      "verifyDescription": "अपनी प्रगति सहेजने और किसी भी समय फिर से शुरू करने के लिए अपना ईमेल सत्यापित करें",
+      "codeSentTo": "हमने {{email}} पर 6 अंकों का कोड भेजा है",
+      "detailsDescription": "इस बातचीत को सहेजने के लिए अपने विवरण जोड़ें",
+      "sendCode": "कोड भेजें",
+      "verifyCode": "कोड सत्यापित करें",
+      "verificationCode": "सत्यापन कोड",
+      "resendCode": "कोड पुनः भेजें",
+      "resendIn": "{{seconds}}s में पुनः भेजें",
+      "changeEmail": "ईमेल बदलें",
+      "complete": "पूरा करें",
+      "fullNamePlaceholder": "राहुल शर्मा",
+      "checkingProfile": "आपका प्रोफ़ाइल जांच रहा है...",
+      "back": "वापस",
+      "errors": {
+        "sendFailed": "कोड भेजने में विफल",
+        "invalidCode": "अमान्य सत्यापन कोड",
+        "linkFailed": "सत्र लिंक करने में विफल",
+        "resendFailed": "कोड पुनः भेजने में विफल"
+      }
+    }
+  },
+  "widget": {
+    "aiPowered": "AI संचालित डिजिटल क्लोन",
+    "bubbleText": "मुझसे बात करें",
+    "noUsername": "कोई उपयोगकर्ता नाम कॉन्फ़िगर नहीं",
+    "closeChat": "चैट बंद करें",
+    "openChat": "चैट खोलें",
+    "tooltips": {
+      "talkToMe": "मुझसे बात करें!",
+      "askAnything": "मुझसे कुछ भी पूछें",
+      "needHelp": "मदद चाहिए?",
+      "letsChat": "चलो बात करते हैं!"
+    }
+  },
+  "assistant": {
+    "error": {
+      "unableToLoad": "सहायक लोड करने में असमर्थ। कृपया बाद में पुनः प्रयास करें।"
+    }
+  },
+  "textLimit": {
+    "title": "संदेश सीमा पूरी हुई",
+    "quotaReached": "{{name}} का मासिक संदेश कोटा पूरा हो गया है।",
+    "usageInfo": "इस महीने {{used}} / {{limit}} संदेश उपयोग किए गए",
+    "continueWithVoice": "आप अभी भी वॉयस चैट के माध्यम से बातचीत कर सकते हैं।",
+    "tryAgainLater": "कृपया बाद में पुनः प्रयास करें जब कोटा रीसेट हो जाए।",
+    "continueWithVoiceButton": "वॉयस चैट के साथ जारी रखें"
+  },
+  "avatar": {
+    "aiClone": "AI क्लोन"
+  },
+  "source": "स्रोत",
+  "sources": "स्रोत",
+  "settings": {
+    "language": {
+      "title": "भाषा",
+      "description": "इंटरफ़ेस के लिए अपनी पसंदीदा भाषा चुनें",
+      "saved": "भाषा प्राथमिकता सहेजी गई"
+    }
+  },
+  "calendar": {
+    "bookCall": "कॉल बुक करें",
+    "scheduleMeeting": "मीटिंग शेड्यूल करें"
+  },
+  "contentOutput": {
+    "viewFull": "पूरा कंटेंट देखें",
+    "copyMarkdown": "मार्कडाउन कॉपी करें",
+    "copied": "कॉपी हो गया!",
+    "downloadMd": "डाउनलोड .md"
+  }
+}

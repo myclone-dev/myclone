@@ -1,0 +1,256 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "close": "Close",
+    "cancel": "Cancel",
+    "continue": "Continue",
+    "submit": "Submit",
+    "skip": "Skip for now",
+    "seconds": "seconds",
+    "minutes": "minutes",
+    "you": "You",
+    "goBack": "Go Back",
+    "optional": "optional",
+    "save": "Save",
+    "saving": "Saving...",
+    "messages": "messages",
+    "message": "message",
+    "at": "at"
+  },
+  "chat": {
+    "modeToggle": {
+      "voice": "Voice",
+      "text": "Text"
+    },
+    "connection": {
+      "connecting": "Connecting...",
+      "settingUp": "Setting up chat...",
+      "takeMoment": "This will only take a moment"
+    },
+    "input": {
+      "placeholder": "Type your message...",
+      "send": "Send message",
+      "uploading": "Uploading...",
+      "provideInfo": "Please provide your information to continue..."
+    },
+    "emptyState": {
+      "title": "Start a conversation with me.",
+      "subtitle": "Ask me anything! I'm here to provide expert insights and assistance.",
+      "connectionError": "Connection Error",
+      "retryConnection": "Retry Connection"
+    },
+    "fileTypes": {
+      "pdf": "PDF",
+      "doc": "Word document",
+      "docx": "Word document",
+      "xls": "Excel spreadsheet",
+      "xlsx": "Excel spreadsheet",
+      "ppt": "PowerPoint",
+      "pptx": "PowerPoint",
+      "png": "Image",
+      "jpg": "Image",
+      "jpeg": "Image",
+      "file": "File"
+    },
+    "errors": {
+      "sessionNotInitialized": "Session not initialized",
+      "failedToUpload": "Failed to upload file",
+      "unknownError": "Unknown error"
+    }
+  },
+  "voice": {
+    "status": {
+      "connected": "Connected",
+      "readyToTalk": "Ready to talk",
+      "readyToStart": "Ready to start",
+      "readyToHelp": "Ready to help",
+      "initializing": "Initializing...",
+      "connecting": "Connecting...",
+      "speaking": "Speaking...",
+      "listening": "Listening..."
+    },
+    "buttons": {
+      "startConversation": "Start Conversation",
+      "startVoiceChat": "Start Voice Chat",
+      "enableAudio": "Click to enable audio",
+      "endSession": "End session",
+      "endCall": "End Call",
+      "mute": "Mute",
+      "unmute": "Unmute",
+      "backToTextChat": "Back to Text Chat"
+    },
+    "transcript": {
+      "title": "Live Transcript",
+      "download": "Download transcript",
+      "minimize": "Minimize",
+      "maximize": "Maximize",
+      "emptyState": "Your conversation will appear here",
+      "saving": "Saving...",
+      "show": "Show Transcript",
+      "viewPrevious": "View Previous Transcript"
+    },
+    "upload": {
+      "title": "Upload document for the assistant to analyze"
+    },
+    "limitExceeded": {
+      "sessionEnded": "Voice Session Ended",
+      "unavailable": "Voice Chat Unavailable",
+      "conversationEnded": "Your conversation with {{name}} has ended.",
+      "unavailableMessage": "Voice chat with {{name}} is currently unavailable.",
+      "continueWithText": "You can continue your conversation via text chat.",
+      "useTextInstead": "You can still have a conversation via text chat.",
+      "continueWithTextButton": "Continue with Text Chat"
+    }
+  },
+  "session": {
+    "inactivity": {
+      "title": "Are you still there?",
+      "description": "Your session will disconnect in",
+      "dismiss": "I'm still here",
+      "hint": "Click anywhere or press any key to continue"
+    },
+    "timeLimit": {
+      "title": "Session Ending Soon",
+      "description": "Your session will end in",
+      "dismiss": "I understand",
+      "info": "You can start a new session after this one ends. Your conversation will be saved."
+    },
+    "disconnected": {
+      "title": "Session Disconnected",
+      "ended": "Session Ended",
+      "connectionLost": "Connection Lost",
+      "reconnect": "Reconnect",
+      "reconnecting": "Reconnecting...",
+      "messagesSaved": "Your messages are saved",
+      "reasons": {
+        "inactivity": {
+          "title": "Session Disconnected",
+          "description": "Your chat session was disconnected due to inactivity. Your conversation has been saved."
+        },
+        "manual": {
+          "title": "Session Ended",
+          "description": "You ended this chat session. Your conversation has been saved."
+        },
+        "error": {
+          "title": "Connection Lost",
+          "description": "The connection was lost unexpectedly. Please reconnect to continue chatting."
+        }
+      }
+    },
+    "timer": {
+      "remaining": "{{time}} remaining"
+    },
+    "endConfirm": {
+      "title": "End chat session?",
+      "description": "Your conversation will be saved."
+    },
+    "timeLimitExceeded": {
+      "title": "Session Time Limit Reached",
+      "sessionEnded": "Your session with {{name}} has ended.",
+      "duration": "Duration",
+      "messagesCount": "Messages",
+      "conversationSaved": "Your conversation has been saved. You can view the transcript or start a new session.",
+      "viewTranscript": "View Transcript",
+      "startNewSession": "Start New Session",
+      "downloadTranscript": "Download Transcript"
+    }
+  },
+  "email": {
+    "prompt": {
+      "title": "Stay connected!",
+      "description": "Get a copy of this conversation and continue via email",
+      "placeholder": "Enter your email",
+      "submit": "Continue",
+      "submitting": "Submitting...",
+      "skip": "Skip for now",
+      "errors": {
+        "required": "Please enter your email",
+        "invalid": "Please enter a valid email"
+      }
+    },
+    "banner": {
+      "title": "Save this conversation",
+      "description": "Enter your information below to save this chat and continue later",
+      "emailLabel": "Email address",
+      "emailPlaceholder": "your@email.com",
+      "fullnameLabel": "Full name",
+      "phoneLabel": "Phone number",
+      "phonePlaceholder": "+1 (555) 123-4567",
+      "continueConversation": "Continue Conversation"
+    },
+    "otp": {
+      "continue": "Continue this conversation",
+      "verify": "Verify your email",
+      "completeProfile": "Complete your profile",
+      "verifyDescription": "Verify your email to save your progress and resume anytime",
+      "codeSentTo": "We sent a 6-digit code to {{email}}",
+      "detailsDescription": "Add your details to save this conversation",
+      "sendCode": "Send Code",
+      "verifyCode": "Verify Code",
+      "verificationCode": "Verification Code",
+      "resendCode": "Resend code",
+      "resendIn": "Resend in {{seconds}}s",
+      "changeEmail": "Change email",
+      "complete": "Complete",
+      "fullNamePlaceholder": "John Doe",
+      "checkingProfile": "Checking your profile...",
+      "back": "Back",
+      "errors": {
+        "sendFailed": "Failed to send OTP",
+        "invalidCode": "Invalid verification code",
+        "linkFailed": "Failed to link session",
+        "resendFailed": "Failed to resend OTP"
+      }
+    }
+  },
+  "widget": {
+    "aiPowered": "AI powered digital clone",
+    "bubbleText": "Chat with me",
+    "noUsername": "No username configured",
+    "closeChat": "Close chat",
+    "openChat": "Open chat",
+    "tooltips": {
+      "talkToMe": "Talk to me!",
+      "askAnything": "Ask me anything",
+      "needHelp": "Need help?",
+      "letsChat": "Let's chat!"
+    }
+  },
+  "assistant": {
+    "error": {
+      "unableToLoad": "Unable to load assistant. Please try again later."
+    }
+  },
+  "textLimit": {
+    "title": "Message Limit Reached",
+    "quotaReached": "{{name}}'s monthly message quota has been reached.",
+    "usageInfo": "{{used}} / {{limit}} messages used this month",
+    "continueWithVoice": "You can still have a conversation via voice chat.",
+    "tryAgainLater": "Please try again later when the quota resets.",
+    "continueWithVoiceButton": "Continue with Voice Chat"
+  },
+  "avatar": {
+    "aiClone": "AI Clone"
+  },
+  "source": "Source",
+  "sources": "Sources",
+  "settings": {
+    "language": {
+      "title": "Language",
+      "description": "Select your preferred language for the interface",
+      "saved": "Language preference saved"
+    }
+  },
+  "calendar": {
+    "bookCall": "Book a call",
+    "scheduleMeeting": "Schedule a Meeting"
+  },
+  "contentOutput": {
+    "viewFull": "View Full Content",
+    "copyMarkdown": "Copy markdown",
+    "copied": "Copied!",
+    "downloadMd": "Download .md"
+  }
+}

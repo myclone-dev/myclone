@@ -1,0 +1,16 @@
+# Dockerfile for LocalStack - Local AWS S3 Development
+FROM localstack/localstack:latest
+
+# Set environment variables for LocalStack configuration
+ENV SERVICES=s3
+ENV DEBUG=1
+ENV DATA_DIR=/var/lib/localstack
+
+# Copy initialization script to auto-create S3 bucket on startup
+COPY docker/localstack-init.sh /etc/localstack/init/ready.d/init-aws.sh
+RUN chmod +x /etc/localstack/init/ready.d/init-aws.sh
+
+# Expose LocalStack port
+EXPOSE 4566
+
+# LocalStack entry point is already defined in base image
