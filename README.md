@@ -1,467 +1,277 @@
-# MyClone : AI digital Persona
+# MyClone
 
-MyClone is a full-stack AI digital persona platform. This repository contains the application code for creating, managing, and interacting with AI-powered personas through text chat, voice chat, embeddable widgets, workflow automation, and knowledge ingestion pipelines.
+> Build AI-powered digital clones of yourself — powered by RAG, voice, and real-time chat.
 
-At a high level, the monorepo includes:
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
+[![Next.js 15](https://img.shields.io/badge/Next.js-15-black.svg)](https://nextjs.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=flat&logo=fastapi)](https://fastapi.tiangolo.com/)
+[![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=flat&logo=docker&logoColor=white)](https://www.docker.com/)
 
-- a `frontend` application built with Next.js for public persona experiences and creator dashboards
-- a `backend` application built with FastAPI for APIs, authentication, ingestion, RAG, workflows, and voice orchestration
-- an `infra` workspace for local infrastructure and container setup
-- GitHub workflows for CI/CD, code quality, migrations, and deployment automation
-
----
-
-## What this repository contains
-
-This monorepo is organized around three main runtime areas:
-
-### `frontend/`
-The web application used by both end users and creators.
-
-It includes:
-
-- public persona pages such as `/{username}` and `/{username}/{persona_name}`
-- authentication flows like signup, login, password reset, email verification, and account claiming
-- creator onboarding flows
-- a dashboard for managing personas, knowledge, conversations, widgets, workflows, access control, whitelabel settings, usage, and voice cloning
-- an embeddable widget SDK and iframe app built separately from the main Next.js app
-
-### `backend/`
-The API and processing layer for the platform.
-
-It includes:
-
-- FastAPI route modules for personas, users, auth, conversations, documents, workflows, jobs, webhooks, custom domains, evaluations, and voice features
-- PostgreSQL-backed application data and vector search
-- retrieval-augmented generation infrastructure
-- async background processing with NATS JetStream
-- voice processing workers
-- LiveKit-based real-time voice agent orchestration
-- shared repositories, models, services, and integrations used across API and workers
-
-### `infra/`
-Local infrastructure and Docker assets.
-
-It includes:
-
-- local Docker Compose setup
-- Dockerfiles for API, workers, migrations, NATS, and LocalStack
-- local AWS-compatible S3 setup through LocalStack
-- container entrypoints and initialization scripts
+MyClone is an open-source platform for creating intelligent digital personas. Users ingest data from LinkedIn, Twitter, websites, PDFs, and YouTube — then interact with their AI clone via text chat or real-time voice conversations powered by retrieval-augmented generation (RAG).
 
 ---
 
-## Product capabilities
+## Features
 
-From the codebase structure and project documentation, the platform supports a broad set of capabilities:
-
-- AI personas with public profile/chat experiences
-- text chat and voice chat
-- persona-specific voice configuration and voice cloning
-- knowledge ingestion from multiple sources
-- document and media processing
-- RAG over stored knowledge using vector search
-- creator dashboards and management tools
-- embeddable website widgets
-- workflow and template systems
-- access control and visitor management
-- custom domains and whitelabel email domain support
-- analytics, monitoring, and evaluation tooling
+- **RAG-Powered Knowledge** — LlamaIndex + pgvector for accurate, context-aware responses
+- **Real-Time Voice Chat** — LiveKit + Deepgram STT + ElevenLabs/Cartesia TTS
+- **Multi-Source Ingestion** — LinkedIn, Twitter, websites, PDFs, YouTube videos
+- **Persistent Memory** — Conversations and context survive restarts
+- **Embeddable Widget** — Drop a script tag on any site to add your clone
+- **Multi-Auth** — OAuth (LinkedIn, Google) + email/password with email verification
+- **Workflow System** — Linear assessments and conversational lead qualification
+- **Payment Integration** — Stripe-powered subscriptions and persona monetization
+- **Internationalization** — 14 languages supported on public-facing pages
 
 ---
 
-## Monorepo structure
+## Tech Stack
 
-```myclone/README.md#L52-84
+| Layer | Technologies |
+|-------|-------------|
+| **Frontend** | Next.js 15, React 19, TypeScript, Tailwind CSS v4, shadcn/ui, Zustand, TanStack Query v5 |
+| **Backend** | FastAPI, Python 3.11+, SQLAlchemy, Alembic, Poetry/uv |
+| **RAG** | LlamaIndex, OpenAI embeddings, pgvector |
+| **Voice** | LiveKit Cloud, Deepgram (STT), ElevenLabs/Cartesia (TTS) |
+| **Database** | PostgreSQL + pgvector |
+| **Message Queue** | NATS JetStream |
+| **Infrastructure** | Docker, multi-stage builds, docker-compose |
+
+---
+
+## Repository Structure
+
+```
 myclone/
-├── .github/                  # CI/CD workflows and automation
-├── backend/                  # FastAPI backend, workers, shared services, migrations
-│   ├── app/                  # API-specific application code
-│   ├── shared/               # Shared config, DB models, repositories, services
-│   ├── workers/              # Background workers
-│   ├── livekit/              # LiveKit agent runtime
-│   ├── alembic/              # Database migrations
-│   ├── docs/                 # Backend technical documentation
-│   ├── docker-compose.yml    # Backend-focused local dev stack
-│   ├── pyproject.toml        # Python dependencies and tooling
-│   └── Makefile              # Common development commands
-├── frontend/                 # Next.js frontend and embed SDK/app
-│   ├── src/app/              # App Router pages and layouts
-│   ├── src/components/       # UI and feature components
-│   ├── src/lib/              # API client, queries, utilities
-│   ├── src/store/            # Zustand stores
-│   ├── src/embed/            # Widget SDK and embed app
-│   ├── docs/                 # Frontend technical documentation
-│   ├── package.json          # Frontend scripts and dependencies
-│   └── vite.embed*.ts        # Separate embed build configuration
-├── infra/                    # Shared local infrastructure assets
-│   ├── docker/               # Dockerfiles and init scripts
-│   └── docker-compose.yml    # Infra-focused local services
-├── README.md
-└── LICENSE
+├── frontend/           # Next.js 15 app (App Router, Turbopack)
+├── backend/            # FastAPI API + workers + RAG system
+│   ├── app/            # API routes, auth, ingestion
+│   ├── shared/         # Database, RAG, services (used by API + workers)
+│   ├── workers/        # Background job processors
+│   └── livekit/        # Voice agent integration
+├── infra/              # Docker configs, docker-compose
+├── scripts/            # Utility scripts
+└── docs/               # Project documentation
 ```
 
 ---
 
-## Architecture overview
+## Quick Start
 
-### Frontend architecture
+### Prerequisites
 
-The frontend is a Next.js App Router application designed for both public-facing persona experiences and authenticated creator tooling.
+- [Docker](https://docs.docker.com/get-docker/) and Docker Compose
+- [Node.js 18+](https://nodejs.org/) and [bun](https://bun.sh/) (frontend)
+- [Python 3.11+](https://www.python.org/) (backend, if running locally)
+- OpenAI API key
 
-Key characteristics:
+### 1. Clone the Repository
 
-- Next.js 15 with React 19
-- App Router-based routing
-- TanStack Query for server state and API data fetching
-- Zustand for client-side UI/auth state
-- typed environment validation with `@t3-oss/env-nextjs` and `zod`
-- dashboard-heavy UI architecture with domain-organized components and query hooks
-- dedicated embed/widget build pipeline using Vite
-- analytics and monitoring integrations including Sentry and product analytics support
-
-Important frontend areas include:
-
-- `src/app/` for routes and layouts
-- `src/components/` for feature and UI components
-- `src/lib/queries/` for domain-based query and mutation hooks
-- `src/store/` for client state
-- `src/embed/` for widget SDK and iframe app
-
-### Backend architecture
-
-The backend is structured as a modular monolith with clear separation between API code, shared domain logic, workers, and real-time voice runtime components.
-
-Key characteristics:
-
-- FastAPI application entrypoint in `backend/app/main.py`
-- route modules under `backend/app/api/`
-- shared configuration, models, repositories, and services under `backend/shared/`
-- PostgreSQL as the primary system of record
-- `pgvector` for vector storage and retrieval
-- async processing with NATS JetStream
-- voice processing workers under `backend/workers/`
-- LiveKit runtime under `backend/livekit/`
-- Alembic migrations under `backend/alembic/`
-
-Important backend areas include:
-
-- `app/api/` for HTTP endpoints
-- `shared/database/` for models and repositories
-- `shared/voice_processing/` for job orchestration
-- `workers/voice_processing/` for background processing
-- `livekit/` for real-time voice agent execution
-- `docs/` for backend architecture and operational documentation
-
-### Infrastructure architecture
-
-Local development infrastructure is containerized and centered around a small set of core services:
-
-- PostgreSQL with `pgvector`
-- NATS with JetStream
-- LocalStack for local S3-compatible storage
-- API container
-- voice-processing worker container(s)
-
-This setup supports local development of ingestion, storage, async jobs, and voice-related flows without requiring all production services.
-
----
-
-## Core technology stack
-
-### Frontend
-
-- Next.js
-- React
-- TypeScript
-- Tailwind CSS
-- shadcn/ui
-- Radix UI
-- TanStack Query
-- Zustand
-- Axios
-- Zod
-- Sentry
-- Vite for embed builds
-- pnpm
-
-### Backend
-
-- Python 3.11+
-- FastAPI
-- SQLAlchemy
-- PostgreSQL
-- asyncpg
-- pgvector
-- Alembic
-- OpenAI
-- LlamaIndex
-- NATS
-- LiveKit
-- ElevenLabs
-- Cartesia
-- Deepgram
-- aioboto3 / S3
-- Langfuse
-- Sentry
-- Resend
-
-### Tooling and automation
-
-- Docker
-- Docker Compose
-- GitHub Actions
-- Ruff
-- Black
-- isort
-- pytest
-- ESLint
-- Prettier
-- Husky
-- pre-commit
-
----
-
-## How the system works
-
-### 1. Persona and knowledge ingestion
-
-A typical ingestion flow looks like this:
-
-1. a user or system submits content through backend endpoints
-2. the backend creates or publishes processing jobs
-3. jobs are sent through NATS JetStream
-4. background workers consume and process those jobs
-5. extracted content and metadata are stored in PostgreSQL
-6. embeddings are stored in vector-enabled tables
-7. personas are linked to the resulting knowledge records
-8. future chat requests can retrieve that knowledge through RAG
-
-### 2. Text and voice interaction
-
-A typical interaction flow looks like this:
-
-1. a user opens a public persona page or embedded widget
-2. the frontend fetches persona/profile/session data from the backend
-3. the backend resolves persona context and available knowledge
-4. retrieval and prompt assembly happen on the backend
-5. the model generates a response
-6. the frontend renders the response in chat UI
-7. for voice sessions, LiveKit handles real-time media/session transport
-8. conversation state and post-processing are persisted by backend services
-
-### 3. Widget/embed flow
-
-The repository includes first-class support for embeddable widgets:
-
-1. creators configure widgets in the dashboard
-2. the frontend generates integration code and widget settings
-3. a separate embed SDK/app bundle is built from `frontend/src/embed/`
-4. external sites load the widget bundle
-5. the widget communicates with backend APIs using configured environment/runtime values
-
----
-
-## Local development options
-
-There are multiple ways to work with this repository depending on what you need to run.
-
-### Option 1: Work on a single app
-If you only need to work on one side of the stack:
-
-- use `frontend/` for UI work
-- use `backend/` for API, worker, ingestion, or data work
-
-Each app has its own README and app-specific setup instructions.
-
-### Option 2: Run the full local stack
-If you need end-to-end development:
-
-- start infrastructure services
-- run backend services and migrations
-- run the frontend app
-- configure environment variables for both apps
-
-Because this is a monorepo with separate app runtimes, you should treat `frontend` and `backend` as independently bootstrapped applications that integrate over HTTP and shared environment configuration.
-
----
-
-## Recommended setup order
-
-### 1. Clone the repository
-
-```myclone/README.md#L194-197
-git clone <your-repository-url>
+```bash
+git clone https://github.com/myclone-dev/myclone.git
 cd myclone
 ```
 
-### 2. Read the app-specific READMEs
+### 2. Start the Backend (Docker)
 
-Start with:
-
-- `backend/README.md`
-- `frontend/README.md`
-
-These contain the most specific setup and workflow details for each application.
-
-### 3. Configure backend environment
-
-Use the backend example environment file as your starting point:
-
-```myclone/README.md#L206-209
+```bash
 cd backend
+
+# Setup environment
 cp .env.example .env
+# Edit .env with your API keys (OPENAI_API_KEY at minimum)
+
+# First-time setup: build, start services, run migrations
+make setup-local
+
+# Or manually:
+docker-compose build
+docker-compose up -d
+docker-compose exec api alembic -c /app/alembic.ini upgrade head
 ```
 
-Then fill in the required values for services such as database access, model providers, voice providers, email, and observability.
+The API will be available at `http://localhost:8001`. Interactive docs at `http://localhost:8001/docs`.
 
-### 4. Configure frontend environment
+### 3. Start the Frontend
 
-Create the frontend local environment file from its template if present in your checkout, then set at least the API and app URLs expected by the frontend.
+```bash
+cd frontend
 
-Common frontend variables referenced in code include:
+# Install dependencies
+bun install
 
-- `NEXT_PUBLIC_API_URL`
-- `NEXT_PUBLIC_APP_URL`
-- `NEXT_PUBLIC_LIVEKIT_URL`
-- `NEXT_PUBLIC_LANDING_PAGE_URL`
-- `NEXT_PUBLIC_SENTRY_DSN`
-- `NEXT_PUBLIC_POSTHOG_KEY`
+# Setup environment
+cp .env.example .env.local
+# Edit .env.local — set NEXT_PUBLIC_API_URL=http://localhost:8001/api
 
-### 5. Start infrastructure and backend
+# Start dev server
+bun dev
+```
 
-Use the backend Docker Compose setup and migration workflow described in `backend/README.md`.
-
-Typical backend local flow includes:
-
-- building containers
-- starting PostgreSQL, NATS, LocalStack, API, and workers
-- running Alembic migrations explicitly
-
-### 6. Start the frontend
-
-From `frontend/`, install dependencies and run the development server using the scripts documented in `frontend/README.md`.
-
----git push --set-upstream origin rishi/update-readme
-
-## Common development workflows
-
-### Frontend workflow
-
-Typical commands are documented in `frontend/README.md`, including:
-
-- install dependencies
-- run dev server
-- build production assets
-- run linting and type checks
-- format code
-
-The frontend also includes dedicated documentation for:
-
-- architecture
-- tech stack
-- development guide
-- query architecture
-- embed SDK
-- i18n and other feature-specific topics
-
-### Backend workflow
-
-Typical commands are documented in `backend/README.md` and `backend/Makefile`, including:
-
-- local environment startup
-- service management
-- migrations
-- linting and formatting
-- shell access
-- code quality checks
-
-The backend includes extensive docs for:
-
-- architecture
-- API behavior
-- migrations
-- deployment
-- LiveKit
-- voice processing
-- RAG
-- persona knowledge architecture
-- workflow system behavior
-- auth and access control
+The app will be available at `http://localhost:3000`.
 
 ---
 
-## Important repository docs
+## Architecture Overview
 
-### Root
-- `README.md`
-- `LICENSE`
+```
+┌──────────────┐     ┌──────────────────┐     ┌──────────────────┐
+│   Frontend   │     │   FastAPI (API)   │     │  Voice Agent     │
+│   Next.js    │────▶│   REST + SSE      │     │  (LiveKit)       │
+└──────────────┘     └────────┬─────────┘     └────────┬─────────┘
+                              │                         │
+                    ┌─────────▼─────────┐               │
+                    │   NATS JetStream  │               │
+                    │  (Message Queue)  │               │
+                    └─────────┬─────────┘               │
+                              │                         │
+              ┌───────────────┼─────────────────────────┘
+              │               │
+    ┌─────────▼──────┐  ┌────▼───────────────┐  ┌───────────────┐
+    │  Workers       │  │  PostgreSQL        │  │  OpenAI API   │
+    │  - Scraping    │  │  + pgvector        │  │  - GPT-4o     │
+    │  - Voice proc  │  │  (Personas, RAG)   │  │  - Embeddings │
+    └────────────────┘  └────────────────────┘  └───────────────┘
+```
 
-### Frontend docs
-- `frontend/README.md`
-- `frontend/docs/README.md`
-- `frontend/docs/ARCHITECTURE.md`
-- `frontend/docs/TECH_STACK.md`
-- `frontend/docs/DEVELOPMENT_GUIDE.md`
+**How it works:**
 
-Additional frontend docs exist for query architecture, embed SDK, i18n, LiveKit-related frontend behavior, and other implementation details.
-
-### Backend docs
-- `backend/README.md`
-- `backend/docs/API_DOCUMENTATION.md`
-- `backend/docs/DEPLOYMENT.md`
-- `backend/docs/MIGRATIONS.md`
-- `backend/docs/LIVEKIT_AGENT_ARCHITECTURE.md`
-- `backend/docs/LlamaIndex-RAG.md`
-- `backend/docs/PERSONA_KNOWLEDGE_ARCHITECTURE.md`
-- `backend/docs/VOICE_PROCESSING_DOCKER.md`
-- `backend/docs/WORKFLOW_SYSTEM_DEVELOPER_GUIDE.md`
-
-There are many more backend docs covering integrations, auth, evaluation, custom domains, deployment details, and operational procedures.
-
----
-
-## CI/CD and automation
-
-The `.github/workflows/` directory contains automation for areas such as:
-
-- backend code quality
-- frontend code quality
-- backend API CI/CD
-- production deployment flows
-- migration verification
-- worker deployment
-- review/automation workflows
-
-This repository is set up for active automation around quality checks and deployment pipelines.
+1. **Ingest** — Users upload data (LinkedIn, Twitter, websites, PDFs, YouTube). Workers process and chunk the content.
+2. **Embed** — LlamaIndex creates vector embeddings stored in PostgreSQL + pgvector.
+3. **Chat** — Text or voice queries trigger RAG retrieval, pulling relevant context for the LLM to generate persona-accurate responses.
 
 ---
 
-## Notes for contributors
+## Development
 
-- prefer reading the app-specific READMEs before making changes
-- backend and frontend have separate dependency management and runtime expectations
-- migrations are an explicit part of backend development
-- widget/embed functionality is a distinct frontend subsystem
-- voice and async processing involve multiple services, not just the API server
-- there is extensive internal documentation in both `frontend/docs` and `backend/docs`
+### Backend Commands
+
+```bash
+cd backend
+
+# Docker workflow (recommended)
+make up                # Start core services
+make down              # Stop all services
+make logs              # View logs
+make migrate           # Run database migrations
+make check             # Auto-fix: isort + black + ruff
+
+# Local workflow (uv)
+uv sync
+uv run uvicorn app.main:app --host 0.0.0.0 --port 8001 --reload
+```
+
+See the [Backend README](./backend/README.md) for the full API reference, database management, and troubleshooting.
+
+### Frontend Commands
+
+```bash
+cd frontend
+
+# Development
+bun dev               # Start dev server (Turbopack)
+bun run build         # Production build
+bun start             # Start production server
+
+# Code quality
+bun type-check        # TypeScript check
+bun lint:fix          # ESLint with auto-fix
+bun format            # Prettier formatting
+```
+
+### Adding UI Components
+
+```bash
+cd frontend
+bunx shadcn@latest add <component-name>
+```
+
+Never manually create files in `src/components/ui/` — always use the shadcn CLI.
 
 ---
 
-## Where to start
+## Environment Variables
 
-If you are new to the codebase, this is a good order:
+### Backend (`backend/.env`)
 
-1. read `frontend/README.md`
-2. read `backend/README.md`
-3. review `frontend/docs/README.md`
-4. review key backend docs in `backend/docs/`
-5. boot the backend local stack
-6. boot the frontend app
-7. verify end-to-end connectivity between frontend and backend
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `DATABASE_URL` | Yes | PostgreSQL connection string |
+| `OPENAI_API_KEY` | Yes | OpenAI API key for LLM + embeddings |
+| `EXPERT_CLONE_API_KEY` | Yes | API authentication key |
+| `LIVEKIT_URL` | For voice | LiveKit Cloud WebSocket URL |
+| `LIVEKIT_API_KEY` | For voice | LiveKit API key |
+| `LIVEKIT_API_SECRET` | For voice | LiveKit API secret |
+| `DEEPGRAM_API_KEY` | For voice | Deepgram STT key |
+| `ELEVENLABS_API_KEY` | For voice | ElevenLabs TTS key |
+
+See `backend/.env.example` for the full list.
+
+### Frontend (`frontend/.env.local`)
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `NEXT_PUBLIC_API_URL` | Yes | Backend API URL (e.g., `http://localhost:8001/api`) |
+| `NEXT_PUBLIC_APP_URL` | Yes | Frontend URL (e.g., `http://localhost:3000`) |
+
+See `frontend/.env.example` for the full list.
+
+---
+
+## Contributing
+
+We welcome contributions! Here's how to get started:
+
+1. **Fork** the repository
+2. **Create** a feature branch: `git checkout -b feature/my-feature`
+3. **Make** your changes with proper testing
+4. **Run checks:**
+   ```bash
+   # Backend
+   cd backend && make check
+
+   # Frontend
+   cd frontend && bun lint:fix && bun format && bun type-check
+   ```
+5. **Commit** your changes: `git commit -m 'Add my feature'`
+6. **Push** to your branch: `git push origin feature/my-feature`
+7. **Open** a Pull Request
+
+### Guidelines
+
+- Keep PRs focused — one feature or fix per PR
+- Follow existing code style (enforced by linters and pre-commit hooks)
+- Add tests for new functionality where applicable
+- Update documentation if you change public APIs or configuration
+
+---
+
+## Documentation
+
+- **[Backend README](./backend/README.md)** — API reference, architecture details, database management
+- **[Backend Docs](./backend/docs/)** — API documentation, auth guides, deployment
+- **[Frontend Docs](./frontend/docs/)** — Architecture, tech stack, development guide
 
 ---
 
 ## License
 
-See `LICENSE` for repository licensing terms.
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+
+---
+
+## Support
+
+- **Issues**: [GitHub Issues](https://github.com/myclone-dev/myclone/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/myclone-dev/myclone/discussions)
+
+---
+
+<div align="center">
+
+**Built with LlamaIndex, FastAPI, Next.js, and LiveKit**
+
+[Report Bug](https://github.com/myclone-dev/myclone/issues) | [Request Feature](https://github.com/myclone-dev/myclone/issues)
+
+</div>
